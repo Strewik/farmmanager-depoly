@@ -140,611 +140,215 @@
 // }
 // AppRegistry.registerComponent("App", () => App);
 
-// import React, { Component } from 'react';
-// import {
-//   Text,
-//   View,
-//   Button,
-//   TouchableOpacity,
-//   KeyboardAvoidingView,
-//   ScrollView,
-//   Image,
-//   StyleSheet
-// } from "react-native";
-// export class App extends React.Component {
-//   state = {
-//     products: [
-//       {title: 'Apple', count: 0, price: 100},
-//       {title: 'IBM', count: 0, price: 200},
-//       {title: 'HP', count: 0, price: 300},
-//     ]
-//   }
 
-//   onChange = (index, val) => {
-//     this.setState({
-//       products: this.state.products.map((product, i) => (
-//         i === index ? {...product, count: val} : product
-//       ))
-//     })
-//   }
 
-//   render () {
-//     return (
-//       <View>
-//         <Text products={this.state.products} onChange={this.onChange} />
-//         <Text products={this.state.products} />
-//       </View>
-//     )
-//   }
-// };
 
-// const ProductList = ({ products, onChange }) => (
-//   <ul>
-//     {products.map((product, i) => (
-//       <li key={i}>
-//         {product.title}
-//         <input
-//           type="text"
-//           value={product.count}
-//           onChange={e => onChange(i, parseInt(e.target.value) || 0)}
-//         />
-//       </li>
-//     ))}
-//   </ul>
-// );
 
-// const Total = ({ products }) => (
-//   <h3>
-//     Price:
-//     {products.reduce((sum, i) => (
-//       sum += i.count * i.price
-//     ), 0)}
-//   </h3>
-// )
 
-// export default App
+import * as yup from 'yup'
+import { Formik } from 'formik'
+import { useField, useFormikContext } from "formik";
+import DatePicker from "react-datepicker";
 
-// import React from 'react';
-// import { View, Text, FlatList, Button, SafeAreaView, processColor } from 'react-native';
+import React, { Component, Fragment } from 'react';
+import { TextInput, View, Text, Button, Alert, StyleSheet } from 'react-native';
 
-// const products = [
-//   { _id: 1, name: 'Item 1', price: 50, quantity: 0 },
-//   { _id: 2, name: 'Item 2', price: 29, quantity: 0 },
-//   { _id: 3, name: 'Item 3', price: 200, quantity: 0 },
-// ];
-
-// class ListItem extends React.Component {
-//   render() {
-//     const { item } = this.props;
-// 5
-//     return (
-//       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-//         <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center' }}>
-//           <Text>{item.name} - </Text>
-//           <Text>{item.price}</Text>
-//         </View>
-//         <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center' }}>
-//           <Button title="Subtract" onPress={this.props.onSubtract} />
-//           <Text>{item.quantity}</Text>
-//           <Button title="Add" onPress={this.props.onAdd} />
-//         </View>
-//       </View>
-//     )
-//   }
-// }
-
-// class App extends React.Component {
-//   state = {
-//     products,
-//   };
-
-//   onSubtract = (item, index) => {
-//     const products = [...this.state.products];
-//     products[index].quantity -= 1;
-//     this.setState({ products });
-//   }
-
-//   onAdd = (item, index) => {
-//     const products = [...this.state.products];
-//     products[index].quantity += 1;
-//     this.setState({ products });
-//   }
-
-//   render() {
-//     const { products } = this.state;
-//     let totalQuantity = 0;
-//     let totalPrice = 0;
-//     products.forEach((item) => {
-//       totalQuantity += item.quantity;
-//       totalPrice += item.quantity * item.price;
-//     })
-
-//     return (
-//       <SafeAreaView style={{ flex: 1 }}>
-//         <FlatList
-//           data={this.state.products}
-//           renderItem={({ item, index }) => (
-//             <ListItem
-//               item={item}
-//               onSubtract={() => this.onSubtract(item, index)}
-//               onAdd={() => this.onAdd(item, index)}
-//             />
-//           )}
-//           keyExtractor={item => item._id}
-//         />
-//         <Text>Total Quantity: {totalQuantity}</Text>
-//         <Text>Total Price: {totalPrice}</Text>
-//       </SafeAreaView>
-//     );
-//   }
-// }
-
-// export default App;
-
-// import React from 'react';
-// import { View, Text, FlatList, Button, SafeAreaView, processColor, TextInput } from 'react-native';
-
-// export default  class Test extends React.Component {
-//   state = {
-//     result: '',
-//     num1: '',
-//     num2: ''
-//   };
-
-//   handlenum1Change = evt => {
-//     const num1 = (evt.target.value);
-//     this.setState(prevState => ({
-//       num1,
-//       result: num1 + prevState.num2
-//     }));
-//   };
-
-//   handlenum2Change = evt => {
-//     const num2 = (evt.target.value);
-//     this.setState(prevState => ({
-//       num2,
-//       result: prevState.num1 + num2
-//     }));
-//   };
-
-//   render() {
-//     return (
-//       <View>
-//           <TextInput
-//             type="string"
-//             name="num1"
-//             value={this.state.num1}
-//             onChange={this.handlenum1Change}
-//           />
-//           <TextInput
-//             name="num2"
-//             value={this.state.num2}
-//             onChange={this.handlenum2Change}
-//           />
-//           <TextInput type="text" value={this.state.result} readOnly />
-//       </View>
-//     );
-//   }
-// }
-
-// import * as yup from 'yup'
-// import { Formik } from 'formik'
-
-// import React, { Component, Fragment } from 'react';
-// import { TextInput, Text, Button, Alert } from 'react-native';
-
-// export default class App extends Component {
-
-//  handlenum1Change = evt => {
-//     const num1 = (evt.target.value);
-//     this.setState(prevState => ({
-//       num1,
-//       result: num1 + prevState.num2
-//     }));
-//   };
-
-//   handlenum2Change = evt => {
-//     const num2 = (evt.target.value);
-//     this.setState(prevState => ({
-//       num2,
-//       result: prevState.num1 + num2
-//     }));
-//   };
-
-//   render() {
-//     const {num1} = this.props
-//     const {num2} = this.props
-//     return (
-//       <Formik
-//         initialValues={{ email: '', password: '', result: '',
-//     num1: '',
-//     num2: '' }}
-//         onSubmit={values => Alert.alert(JSON.stringify(values))}
-//         validationSchema={yup.object().shape(
-//           {
-//           email: yup
-//             .string()
-//             .email()
-//             .required(),
-//           password: yup
-//             .string()
-//             .min(6)
-//             .required(),
-//         })}
-//       >
-//         {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
-//           <Fragment>
-//             <TextInput
-//               value={values.email}
-//               onChangeText={handleChange('email')}
-//               onBlur={() => setFieldTouched('email')}
-//               placeholder="E-mail"
-//             />
-//             {touched.email && errors.email &&
-//               <Text style={{ fontSize: 10, color: 'red' }}>{errors.email}</Text>
-//             }
-//             <TextInput
-//               value={values.password}
-//               onChangeText={handleChange('password')}
-//               placeholder="Password"
-//               onBlur={() => setFieldTouched('password')}
-//               secureTextEntry={true}
-//             />
-//             {touched.password && errors.password &&
-//               <Text style={{ fontSize: 10, color: 'red' }}>{errors.password}</Text>
-//             }
-//             <Button
-//               title='Sign In'
-//               disabled={!isValid}
-//               onPress={handleSubmit}
-//             />
-//             {/* <TextInput
-//             type="string"
-//             name="num1"
-//             value={this.state.num1}
-//             onChange={this.handlenum1Change}
-//           />
-//           <TextInput
-//             name="num2"
-//             value={this.state.num2}
-//             onChange={this.handlenum2Change}
-//           />
-//           <TextInput type="text" value={this.state.result} readOnly /> */}
-//           </Fragment>
-//         )}
-//       </Formik>
-//     );
-//   }
-// }
-
-import React, { Component } from "react";
-import {
-    TextInput,
-    Text,
-    Button,
-    Alert,
-    View,
-    StyleSheet,
-    ScrollView,
-} from "react-native";
-import * as yup from "yup";
-import { Formik } from "formik";
-// import DatePicker from "react-datepicker"
 
 export default class App extends Component {
-    render() {
-        const unitprice = this.props
-        const quantity = this.quantity
-        const inputStyle = {
-            borderWidth: 1,
-            borderColor: "#4e4e4e",
-            padding: 12,
-            marginBottom: 5,
-        };
+    constructor(props) {
+         super(props);
+         this.state = { f1: "", f2: "", result: "" };
+     }
+     
+  render() {
+      var f1 = this.state.f1;
+         var f2 = this.state.f2;
+         const result = f1 && f2 ? f2 * f1 : null;
+    return (
+        <View style={styles.container}>
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        onSubmit={values => Alert.alert(JSON.stringify(values))}
+        validationSchema={yup.object().shape({
+          email: yup
+            .string()
+            .email()
+            .required(),
+          password: yup
+            .string()
+            .min(6)
+            .required(),
+        })}
+      >
+      
 
-        handleunitpriceChange = (evt) => {
-            const unitprice = Number(values.unitprice);
-            this.setState((prevState) => ({
-                unitprice,
-                result: unitprice + prevState.quantity,
-            }));
-        };
+        {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
+          <Fragment >
+          <Text>Date</Text>
+            <TextInput
+                label='Customer'
+              value={values.customer}
+              onChangeText={handleChange('customer')}
+              onBlur={() => setFieldTouched('customer')}
+              placeholder="customer"
+            />
+            {touched.customer && errors.customer &&
+              <Text style={{ fontSize: 10, color: 'red' }}>{errors.customer}</Text>
+            }
+            <TextInput
+              value={values.phone}
+              onChangeText={handleChange('phone')}
+              onBlur={() => setFieldTouched('phone')}
+              placeholder="phone"
+            />
+            {touched.phone && errors.phone &&
+              <Text style={{ fontSize: 10, color: 'red' }}>{errors.phone}</Text>
+            }
+            <TextInput
+              value={values.product}
+              onChangeText={handleChange('product')}
+              onBlur={() => setFieldTouched('product')}
+              placeholder="product"
+            />
+            {touched.product && errors.product &&
+              <Text style={{ fontSize: 10, color: 'red' }}>{errors.product}</Text>
+            }
+            <TextInput
+              value={values.unit}
+              onChangeText={handleChange('unit')}
+              onBlur={() => setFieldTouched('unit')}
+              placeholder="unit"
+            />
+            {touched.unit && errors.unit &&
+              <Text style={{ fontSize: 10, color: 'red' }}>{errors.unit}</Text>
+            }
 
-        handlequantityChange = (evt) => {
-            const quantity = Number(values.quantity);
-            this.setState((prevState) => ({
-                quantity,
-                result: prevState.unitprice + quantity,
-            }));
-        };
+                <TextInput
+                    value={values.unitprice}
+                    placeholder="Unit price"
+                    // style={styles.input}
+                    keyboardType="numeric"
+                    onBlur={() => setFieldTouched('unit')}
+                    onChangeText={(text) =>
+                    this.setState({ f1: parseInt(text) })
+                    // handleChange('unitprice')
+                    }
+                />
 
-        return (
-            <ScrollView>
-                <Formik
-                    initialValues={{
-                        customer: "",
-                        email: "",
-                        password: "",
-                        startDate: new Date(),
-                        unitprice: "0",
-                        quantity: "0",
-                        subtotal: "0",
-                    }}
-                    onSubmit={(values) => Alert.alert(JSON.stringify(values))}
-                    validationSchema={yup.object().shape({
-                        name: yup
-                            .string()
-                            .required("Please, provide your name!"),
-                        email: yup.string().email().required(),
-                        password: yup
-                            .string()
-                            .min(4)
-                            .max(10, "Password should not excced 10 chars.")
-                            .required(),
-                    })}
-                >
-                    {({
-                        values,
-                        handleChange,
-                        errors,
-                        setFieldTouched,
-                        touched,
-                        isValid,
-                        handleSubmit,
-                    }) => (
-                        <View style={styles.formContainer}>
-                            {/* <DatePicker
-                      selected={values.startDate}
-                      dateFormat="MMMM d, yyyy"
-                      className="form-control"
-                      name="startDate"
-                      onChange={date => setFieldValue('startDate', date)}
-                    /> */}
-                            <TextInput
-                                value={values.customer}
-                                style={inputStyle}
-                                onChangeText={handleChange("customer")}
-                                placeholder="Customer"
-                                onBlur={() => setFieldTouched("customer")}
-                            />
-                            {touched.customer && errors.customer && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.customer}
-                                </Text>
-                            )}
-                            <TextInput
-                                value={values.phone}
-                                style={inputStyle}
-                                onChangeText={handleChange("phone")}
-                                onBlur={() => setFieldTouched("phone")}
-                                placeholder="Phone"
-                            />
-                            {touched.phone && errors.phone && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.phone}
-                                </Text>
-                            )}
+                <TextInput
+                    placeholder="Quantity"
+                    // style={styles.input}
+                    keyboardType="numeric"
+                    onChangeText={(text) =>
+                        this.setState({ f2: parseInt(text) })
+                    }
+                />
 
-                            <TextInput
-                                value={values.product}
-                                style={inputStyle}
-                                onChangeText={handleChange("product")}
-                                onBlur={() => setFieldTouched("product")}
-                                placeholder="Product"
-                            />
-                            {touched.product && errors.product && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.product}
-                                </Text>
-                            )}
-                            <TextInput
-                                value={values.unit}
-                                style={inputStyle}
-                                onChangeText={handleChange("unit")}
-                                placeholder="Unit"
-                                onBlur={() => setFieldTouched("unit")}
-                                secureTextEntry={true}
-                            />
-                            {touched.unit && errors.unit && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.unit}
-                                </Text>
-                            )}
-                            <TextInput
-                                value={this.state.unitprice}
-                                style={inputStyle}
-                                onChangeText={handleunitpriceChange("unitprice")}
-                                onBlur={() => setFieldTouched("unitprice")}
-                                placeholder="Unit Price"
-                            />
-                            {touched.unitprice && errors.unitprice && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.unitprice}
-                                </Text>
-                            )}
-                            <TextInput
-                                value={this.state.quantity}
-                                style={inputStyle}
-                                onChangeText={handlequantityChange("quantity")}
-                                onBlur={() => setFieldTouched("quantity")}
-                                placeholder="Quantity"
-                            />
-                            {touched.quantity && errors.quantity && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.quantity}
-                                </Text>
-                            )}
-                            <TextInput
-                                value={this.state.result}
-                                style={inputStyle}
-                                onChangeText={handleChange("subtotal")}
-                                placeholder="Sub-total"
-                                onBlur={() => setFieldTouched("subtotal")}
-                            />
-                            {touched.subtotal && errors.subtotal && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.subtotal}
-                                </Text>
-                            )}
-                            <TextInput
-                                value={values.tax}
-                                style={inputStyle}
-                                onChangeText={handleChange("tax")}
-                                onBlur={() => setFieldTouched("tax")}
-                                placeholder="Tax"
-                            />
-                            {touched.tax && errors.tax && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.tax}
-                                </Text>
-                            )}
-                            <TextInput
-                                value={values.description}
-                                style={inputStyle}
-                                onChangeText={handleChange("description")}
-                                placeholder="Description"
-                                onBlur={() => setFieldTouched("description")}
-                            />
-                            {touched.description && errors.description && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.description}
-                                </Text>
-                            )}
-                            <TextInput
-                                value={values.total}
-                                style={inputStyle}
-                                onChangeText={handleChange("total")}
-                                onBlur={() => setFieldTouched("total")}
-                                placeholder="Total"
-                            />
-                            {touched.total && errors.total && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.total}
-                                </Text>
-                            )}
-                            <TextInput
-                                value={values.invnumber}
-                                style={inputStyle}
-                                onChangeText={handleChange("invnumber")}
-                                onBlur={() => setFieldTouched("invnumber")}
-                                placeholder="Invoice number"
-                            />
-                            {touched.invnumber && errors.invnumber && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.invnumber}
-                                </Text>
-                            )}
-                            <TextInput
-                                value={values.amountpaid}
-                                style={inputStyle}
-                                onChangeText={handleChange("amountpaid")}
-                                placeholder="Amount Paid"
-                                onBlur={() => setFieldTouched("amountpaid")}
-                            />
-                            {touched.amountpaid && errors.amountpaid && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.amountpaid}
-                                </Text>
-                            )}
-                            <TextInput
-                                value={values.paymode}
-                                style={inputStyle}
-                                onChangeText={handleChange("paymode")}
-                                onBlur={() => setFieldTouched("paymode")}
-                                placeholder="Payment Mode"
-                            />
-                            {touched.paymode && errors.paymode && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.paymode}
-                                </Text>
-                            )}
-                            <TextInput
-                                value={values.receiptnum}
-                                style={inputStyle}
-                                onChangeText={handleChange("receiptnum")}
-                                placeholder="Receipt Number"
-                                onBlur={() => setFieldTouched("receiptnum")}
-                            />
-                            {touched.receiptnum && errors.receiptnum && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.receiptnum}
-                                </Text>
-                            )}
-                            <TextInput
-                                value={values.baldue}
-                                style={inputStyle}
-                                onChangeText={handleChange(" baldue")}
-                                onBlur={() => setFieldTouched(" baldue")}
-                                placeholder="Balance Due"
-                            />
-                            {touched.baldue && errors.baldue && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.baldue}
-                                </Text>
-                            )}
-                            <TextInput
-                                value={values.balduedate}
-                                style={inputStyle}
-                                onChangeText={handleChange("balduedate")}
-                                onBlur={() => setFieldTouched("balduedate")}
-                                placeholder="Balance Due Date"
-                            />
-                            {touched.balduedate && errors.balduedate && (
-                                <Text
-                                    style={{ fontSize: 12, color: "#FF0D10" }}
-                                >
-                                    {errors.balduedate}
-                                </Text>
-                            )}
 
-                            <Button
-                                color="#3740FE"
-                                title="Submit"
-                                //   disabled={!isValid}
-                                onPress={handleSubmit}
-                            />
-                        </View>
-                    )}
-                </Formik>
-            </ScrollView>
-        );
-    }
+                <Text>Sub-total {result ? <Text>{result}</Text> : null}</Text>
+                <TextInput
+              value={values.tax}
+              onChangeText={handleChange('tax')}
+              onBlur={() => setFieldTouched('tax')}
+              placeholder="tax"
+            />
+            {touched.tax && errors.tax &&
+              <Text style={{ fontSize: 10, color: 'red' }}>{errors.tax}</Text>
+            }
+            <TextInput
+              value={values.decsription}
+              onChangeText={handleChange('decsription')}
+              onBlur={() => setFieldTouched('decsription')}
+              placeholder="decsription"
+            />
+            {touched.decsription && errors.decsription &&
+              <Text style={{ fontSize: 10, color: 'red' }}>{errors.decsription}</Text>
+            }
+            <TextInput
+              value={values.total}
+              onChangeText={handleChange('total')}
+              onBlur={() => setFieldTouched('total')}
+              placeholder="total"
+            />
+            {touched.total && errors.total &&
+              <Text style={{ fontSize: 10, color: 'red' }}>{errors.total}</Text>
+            }
+            <TextInput
+              value={values.invnumber}
+              onChangeText={handleChange('invnumber')}
+              onBlur={() => setFieldTouched('invnumber')}
+              placeholder="invnumber"
+            />
+            {touched.invnumber && errors.invnumber &&
+              <Text style={{ fontSize: 10, color: 'red' }}>{errors.invnumber}</Text>
+            }
+            <TextInput
+              value={values.amountpaid}
+              onChangeText={handleChange('amountpaid')}
+              onBlur={() => setFieldTouched('amountpaid')}
+              placeholder="amountpaid"
+            />
+            {touched.amountpaid && errors.amountpaid &&
+              <Text style={{ fontSize: 10, color: 'red' }}>{errors.amountpaid}</Text>
+            }
+            <TextInput
+              value={values.paymode}
+              onChangeText={handleChange('paymode')}
+              onBlur={() => setFieldTouched('paymode')}
+              placeholder="paymode"
+            />
+            {touched.paymode && errors.paymode &&
+              <Text style={{ fontSize: 10, color: 'red' }}>{errors.paymode}</Text>
+            }
+            <TextInput
+              value={values.receiptnum}
+              onChangeText={handleChange('receiptnum')}
+              onBlur={() => setFieldTouched('receiptnum')}
+              placeholder="receiptnum"
+            />
+            {touched.receiptnum && errors.receiptnum &&
+              <Text style={{ fontSize: 10, color: 'red' }}>{errors.receiptnum}</Text>
+            }
+            <TextInput
+              value={values.baldue}
+              onChangeText={handleChange('baldue')}
+              onBlur={() => setFieldTouched('baldue')}
+              placeholder="baldue"
+            />
+            {touched.baldue && errors.baldue &&
+              <Text style={{ fontSize: 10, color: 'red' }}>{errors.baldue}</Text>
+            }
+            <Text>Balance due date</Text>
+
+            <Button
+              title='Sign In'
+              disabled={!isValid}
+              onPress={handleSubmit}
+            />
+          </Fragment>
+        )}
+      </Formik>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    formContainer: {
-        padding: 30,
-    },
+  container: {
+    justifyContent: "center",
+    marginTop: 15,
+    padding: 20
+  },
+  title: {
+    fontSize: 25,
+    fontWeight: "bold",
+    marginTop: 5,
+    color: "#006432",
+    textAlign: "center",
+    marginBottom: 25
+  },
+  button: {
+    marginTop: 20,
+    marginBottom: 50
+  }
 });
-
-console.disableYellowBox = true;
