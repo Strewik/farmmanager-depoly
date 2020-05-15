@@ -25,22 +25,18 @@ const LoginForm = t.struct({
 const formStyles = {
   ...Form.stylesheet,
   formGroup: {
-    normal: {
-      marginBottom: 20
-    }
+    normal: {}
   },
   controlLabel: {
     normal: {
-      color: "#650225",
-      fontSize: 20,
-      marginBottom: 7
+      color: "#006432",
+      fontSize: 20
     },
-
     error: {
       color: "red",
-      fontSize: 12,
+      fontSize: 18,
       marginBottom: 7,
-      fontWeight: "bold"
+      fontWeight: "600"
     }
   }
 };
@@ -60,64 +56,46 @@ const options = {
   stylesheet: formStyles
 };
 
-class Login extends Component {
+export default class Login extends Component {
   handleSubmit = () => {
     const value = this._form.getValue();
     console.log("value: ", value);
   };
 
   render() {
+    let { navigation } = this.props;
     return (
-      <SafeAreaView
-        style={{
-          flex: 1,
-          backgroundColor: "#fff",
-          flexDirection: "column",
-          justifyContent: "center"
-        }}
-        behavior="padding"
-        enabled
-      >
+      <SafeAreaView style={styles.container} behavior="padding" enabled>
         <ScrollView>
-          <View style={styles.container}>
-            <Text style={styles.word}>Welcome</Text>
+          <View>
+            <Text style={styles.title}>Log In</Text>
             <Form
               ref={c => (this._form = c)}
               type={LoginForm}
               options={options}
             />
-            <Button
-              title="Login"
-              color="#0A802B"
-              onPress={this.handleSubmit}
-              style={{ backgroundColor: "#0a802b" }}
-            ></Button>
-            <View style={styles.lowText}>
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  textAlign: "center",
-                  marginBottom: 8,
-                  color: "grey"
-                }}
-                onPress={() => Linking.openURL("http://google.com")}
-              >
-                Forgot Password?
-              </Text>
-              <Text>Don't have an account?</Text>
-              <Text
-                style={{
-                  textAlign: "center",
-                  marginTop: 8,
-                  color: "grey",
-                  fontSize: 20,
-                  color: "#650225"
-                }}
-                onPress={() => Linking.openURL("http://google.com")}
-              >
-                Sign Up
-              </Text>
+            {/* <TouchableOpacity> */}
+            <View style={styles.button}>
+              <Button
+                title="Login"
+                color="#0A802B"
+                onPress={this.handleSubmit.bind(this)}
+              />
             </View>
+            {/* </TouchableOpacity> */}
+            <Text
+              style={styles.forgot}
+              onPress={() => navigation.navigate("Password 0ne")}
+            >
+              Forgot Password?
+            </Text>
+            <Text style={styles.question}>Don't have an account?</Text>
+            <Text
+              style={styles.link}
+              onPress={() => navigation.navigate("SignUp")}
+            >
+              Sign Up
+            </Text>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -127,30 +105,42 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: "#fff",
+    justifyContent: "center",
+    marginTop: 15,
+    padding: 20
+  },
+  title: {
+    fontSize: 25,
+    fontWeight: "bold",
+    marginTop: 5,
+    color: "#006432",
+    textAlign: "center",
+    marginBottom: 25
+  },
+  button: {
+    marginTop: 20,
+    marginBottom: 20,
+    // alignItems: "center",
+    elevation: 10
+  },
+  question: {
+    color: "gray",
+    textAlign: "center",
+    marginTop: 8,
+    fontSize: 18
+  },
+  link: {
+    color: "#006432",
+    textAlign: "center",
+    marginTop: 8,
+    fontSize: 20,
     fontWeight: "bold"
   },
-  word: {
-    fontSize: 25,
-    marginTop: 70,
-    color: "#650225",
-    paddingBottom: 40,
-    paddingTop: 20
-  },
-  words: {
-    marginTop: 5,
-    color: "#650225"
-  },
-  lowText: {
-    marginTop: 22,
-    backgroundColor: "#fff",
+  forgot: {
     fontWeight: "bold",
-    color: "#fff",
-    alignItems: "center",
-    paddingTop: 20
+    fontSize: 18,
+    textAlign: "center",
+    marginTop: 8,
+    color: "#006432"
   }
 });
-
-export default Login;

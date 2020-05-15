@@ -1,17 +1,14 @@
 import "react-native-gesture-handler";
 import React, { Component } from "react";
 import { View, Text, Button, TouchableOpacity, Image } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-
-import ConsumableLand from "./ConsumableLand";
-import ToolLand from "./ToolLand";
+// import { NavigationContainer } from "@react-navigation/native";
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { createStackNavigator } from "@react-navigation/stack";
+// import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 
-const Tab = createMaterialBottomTabNavigator();
-const Stack = createStackNavigator();
+// const Tab = createMaterialBottomTabNavigator();
+// const Stack = createStackNavigator();
 
 export default function LandReportInventory({ navigation }) {
   return (
@@ -92,7 +89,7 @@ export default function LandReportInventory({ navigation }) {
             <Text>HARVEST</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Advance Summaries")}
+            onPress={() => navigation.navigate("Seedlings Summaries")}
             style={{
               flex: 1,
               backgroundColor: "#606734",
@@ -244,4 +241,3 @@ export default function LandReportInventory({ navigation }) {
     </View>
   );
 }
-

@@ -7,14 +7,14 @@ import {
   StyleSheet,
   ScrollView,
   ActivityIndicator,
-  TouchableOpacity  
+  TouchableOpacity
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-export default class ToolsLand extends Component {
+export default class ToolLand extends Component {
   state = {
     data: [],
     loading: true
@@ -77,14 +77,11 @@ export default class ToolsLand extends Component {
           <Button
             title="ADD"
             style={{ position: "absolute", bottom: 0, left: 0 }}
-            onPress={() => navigation.navigate("ToolBinCard")}
+            onPress={() => navigation.navigate("SignUp")}
           />
         </View>
       </ScrollView>
     );
-    // } else {
-    //   return <ActivityIndicator />;
-    // }
   }
 }
 

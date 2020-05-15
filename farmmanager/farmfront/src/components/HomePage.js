@@ -13,7 +13,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import LandReportFinance from "./LandReportFinance";
 import LandReportInventory from "./LandReportInventory";
-import LandReportHarvest from "./LandReportHarvest";
 import LandReportWorkers from "./LandReportWorkers";
 
 const Stack = createStackNavigator();

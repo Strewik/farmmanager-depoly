@@ -1,33 +1,38 @@
 import { combineReducers } from "redux";
 import userReducer from "./userReducer";
+import farmReducer from "./farmReducer";
 import advanceReducer from "./advanceReducer";
-import incomeReducer from "./incomeReducer";
+import casualReducer from "./casualReducer";
+import consumableReducer from "./consumableReducer";
+import consumablebincardReducer from "./consumablebincardReducer";
+import customerReducer from "./customerReducer";
+import employeeReducer from "./employeeReducer";
 import expenditureReducer from "./expenditureReducer";
+import harvestReducer from "./harvestReducer";
+import incomeReducer from "./incomeReducer";
 import payrollReducer from "./payrollReducer";
 import requisitionReducer from "./requisitionReducer";
-import toolReducer from "./toolReducer";
-import newConsumableReducer from "./newConsumableReducer";
-import consumableReducer from "./consumableReducer";
-import harvestReducer from "./harvestReducer";
-import toolbincardReducer from "./toolbincardReducer";
-import personnelReducer from "./personnelReducer";
-import customerReducer from "./customerReducer";
+import seedlingReducer from "./seedlingReducer";
 import supplierReducer from "./supplierReducer";
+import toolReducer from "./toolReducer";
+import toolbincardReducer from "./toolbincardReducer";
 
 export default combineReducers({
   users: userReducer,
+  farms: farmReducer,
   advances: advanceReducer,
-  incomes: incomeReducer,
+  casuals: casualReducer,
+  consumables: consumableReducer,
+  consumablebincards: consumablebincardReducer,
+  customers: customerReducer,
+  employees: employeeReducer,
   expenditures: expenditureReducer,
+  harvests: harvestReducer,
+  incomes: incomeReducer,
   payrolls: payrollReducer,
   requisitions: requisitionReducer,
+  seedlings: seedlingReducer,
+  suppliers: supplierReducer,
   tools: toolReducer,
-  toolbincards:toolbincardReducer,
-  consumables: consumableReducer,
-  newconsumables: newConsumableReducer,
-  harvests: harvestReducer,
-  persons: personnelReducer,
-  customers: customerReducer,
-  suppliers: supplierReducer
+  toolbincards: toolbincardReducer
 });
-

@@ -9,14 +9,12 @@ import {
   ScrollView,
   StyleSheet
 } from "react-native";
-import {
-  getExpenditure
-} from "../actions/expenditureActions";
+import { getExpenditures } from "../actions/expenditureActions";
 import { connect } from "react-redux";
 
 class ExpenditureLand extends Component {
   componentDidMount() {
-    this.props.getExpenditure();
+    this.props.getExpenditures();
   }
 
   render() {
@@ -70,9 +68,7 @@ const mapStateToProps = state => ({
   expenditures: state.expenditures.items
 });
 
-export default connect(mapStateToProps, { getExpenditure })(
-  ExpenditureLand
-);
+export default connect(mapStateToProps, { getExpenditures })(ExpenditureLand);
 
 const styles = StyleSheet.create({
   heading: {

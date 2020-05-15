@@ -12,31 +12,31 @@ class UserViewset(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
-# Personnel Viewset
-class PersonnelViewset(viewsets.ModelViewSet):
-    queryset = Personnel.objects.all().order_by('-date')
+# Farm Viewset
+class FarmViewset(viewsets.ModelViewSet):
+    queryset = Farm.objects.all().order_by('-date')
     permissions_classes = [
         permissions.AllowAny
     ]
-    serializer_class = PersonnelSerializer
+    serializer_class = FarmSerializer
 
 
-# Income Viewset
-class IncomeViewset(viewsets.ModelViewSet):
-    queryset = Income.objects.all().order_by('-date')
+# AdvanceForm Viewset
+class AdvanceFormViewset(viewsets.ModelViewSet):
+    queryset = AdvanceForm.objects.all().order_by('-date')
     permissions_classes = [
         permissions.AllowAny
     ]
-    serializer_class = IncomeSerializer
+    serializer_class = AdvanceFormSerializer
 
 
-# Expenditure Viewset
-class ExpenditureViewset(viewsets.ModelViewSet):
-    queryset = Expenditure.objects.all().order_by('-date')
+# Casual Viewset
+class CasualViewset(viewsets.ModelViewSet):
+    queryset = Casual.objects.all().order_by('-date')
     permissions_classes = [
         permissions.AllowAny
     ]
-    serializer_class = ExpenditureSerializer
+    serializer_class = CasualSerializer
 
 
 # Consumable Viewset
@@ -48,13 +48,40 @@ class ConsumableViewset(viewsets.ModelViewSet):
     serializer_class = ConsumableSerializer
 
 
-# NewConsumable
-class NewConsumableViewset(viewsets.ModelViewSet):
-    queryset = NewConsumable.objects.all().order_by('-date')
+# ConsumableBinCard
+class ConsumableBinCardViewset(viewsets.ModelViewSet):
+    queryset = ConsumableBinCard.objects.all().order_by('-date')
     permissions_classes = [
         permissions.AllowAny
     ]
-    serializer_class = NewConsumableSerializer
+    serializer_class = ConsumableBinCardSerializer
+
+
+# Customer Viewset
+class CustomerViewset(viewsets.ModelViewSet):
+    queryset = Customer.objects.all().order_by('-date')
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = CustomerSerializer
+
+
+# Employee
+class EmployeeViewset(viewsets.ModelViewSet):
+    queryset = Employee.objects.all().order_by('-date')
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = EmployeeSerializer
+
+
+# Expenditure Viewset
+class ExpenditureViewset(viewsets.ModelViewSet):
+    queryset = Expenditure.objects.all().order_by('-date')
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ExpenditureSerializer
 
 
 # Harvest Viewset
@@ -66,13 +93,13 @@ class HarvestViewset(viewsets.ModelViewSet):
     serializer_class = HarvestSerializer
 
 
-# AdvanceForm Viewset
-class AdvanceFormViewset(viewsets.ModelViewSet):
-    queryset = AdvanceForm.objects.all().order_by('-date')
+# Income Viewset
+class IncomeViewset(viewsets.ModelViewSet):
+    queryset = Income.objects.all().order_by('-date')
     permissions_classes = [
         permissions.AllowAny
     ]
-    serializer_class = AdvanceFormSerializer
+    serializer_class = IncomeSerializer
 
 
 # Payroll Viewset
@@ -93,13 +120,22 @@ class RequisitionViewset(viewsets.ModelViewSet):
     serializer_class = RequisitionSerializer
 
 
-# ToolBinCard Viewset
-class ToolBinCardViewset(viewsets.ModelViewSet):
-    queryset = ToolBinCard.objects.all().order_by('-date')
+# Seedling Viewset
+class SeedlingViewset(viewsets.ModelViewSet):
+    queryset = Seedling.objects.all().order_by('-date')
     permissions_classes = [
         permissions.AllowAny
     ]
-    serializer_class = ToolBinCardSerializer
+    serializer_class = SeedlingSerializer
+
+
+# Supplier Viewset
+class SupplierViewset(viewsets.ModelViewSet):
+    queryset = Supplier.objects.all().order_by('-date')
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = SupplierSerializer
 
 
 # Tool Viewset
@@ -109,3 +145,12 @@ class ToolViewset(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = ToolSerializer
+
+
+# ToolBinCard Viewset
+class ToolBinCardViewset(viewsets.ModelViewSet):
+    queryset = ToolBinCard.objects.all().order_by('-date')
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ToolBinCardSerializer

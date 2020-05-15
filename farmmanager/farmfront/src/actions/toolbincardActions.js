@@ -8,7 +8,7 @@ import {
 } from "./types";
 
 //FETCH TOOLS
-export const getToolbincard = () => dispatch => {
+export const getToolbincards = () => dispatch => {
   axios
     .get("http://localhost:8000/api/toolbincard/")
     .then(res => {

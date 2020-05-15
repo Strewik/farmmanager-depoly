@@ -1,7 +1,6 @@
 {
     "python.pythonPath": "venv/bin/python",
     "editor.formatOnSave": true,
-    "editor.formatOnSaveTimeout": 1000,
-    "editor.formatOnPaste": true,
-    "editor.formatOnType": true
+    "editor.formatOnSaveTimeout": 60000,
+    "editor.formatOnPaste": true
 }

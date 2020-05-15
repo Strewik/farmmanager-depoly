@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Text,
   Button,
-  Linking,
   SafeAreaView,
   TouchableOpacity
 } from "react-native";
@@ -28,22 +27,33 @@ const PaymentMode = t.enums({
   Credit: "Credit"
 });
 
+const Product = t.enums({
+  1: "Robusta Green Bean",
+  2: "Robusta Kase",
+  3: "Robusta Kiboko",
+  4: "Robusta Red Cherry"
+});
+
+const VAT = t.enums({
+  1: "VAT Inclusive",
+  2: "VAT Excluded",
+  3: "Not Applicable"
+});
 const Income = t.struct({
-  Date: t.Date,
+  AmountRec: t.Number,
+  ReceiptNumber: t.maybe(t.Number),
   Customer: Customer,
   Phone: Phone,
-  Product: t.String,
+  Date: t.Date,
+  Product: Product,
+  Quantity: t.Number,
   Unit: t.String,
   UnitPrice: t.Number,
-  Quantity: t.Number,
   SubTotal: t.Number,
-  Tax: t.maybe(t.Number),
-  Description: t.maybe(t.String),
+  VAT: t.maybe(VAT),
   Total: t.Number,
-  InvoiceNumber: t.maybe(t.Number),
-  AmountPaid: t.Number,
   PaymentMode: PaymentMode,
-  ReceiptNumber: t.maybe(t.Number),
+  Invnumber: t.maybe(t.Number),
   BalanceDue: t.maybe(t.Number),
   BalanceDueDate: t.maybe(t.Date)
 });
@@ -70,8 +80,28 @@ const formStyles = {
 
 const options = {
   fields: {
+    AmountRec: {
+      autoFocus: true,
+      label: "Amount Received",
+      error: "Please fill this field",
+      returnKeyType: "next"
+    },
+    ReceiptNumber: {
+      label: "Receipt Number",
+      returnKeyType: "next"
+    },
+    Customer: {
+      label: "Customer Name",
+      error: "Fill this field",
+      returnKeyType: "next"
+    },
+    Phone: {
+      label: "Phone Number",
+      error: "Fill this field",
+      returnKeyType: "next"
+    },
     Date: {
-      label: "Date",
+      label: "Date of Sale",
       mode: "date",
       error: "Please enter a correct date",
       config: {
@@ -79,41 +109,54 @@ const options = {
         format: date => moment(date).format("DD-MM-YYYY")
       }
     },
-    Name: {
-      autoFocus: true,
-      error: "Please enter a correct Name"
+    Product: {
+      label: "Product Name",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
-    Email: {
-      error: "Please enter a correct email address"
+    Quantity: {
+      label: "Quantity",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
-    Phone: {
-      error: "Please enter a correct phone number e.g 0772363636"
-    },
-    Password: {
-      error: "Please create a password",
-      Password: true,
-      secureTextEntry: true
+    Unit: {
+      label: "Units",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
     UnitPrice: {
-      label: "Unit Price"
+      label: "Unit Price",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
     SubTotal: {
-      label: "Sub Total"
+      label: "Sub Total",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
-    InvoiceNumber: {
-      label: "Invoice Number"
+    VAT: {
+      label: "VAT",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
-    AmountPaid: {
-      label: "Amount Paid"
+    Total: {
+      label: "Total",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
     PaymentMode: {
-      label: "Payment Mode"
+      label: "Payment Mode",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
-    ReceiptNumber: {
-      label: "Reciept Number"
+    Invnumber: {
+      label: "Invoice Number",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
     BalanceDue: {
-      label: "Balance Due"
+      label: "Balance Due",
+      returnKeyType: "next"
     },
     BalanceDueDate: {
       label: "Due Date",
@@ -142,21 +185,20 @@ export default class IncomeForm extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        date: this.Date,
+        amountrecvd: this.AmountRec,
+        receiptnum: this.ReceiptNumber,
         customer: this.Customer,
         phone: this.Phone,
+        date: this.Date,
         product: this.Product,
+        quantity: this.Quantity,
         unit: this.Unit,
         unitprice: this.UnitPrice,
-        quantity: this.Quantity,
         subtotal: this.SubTotal,
-        tax: this.Tax,
-        description: this.Description,
+        vat: this.VAT,
         total: this.Total,
-        invnumber: this.InvoiceNumber,
-        amountpaid: this.AmountPaid,
         paymode: this.PaymentMode,
-        receiptnum: this.ReceiptNumber,
+        invnumber: this.Invnumber,
         baldue: this.BalanceDue,
         balduedate: this.BalanceDueDate
       })
@@ -183,21 +225,20 @@ export default class IncomeForm extends Component {
     const value = this._form.getValue();
     console.log(value);
     if (value != null) {
-      (this.Date = value.Date),
+      (this.AmountRec = value.AmountRec),
+        (this.ReceiptNumber = value.ReceiptNumber),
         (this.Customer = value.Customer),
         (this.Phone = value.Phone),
+        (this.Date = value.Date),
         (this.Product = value.Product),
+        (this.Quantity = value.Quantity),
         (this.Unit = value.Unit),
         (this.UnitPrice = value.UnitPrice),
-        (this.Quantity = value.Quantity),
         (this.SubTotal = value.SubTotal),
-        (this.Tax = value.Tax),
-        (this.Description = value.Description),
+        (this.VAT = value.VAT),
         (this.Total = value.Total),
-        (this.InvoiceNumber = value.InvoiceNumber),
-        (this.AmountPaid = value.AmountPaid),
         (this.PaymentMode = value.PaymentMode),
-        (this.ReceiptNumber = value.ReceiptNumber),
+        (this.Invnumber = value.Invnumber),
         (this.BalanceDue = value.BalanceDue),
         (this.BalanceDueDate = value.BalanceDueDate),
         this.InsertDataToServer();
@@ -205,24 +246,6 @@ export default class IncomeForm extends Component {
       alert("Income captured!");
     } else console.log("No data entered");
   };
-
-  // handlenum1Change = evt => {
-  //   const num1 = this._form.getValue().Quantity;
-  //   num1 = Number(evt.target.value);
-  //   this.setState(prevState => ({
-  //     num1,
-  //     result: num1 + prevState.num2
-  //   }));
-  // };
-
-  // handlenum2Change = evt => {
-  //   const num2 = this._form.getValue().UnitPrice;
-  //   num2 = Number(evt.target.value);
-  //   this.setState(prevState => ({
-  //     num2,
-  //     result: prevState.num1 + num2
-  //   }));
-  // };
 
   render() {
     return (

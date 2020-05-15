@@ -18,44 +18,26 @@ const Name = t.refinement(t.String, Name => {
   return regex.test(Name);
 });
 
-var PaymentMode = t.enums({
+var PaymentMtd = t.enums({
   Cash: "Cash",
+  Cheque: "Cheque",
+  Inkind: "In-Kind",
   Bank: "Bank",
   MobileMoney: "Mobile Money"
 });
 
-var Gender = t.enums({
-  M: "Male",
-  F: "Female"
-});
-
-var Status = t.enums({
-  Permanent: "Permanent",
-  Temporary: "Temporary"
-});
-
-var Tax = t.enums({
-  VAT: "Value Added Tax",
-  WHT: "Withholding Tax"
-});
-
 const Payroll = t.struct({
-  ...Form.Payroll,
   Date: t.Date,
   Name: Name,
-  Gender: Gender,
   Position: t.String,
-  Status: Status,
-  PaymentMode: PaymentMode,
-  SalaryAmount: t.Number,
-  PAYE: t.maybe(t.Number),
-  NSSF1: t.maybe(t.Number),
-  NSSF2: t.maybe(t.Number),
-  Tax: t.maybe(Tax),
-  LST: t.maybe(t.Number),
   Advance: t.maybe(t.Number),
-  NetPay: t.Number,
-  Total: t.Number
+  Netsalary: t.Number,
+  LST: t.maybe(t.Number),
+  NSSF: t.maybe(t.Number),
+  PAYE: t.maybe(t.Number),
+  Grosssalary: t.Number,
+  Payperiod: t.Date,
+  PaymentMtd: PaymentMtd
 });
 
 const formStyles = {
@@ -68,7 +50,6 @@ const formStyles = {
       color: "#006432",
       fontSize: 20
     },
-
     error: {
       color: "red",
       fontSize: 18,
@@ -81,8 +62,8 @@ const formStyles = {
 const options = {
   ...Form.options,
   fields: {
-   Date: {
-      label: "Date",
+    Date: {
+      label: "Date of Payment",
       mode: "date",
       error: "Please enter a correct date",
       returnKeyType: "next",
@@ -92,37 +73,33 @@ const options = {
       }
     },
     Name: {
-      autoFocus: true,
-      label: "Name",
+      label: "Staff Name",
       error: "Please enter a correct Name",
       returnKeyType: "next"
-    },
-    Gender: {
-      label: "Gender",
-      error: "You must select gender",
-      returnKeyType: "next",
-      config: {
-        defaultValueText: "Select"
-      }
     },
     Position: {
       label: "Position",
       error: "Please enter the employee's position",
       returnKeyType: "next"
     },
-    Status: {
-      label: "Status",
-      error: "Please enter the status of the employee",
+    Advance: {
+      label: "Advance Taken",
+      error: "Advance missing",
       returnKeyType: "next"
     },
-    PaymentMode: {
-      label: "Payment Mode",
-      error: "Please select a mode of payment",
+    Netsalary: {
+      label: "Net Salary",
+      error: "Net pay is missing",
       returnKeyType: "next"
     },
-    SalaryAmount: {
-      label: "Salary Amount",
-      error: "Please enter a correct Salary Amount",
+    LST: {
+      label: "LST",
+      error: "Fill in local service tax",
+      returnKeyType: "next"
+    },
+    NSSF: {
+      label: "NSSF",
+      error: "NSSF is missing",
       returnKeyType: "next"
     },
     PAYE: {
@@ -130,45 +107,31 @@ const options = {
       error: "PAYE is missing",
       returnKeyType: "next"
     },
-    NSSF1: {
-      label: "NSSF(5%)",
-      error: "NSSF is missing",
+    Grosssalary: {
+      label: "Gross Salary",
+      error: "Please enter gross salary",
       returnKeyType: "next"
     },
-    NSSF2: {
-      label: "NSSF(10%)",
-      error: "NSSF is missing",
-      returnKeyType: "next"
+    Payperiod: {
+      label: "Pay Period",
+      mode: "date",
+      error: "Please select pay period",
+      returnKeyType: "next",
+      config: {
+        defaultValueText: "Select",
+        format: date => moment(date).format("DD-MM-YYYY")
+      }
     },
-    Tax: {
-      label: "Tax",
-      error: "Tax is missing",
+    PaymentMtd: {
+      label: "Payment Method",
+      error: "Please select a method of payment",
       returnKeyType: "next"
-    },
-    LST: {
-      label: "Local Service Tax",
-      error: "LST is missing",
-      returnKeyType: "next"
-    },
-    Advance: {
-      label: "Salary Advance",
-      error: "Advance missing",
-      returnKeyType: "next"
-    },
-    NetPay: {
-      label: "Net Pay",
-      error: "Net pay is missing",
-      returnKeyType: "next"
-    },
-    Total: {
-      label: "Total",
-      error: "Total is missing"
     }
   },
   stylesheet: formStyles
 };
 
-export default class Advance extends Component {
+export default class PayrollForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -184,19 +147,15 @@ export default class Advance extends Component {
       body: JSON.stringify({
         date: this.Date,
         name: this.Name,
-        gender: this.Gender,
         position: this.Position,
-        status: this.Status,
-        paymod: this.PaymentMode,
-        salaryamnt: this.SalaryAmount,
-        paye: this.PAYE,
-        nssf1: this.NSSF1,
-        nssf2: this.NSSF2,
-        tax: this.Tax,
-        lst: this.LST,
         advance: this.Advance,
-        netpay: this.NetPay,
-        total: this.Total
+        netsalary: this.Netsalary,
+        lst: this.LST,
+        nssf: this.NSSF,
+        paye: this.PAYE,
+        grosssalary: this.Grosssalary,
+        payperiod: this.Payperiod,
+        paymtd: this.PaymentMtd
       })
     })
       .then(response => response.json())
@@ -223,19 +182,15 @@ export default class Advance extends Component {
     if (value != null) {
       (this.Date = value.Date),
         (this.Name = value.Name),
-        (this.Gender = value.Gender),
         (this.Position = value.Position),
-        (this.Status = value.Status),
-        (this.PaymentMode = value.PaymentMode),
-        (this.SalaryAmount = value.SalaryAmount),
-        (this.PAYE = value.PAYE),
-        (this.NSSF1 = value.NSSF1),
-        (this.NSSF2 = value.NSSF2),
-        (this.Tax = value.Tax),
-        (this.LST = value.LST),
         (this.Advance = value.Advance),
-        (this.NetPay = value.NetPay),
-        (this.Total = value.Total),
+        (this.Netsalary = value.Netsalary),
+        (this.LST = value.LST),
+        (this.NSSF = value.NSSF),
+        (this.PAYE = value.PAYE),
+        (this.Grosssalary = value.Grosssalary),
+        (this.Payperiod = value.Payperiod),
+        (this.PaymentMtd = value.PaymentMtd),
         this.InsertDataToServer();
       // clear all fields after submit
       this.clearForm();
@@ -262,7 +217,6 @@ export default class Advance extends Component {
                   color="#0A802B"
                   title="SAVE"
                   onPress={this.handleSubmit}
-                  // onPress={() => navigation.navigate("Finance")}
                 />
               </View>
             </TouchableOpacity>
@@ -292,4 +246,3 @@ const styles = StyleSheet.create({
     marginBottom: 50
   }
 });
-

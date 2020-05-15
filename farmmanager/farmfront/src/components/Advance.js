@@ -28,15 +28,23 @@ var Status = t.enums({
   Temporary: "Temporary"
 });
 
+var PaymentMethod = t.enums({
+  Cash: "Cash",
+  Bank: "Bank",
+  MobileMoney: "Mobile Money"
+});
+
 const AdvanceForm = t.struct({
-  ...Form.AdvanceForm,
   date: t.Date,
   name: name,
   gender: gender,
   position: t.String,
   status: Status,
   advancedamnt: t.Number,
-  description: t.maybe(t.String)
+  reason: t.String,
+  recipient: t.String,
+  payperiod: t.Date,
+  paymethod: PaymentMethod
 });
 
 const formStyles = {
@@ -49,7 +57,6 @@ const formStyles = {
       color: "#006432",
       fontSize: 20
     },
-
     error: {
       color: "red",
       fontSize: 18,
@@ -60,25 +67,19 @@ const formStyles = {
 };
 
 const options = {
-  ...Form.options,
   fields: {
     date: {
-      label: "Date",
+      label: "Date of Advance",
       mode: "date",
       error: "Please enter a correct date",
-      returnKeyType: "next",
       config: {
         defaultValueText: "Select",
-        format: date => moment(date).format("YYYY-DD-MM")
+        format: date => moment(date).format("DD-MM-YYYY")
       }
-      // config: {
-      //   defaultValueText: "Select",
-      //   format: strDate => utils.convertDateToString(strDate, "YYYY-MM-DD")
-      // }
     },
     name: {
       autoFocus: true,
-      label: "Name",
+      label: "Staff Name",
       error: "Please enter a correct Name",
       returnKeyType: "next"
     },
@@ -96,18 +97,38 @@ const options = {
       returnKeyType: "next"
     },
     status: {
-      label: "Status",
+      label: "Job Status",
       error: "Please enter the status of the employee",
       returnKeyType: "next"
     },
     advancedamnt: {
-      label: "Amount",
+      label: "Advance Amount",
       error: "Please enter a correct advance Amount",
       returnKeyType: "next"
     },
-    description: {
-      label: "Description",
-      error: "Put a description"
+    reason: {
+      label: "Reason for Advance",
+      error: "Please enter a  reason for advance",
+      returnKeyType: "next"
+    },
+    recipient: {
+      label: "Advance Recipient",
+      error: "Please enter who picked the advance",
+      returnKeyType: "next"
+    },
+    payperiod: {
+      label: "Pay Period",
+      mode: "date",
+      error: "Please enter pay period",
+      returnKeyType: "next",
+      config: {
+        defaultValueText: "Select",
+        format: date => moment(date).format("DD-MM-YYYY")
+      }
+    },
+    paymethod: {
+      label: "Payment Method",
+      error: "Please select method of payment"
     }
   },
   stylesheet: formStyles
@@ -133,7 +154,10 @@ export default class Advance extends Component {
         position: this.position,
         status: this.status,
         advancedamnt: this.advancedamnt,
-        description: this.description
+        reason: this.reason,
+        recipient: this.recipient,
+        payperiod: this.payperiod,
+        paymethod: this.paymethod
       })
     })
       .then(response => response.json())
@@ -164,6 +188,10 @@ export default class Advance extends Component {
         (this.status = value.status),
         (this.advancedamnt = value.advancedamnt),
         (this.description = value.description),
+        (this.reason = value.reason),
+        (this.recipient = value.recipient),
+        (this.payperiod = value.payperiod),
+        (this.paymethod = value.paymethod),
         this.InsertDataToServer();
       this.clearForm();
       alert("Advance captured!");

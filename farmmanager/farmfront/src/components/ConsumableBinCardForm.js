@@ -6,13 +6,15 @@ import {
   Button,
   Linking,
   Text,
+  TouchableOpacity,
   SafeAreaView
 } from "react-native";
+import moment from "moment";
 
 var t = require("tcomb-form-native");
 const Form = t.form.Form;
 
-const Consumable = t.struct({
+const ConsumableBinCard = t.struct({
   Date: t.Date,
   Name: t.String,
   QuantityTaken: t.Number,
@@ -20,21 +22,19 @@ const Consumable = t.struct({
   QuantityBalance: t.Number,
   Description: t.maybe(t.String),
   Notification: t.String,
-  TakenBy: t.String
+  TakenBy: t.String,
+  Store: t.String
 });
 
 const formStyles = {
   ...Form.stylesheet,
   formGroup: {
-    normal: {
-      marginBottom: 5
-    }
+    normal: {}
   },
   controlLabel: {
     normal: {
-      color: "#650205",
-      fontSize: 20,
-      marginBottom: 5
+      color: "#006432",
+      fontSize: 20
     },
     error: {
       color: "red",
@@ -47,14 +47,14 @@ const formStyles = {
 
 const options = {
   fields: {
-    date: {
+    Date: {
       label: "Date",
       mode: "date",
       error: "Please enter a correct date",
       returnKeyType: "next",
       config: {
         defaultValueText: "Select",
-        format: date => moment(date).format("YYYY-DD-MM")
+        format: date => moment(date).format("DD-MM-YYYY")
       }
     },
     Name: {
@@ -75,19 +75,23 @@ const options = {
     TakenBy: {
       label: "Taken By",
       error: "Please enter in letters"
+    },
+    Store: {
+      label: "Store Name",
+      error: "Please fill in the store"
     }
   },
   stylesheet: formStyles
 };
 
-export default class Consumable extends Component {
+export default class ConsumableBinCardForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   InsertDataToServer = async () => {
-    fetch("http://127.0.0.1:8000/api/consumable/", {
+    fetch("http://127.0.0.1:8000/api/consumablebincard/", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -101,7 +105,8 @@ export default class Consumable extends Component {
         qtybal: this.QuantityBalance,
         description: this.Description,
         notification: this.Notification,
-        takenby: this.TakenBy
+        takenby: this.TakenBy,
+        store: this.Store
       })
     })
       .then(response => response.json())
@@ -125,17 +130,18 @@ export default class Consumable extends Component {
     const value = this._form.getValue();
     console.log(value);
     if (value != null) {
-      (this.Date: value.Date),
-        (this.Name: value.Name),
-        (this.QuantityTaken: value.QuantityTaken),
-        (this.QuantityUsed: value.QuantityUsed),
-        (this.QuantityBalance: value.QuantityBalance),
-        (this.Description: value.Description),
-        (this.Notification: value.Notification),
-        (this.TakenBy: value.TakenBy),
+      (this.Date = value.Date),
+        (this.Name = value.Name),
+        (this.QuantityTaken = value.QuantityTaken),
+        (this.QuantityUsed = value.QuantityUsed),
+        (this.QuantityBalance = value.QuantityBalance),
+        (this.Description = value.Description),
+        (this.Notification = value.Notification),
+        (this.TakenBy = value.TakenBy),
+        (this.Store = value.Store),
         this.InsertDataToServer();
       this.clearForm();
-      alert("Advance captured!");
+      alert("Consumable Bin Card captured!");
     } else console.log("No data entered");
   };
 
@@ -144,10 +150,10 @@ export default class Consumable extends Component {
       <SafeAreaView style={styles.container} behavior="padding" enabled>
         <ScrollView>
           <View>
-            <Text style={styles.title}>Consumable</Text>
+            <Text style={styles.title}>Consumable Bin Card</Text>
             <Form
               ref={c => (this._form = c)}
-              type={Consumable}
+              type={ConsumableBinCard}
               value={this.state.value}
               onChange={this.onChange.bind(this)}
               options={options}

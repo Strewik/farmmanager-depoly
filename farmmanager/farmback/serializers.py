@@ -9,24 +9,24 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# Personnel Serialiser
-class PersonnelSerializer(serializers.ModelSerializer):
+# Farm Serialiser
+class FarmSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Personnel
+        model = Farm
         fields = '__all__'
 
 
-# Income Serialiser
-class IncomeSerializer(serializers.ModelSerializer):
+# AdvanceForm Serialiser
+class AdvanceFormSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Income
+        model = AdvanceForm
         fields = '__all__'
 
 
-# Expenditure Serialiser
-class ExpenditureSerializer(serializers.ModelSerializer):
+# Casual Serialiser
+class CasualSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Expenditure
+        model = Casual
         fields = '__all__'
 
 
@@ -37,10 +37,31 @@ class ConsumableSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# NewConsumable Serialiser
-class NewConsumableSerializer(serializers.ModelSerializer):
+# ConsumableBinCard Serialiser
+class ConsumableBinCardSerializer(serializers.ModelSerializer):
     class Meta:
-        model = NewConsumable
+        model = ConsumableBinCard
+        fields = '__all__'
+
+
+# Customer Serialiser
+class CustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = '__all__'
+
+
+# Employee Serialiser
+class EmployeeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Employee
+        fields = '__all__'
+
+
+# Expenditure Serialiser
+class ExpenditureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Expenditure
         fields = '__all__'
 
 
@@ -51,10 +72,10 @@ class HarvestSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# AdvanceForm Serialiser
-class AdvanceFormSerializer(serializers.ModelSerializer):
+# Income Serialiser
+class IncomeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = AdvanceForm
+        model = Income
         fields = '__all__'
 
 
@@ -72,10 +93,17 @@ class RequisitionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# ToolBinCard Serialiser
-class ToolBinCardSerializer(serializers.ModelSerializer):
+# Seedling Serialiser
+class SeedlingSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ToolBinCard
+        model = Seedling
+        fields = '__all__'
+
+
+# Supplier Serialiser
+class SupplierSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Supplier
         fields = '__all__'
 
 
@@ -83,4 +111,11 @@ class ToolBinCardSerializer(serializers.ModelSerializer):
 class ToolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tool
+        fields = '__all__'
+
+
+# ToolBinCard Serialiser
+class ToolBinCardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ToolBinCard
         fields = '__all__'

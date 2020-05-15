@@ -7,9 +7,9 @@ import {
   UPDATE_EXPENDITURE
 } from "./types";
 
-//FETCH ADVANCES
+//FETCH EXPENDITURES
 
-export const getExpenditure = () => dispatch => {
+export const getExpenditures = () => dispatch => {
   axios
     .get("http://localhost:8000/api/expenditure/")
     .then(res => {
@@ -21,13 +21,13 @@ export const getExpenditure = () => dispatch => {
     })
     .catch(err => console.log(err));
 };
-// GET ONE ADVANCE
+// GET ONE EXPENDITURE
 export const detailExpenditure = id => dispatch => {
   axios
     .get(`http://localhost:8000/api/expenditure/${id}/`)
     .then(res => {
       // console.log(res.data);
-      // .then((advances) =>
+      // .then((EXPENDITUREs) =>
       dispatch({
         type: DETAIL_EXPENDITURE,
         payload: res.data
@@ -38,7 +38,7 @@ export const detailExpenditure = id => dispatch => {
     );
 };
 
-//DELETE ADVANCE
+//DELETE EXPENDITURE
 export const deleteExpenditure = id => dispatch => {
   axios
     .delete(`http://localhost:8000/api/expenditure/${id}/`)
@@ -52,28 +52,28 @@ export const deleteExpenditure = id => dispatch => {
     .catch(err => console.log("Axios not able to delete Expenditure", err));
 };
 
-// //ADD_ADVANCE
+// //ADD_EXPENDITURE
 
-export const addAdvance = expenseData => dispatch => {
-  console.log("add expenditure");
-  fetch("http://127.0.0.1:8000/api/expenditure/", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(expenseData)
-  })
-    .then(res => res.json())
-    .then(expense =>
-      dispatch({
-        type: ADD_EXPENDITURE,
-        payload: expense
-      })
-    )
-    .catch(error => {
-      console.error("Failed to add expense", error);
-    });
-};
+// export const addExpenditure = expenseData => dispatch => {
+//   console.log("add expenditure");
+//   fetch("http://127.0.0.1:8000/api/expenditure/", {
+//     method: "POST",
+//     headers: {
+//       Accept: "application/json",
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify(expenseData)
+//   })
+//     .then(res => res.json())
+//     .then(expense =>
+//       dispatch({
+//         type: ADD_EXPENDITURE,
+//         payload: expense
+//       })
+//     )
+//     .catch(error => {
+//       console.error("Failed to add expense", error);
+//     });
+// };
 
-// //UPDATE ADVANCE
+// //UPDATE EXPENDITURE

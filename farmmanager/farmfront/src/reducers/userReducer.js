@@ -1,5 +1,3 @@
-// // postReducer.js
-
 import {
   GET_USER,
   DELETE_USER,
@@ -59,14 +57,4 @@ export default function(state = initialState, action) {
     //             return {...state, USERs: clone};
     //         };
     
-// function todoApp(state = initialState, action) {
-//   switch (action.type) {
-//     case SET_VISIBILITY_FILTER:
-//       return Object.assign({}, state, {
-//         visibilityFilter: action.filter
-//       })
-//     default:
-//       return state
-//   }
-// } 
 
