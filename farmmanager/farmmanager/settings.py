@@ -25,12 +25,7 @@ SECRET_KEY = 'n-ye&9@&x1tv=cy_m63#ti&sunxtbs%dpra+qjh0wv*%7ca4k8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    # 'http://192.168.43.94',
-    # 'http://localhost',
-    # 'http://127.0.0.1'
-    '*'
-]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -57,6 +52,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    
+]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+]
+CORS_ORIGIN_REGEX_WHITELIST = [
+    'http://127.0.0.1:8000',
 ]
 
 ROOT_URLCONF = 'farmmanager.urls'
@@ -129,11 +136,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ORIGIN_WHITELIST = (
-         'http://localhost:3000',
-         'http://localhost:8000',
-         'http://localhost',
-         'http://192.168.43.94:19001',
-         'http://192.168.43.94',
-         'http://127.0.0.1:8000'
-     )

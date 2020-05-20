@@ -11,8 +11,9 @@ web-build/
 web-report/
 # macOS
 .DS_Store
-node_modules
-
+dist/
+.vscode/*
+__pycache__
 
 
 #db
@@ -80,3 +81,6 @@ __pycache__
 *.pyc
 .vscode
 vscode/
+
+.expo/*
+.expo-shared/*

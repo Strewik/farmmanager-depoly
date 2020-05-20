@@ -9,14 +9,12 @@ import {
   ScrollView,
   StyleSheet
 } from "react-native";
-import {
-  getExpenditure
-} from "../actions/expenditureActions";
+import { getExpenditures } from "../actions/expenditureActions";
 import { connect } from "react-redux";
 
 class ExpenditureLand extends Component {
   componentDidMount() {
-    this.props.getExpenditure();
+    this.props.getExpenditures();
   }
 
   render() {
@@ -70,9 +68,7 @@ const mapStateToProps = state => ({
   expenditures: state.expenditures.items
 });
 
-export default connect(mapStateToProps, { getExpenditure })(
-  ExpenditureLand
-);
+export default connect(mapStateToProps, { getExpenditures })(ExpenditureLand);
 
 const styles = StyleSheet.create({
   heading: {
@@ -120,28 +116,3 @@ const styles = StyleSheet.create({
     marginLeft: 20
   }
 });
-
-
-
-
-
-// import React, { Component } from 'react'
-// import { Text, View, Button } from 'react-native'
-// import { NavigationContainer } from "@react-navigation/native";
-// import { createStackNavigator } from '@react-navigation/stack'
-
-// const Stack = createStackNavigator();
-
-// export default function ExpenditureLand({navigation}) {
-//   return (
-//             <View>
-//                 <Text> Expenditure Landing page </Text>
-//                 <Button 
-//                 title="ADD"
-//                 style={{position: 'absolute', bottom:0, left:0,}}
-//                 onPress={() => navigation.navigate('Expenditure Form')}
-//                 />
-//             </View>
-//         )
-//     }
-

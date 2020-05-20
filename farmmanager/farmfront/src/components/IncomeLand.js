@@ -16,6 +16,7 @@ class IncomeLand extends Component {
   componentDidMount() {
     this.props.getIncome();
   }
+
   render() {
     let { navigation, route } = this.props;
     const income = this.props;

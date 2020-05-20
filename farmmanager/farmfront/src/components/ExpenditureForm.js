@@ -22,11 +22,24 @@ const Supplier = t.refinement(t.String, Supplier => {
   return regex.test(Supplier);
 });
 
-const TypeOfExpense = t.enums({
-  Capital: "Capital",
-  Operational: "Operational"
+const Itemtype = t.enums({
+  1: "Office Supplies",
+  2: "Crop Husbandry",
+  3: "Animal Husbandry",
+  4: "Construction Works",
+  5: "Water works",
+  6: "Electrical works",
+  7: "Carpentry works"
 });
 
+const Unit = t.enums({
+  1: "Liter",
+  2: "Kilogram",
+  3: "Tonne",
+  4: "piece",
+  5: "Bag",
+  6: "Trip"
+});
 const PaymentMode = t.enums({
   Cash: "Cash",
   Credit: "Credit"
@@ -37,8 +50,8 @@ const Expenditure = t.struct({
   Supplier: Supplier,
   Phone: Phone,
   Product: t.String,
-  TypeOfExpense: TypeOfExpense,
-  Unit: t.String,
+  Itemtype: Itemtype,
+  Unit: Unit,
   UnitPrice: t.Number,
   Quantity: t.Number,
   SubTotal: t.Number,
@@ -63,7 +76,6 @@ const formStyles = {
       color: "#006432",
       fontSize: 20
     },
-
     error: {
       color: "red",
       fontSize: 18,
@@ -84,25 +96,37 @@ const options = {
         format: date => moment(date).format("DD-MM-YYYY")
       }
     },
-    Name: {
+    Supplier: {
+      label: "Supplier",
       error: "Please enter a correct Name"
     },
-    Email: {
-      error: "Please enter a correct email address"
-    },
     Phone: {
+      label: "Phone",
       error: "Please enter a correct phone number"
     },
-    Password: {
-      error: "Please create a password",
-      Password: true,
-      secureTextEntry: true
+    Product: {
+      label: "Product",
+      error: "Please fill this field"
     },
-    TypeOfExpense: {
-      label: "Type of Expense"
+    Itemtype: {
+      label: "Item Type",
+      error: "Please this field is required.",
+      config: {
+        defaultValueText: "Select"
+      }
+    },
+    Unit: {
+      label: "Unit",
+      error: "Please this field is required.",
+      config: {
+        defaultValueText: "Select"
+      }
     },
     UnitPrice: {
       label: "Unit Price"
+    },
+    Quantity: {
+      label: "Quantity"
     },
     SubTotal: {
       label: "Sub Total"
@@ -153,7 +177,7 @@ export default class ExpenditureForm extends Component {
         suppl: this.Supplier,
         phone: this.Phone,
         product: this.Product,
-        typeofex: this.TypeOfExpense,
+        itemtype: this.Itemtype,
         unit: this.Unit,
         unitprice: this.UnitPrice,
         quantity: this.Quantity,
@@ -195,7 +219,7 @@ export default class ExpenditureForm extends Component {
         (this.Supplier = value.Supplier),
         (this.Phone = value.Phone),
         (this.Product = value.Product),
-        (this.TypeOfExpense = value.TypeOfExpense),
+        (this.Itemtype = value.Itemtype),
         (this.Unit = value.Unit),
         (this.UnitPrice = value.UnitPrice),
         (this.Quantity = value.Quantity),
@@ -211,7 +235,7 @@ export default class ExpenditureForm extends Component {
         (this.BalanceDueDate = value.BalanceDueDate),
         this.InsertDataToServer();
       this.clearForm();
-      alert("Income captured!");
+      alert("Expenditure captured!");
     } else console.log("No data entered");
   };
 

@@ -14,23 +14,27 @@ import t from "tcomb-form-native";
 
 const Form = t.form.Form;
 
-const CostType = t.enums({
-  Capital: "Capital",
-  Operational: "Operational"
+const Itemtype = t.enums({
+  1: "Labour & Man Power",
+  2: "Vehicles & Machinery",
+  3: "Consumables & Tools",
+  4: "Construction & Maintenance",
+  5: "Office Supplies"
 });
 
 const Requisition = t.struct({
   Date: t.Date,
-  CostType: CostType,
-  Units: t.String,
-  Activity: t.String,
-  Quantity: t.Number,
-  UnitPrice: t.Number,
-  SubTotal: t.Number,
+  Reqno: t.maybe(t.String),
+  Itemtype: Itemtype,
   Description: t.maybe(t.String),
+  Purpose: t.String,
+  Activity: t.maybe(t.String),
+  Unit: t.String,
+  UnitPrice: t.Number,
+  Quantity: t.Number,
+  Total: t.Number,
   RequestedBy: t.String,
-  ApprovedBy: t.maybe(t.String),
-  Total: t.Number
+  ApprovedBy: t.maybe(t.String)
 });
 
 const formStyles = {
@@ -56,45 +60,56 @@ const RequisitionOptions = {
   fields: {
     Date: {
       mode: "date",
-      error: "Please enter harvest date",
+      error: "Please select date",
       config: {
         defaultValueText: "Select",
         format: date => moment(date).format("DD-MM-YYYY")
       }
     },
-    CostType: {
-      label: "Cost Type",
-      returnKeyType: "next",
-      error: "Please enter correct quantity value"
+    Reqno: {
+      label: "Requisition No.",
+      returnKeyType: "next"
     },
-    Units: {
+    Itemtype: {
+      label: "Item Type",
       returnKeyType: "next",
-      error: "Please enter correct unit value"
+      config: {
+        defaultValueText: "Select"
+      }
+    },
+    Description: {
+      label: "Description",
+      returnKeyType: "next",
+      error: "Please describe requisition"
+    },
+    Purpose: {
+      label: "Purpose",
+      returnKeyType: "next",
+      error: "Please describe requisition"
     },
     Activity: {
+      label: "Activity",
       returnKeyType: "next",
       error: "Name of activity or item is required"
     },
-    store: {
+    Unit: {
+      label: "Unit",
       returnKeyType: "next",
-      error: "Please provide store name"
-    },
-    Quantity: {
-      returnKeyType: "next",
-      error: "Please provide description"
+      error: "Please enter correct unit value"
     },
     UnitPrice: {
       label: "Unit Price",
       returnKeyType: "next",
       error: "Please enter unit price"
     },
-    SubTotal: {
-      label: "Sub-total",
-      error: "Expect correct values"
-    },
-    Description: {
+    Quantity: {
+      label: "Quantity",
       returnKeyType: "next",
-      error: "Please describe requisition"
+      error: "Please provide description"
+    },
+    Total: {
+      label: "Total",
+      error: "No total captured"
     },
     RequestedBy: {
       label: "Requested By",
@@ -104,9 +119,6 @@ const RequisitionOptions = {
     ApprovedBy: {
       label: "Approved By",
       returnKeyType: "done"
-    },
-    Total: {
-      error: "No total captured"
     }
   },
   stylesheet: formStyles
@@ -117,7 +129,7 @@ export default class RequisitionForm extends Component {
     super(props);
     this.state = {};
   }
-InsertDataToServer = async () => {
+  InsertDataToServer = async () => {
     fetch("http://127.0.0.1:8000/api/requisition/", {
       method: "POST",
       headers: {
@@ -126,16 +138,17 @@ InsertDataToServer = async () => {
       },
       body: JSON.stringify({
         date: this.Date,
-        costtype: this.CostType,
-        units: this.Units,
-        activity: this.Activity,
-        qty: this.Quantity,
-        unitprice: this.UnitPrice,
-        subtotal: this.SubTotal,
+        reqno: this.Reqno,
+        itemtype: this.Itemtype,
         description: this.Description,
+        purpose: this.Purpose,
+        activity: this.Activity,
+        unit: this.Unit,
+        unitprice: this.UnitPrice,
+        qty: this.Quantity,
+        total: this.Total,
         requestby: this.RequestedBy,
-        approvby: this.ApprovedBy,
-        total: this.Total
+        approvby: this.ApprovedBy
       })
     })
       .then(response => response.json())
@@ -160,17 +173,18 @@ InsertDataToServer = async () => {
     const value = this._form.getValue();
     console.log(value);
     if (value != null) {
-     (this.Date = value.Date),
-      (this.CostType = value.CostType),
-      (this.Units = value.Units),
-      (this.Activity = value.Activity),
-      (this.Quantity = value.Quantity),
-      (this.UnitPrice = value.UnitPrice),
-      (this.SubTotal = value.SubTotal),
-      (this.Description = value.Description),
-      (this.RequestedBy = value.RequestedBy),
-      (this.ApprovedBy = value.ApprovedBy),
-      (this.Total = value.Total),
+      (this.Date = value.Date),
+        (this.Reqno = value.Reqno),
+        (this.Itemtype = value.Itemtype),
+        (this.Description = value.Description),
+        (this.Purpose = value.Purpose),
+        (this.Activity = value.Activity),
+        (this.Unit = value.Unit),
+        (this.UnitPrice = value.UnitPrice),
+        (this.Quantity = value.Quantity),
+        (this.Total = value.Total),
+        (this.RequestedBy = value.RequestedBy),
+        (this.ApprovedBy = value.ApprovedBy),
         this.InsertDataToServer();
       this.clearForm();
       alert("Requisition captured!");
@@ -189,21 +203,16 @@ InsertDataToServer = async () => {
 
   render() {
     return (
-      <SafeAreaView
-        style={styles.container}
-        behavior="padding"
-        enabled>
+      <SafeAreaView style={styles.container} behavior="padding" enabled>
         <ScrollView>
           <View>
             <Text style={styles.title}>Requisition Form</Text>
             <Form
-              // ref={request => (this.formRef = request)}
               ref={c => (this._form = c)}
               type={Requisition}
               value={this.state.value}
               onChange={this.onChange.bind(this)}
               options={RequisitionOptions}
-              // onChangeText={this.onChangeText}
             />
             <TouchableOpacity>
               <View style={styles.button}>

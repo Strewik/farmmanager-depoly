@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Text,
   Button,
-  KeyboardAvoidingView,
+  SafeAreaView,
   Linking,
   Image
 } from "react-native";
@@ -24,22 +24,18 @@ const RecoveryOne = t.struct({
 const formStyles = {
   ...Form.stylesheet,
   formGroup: {
-    normal: {
-      marginBottom: 20
-    }
+    normal: {}
   },
   controlLabel: {
     normal: {
-      color: "#650225",
-      fontSize: 20,
-      marginBottom: 7
+      color: "#006432",
+      fontSize: 20
     },
-
     error: {
       color: "red",
-      fontSize: 12,
+      fontSize: 18,
       marginBottom: 7,
-      fontWeight: "bold"
+      fontWeight: "600"
     }
   }
 };
@@ -56,24 +52,15 @@ const options = {
 
 export default class PasswordRecovery extends Component {
   render() {
+    let { navigation } = this.props;
     return (
-      <KeyboardAvoidingView
-        style={{
-          flex: 1,
-          backgroundColor: "#fff",
-          flexDirection: "column",
-          justifyContent: "center"
-        }}
-        behavior="padding"
-        enabled
-      >
+      <SafeAreaView style={styles.container} behavior="padding" enabled>
         <ScrollView>
-          <View style={styles.container}>
+          <View>
             <View style={styles.image}>
               <Image source={require("../images/user.png")} />
             </View>
-            <Text style={styles.word1}>Password Recovery</Text>
-            <Text style={styles.word2}>Enter Account Email</Text>
+            <Text style={styles.word}>Enter Account Email</Text>
             <Form
               ref={c => (this._form = c)}
               type={RecoveryOne}
@@ -82,46 +69,43 @@ export default class PasswordRecovery extends Component {
             <View>
               <Text
                 style={styles.recovery}
-                onPress={() => Linking.openURL("http://google.com")}
+                onPress={() => navigation.navigate("Password Two")}
               >
                 Send Recovery Link To My Email
               </Text>
             </View>
           </View>
         </ScrollView>
-      </KeyboardAvoidingView>
+      </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: "#fff"
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    marginTop: 10,
+    padding: 10
   },
   image: {
     alignItems: "center",
-    marginTop: 25
+    marginTop: 10
   },
-  word1: {
+  word: {
     fontSize: 20,
     marginTop: 10,
-    color: "#650225",
-    fontWeight: "bold"
-  },
-  word2: {
-    fontSize: 18,
-    marginTop: 10,
-    color: "#650225",
-    paddingBottom: 40,
-    paddingTop: 20
+    color: "#006432",
+    fontWeight: "bold",
+    paddingBottom: 10,
+    paddingTop: 10
   },
   recovery: {
     textAlign: "center",
     marginTop: 5,
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: "bold",
-    color: "#650225"
+    color: "#006432"
   }
 });
+

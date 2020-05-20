@@ -10,10 +10,7 @@ import {
   Image,
   StyleSheet
 } from "react-native";
-import {
-  deleteExpenditure,
-  detailExpenditure
-} from "../actions/incomeActions";
+import { deleteExpenditure, detailExpenditure } from "../actions/incomeActions";
 import { connect } from "react-redux";
 
 class ExpenditureDetails extends Component {
@@ -80,7 +77,7 @@ class ExpenditureDetails extends Component {
               source={require("../images/worker.jpg")}
             />
             <Text style={{ flex: 1, alignSelf: "stretch", color: "#228B22" }}>
-              Customer:
+              Supplier:
             </Text>
             <Text
               style={{
@@ -90,7 +87,7 @@ class ExpenditureDetails extends Component {
                 fontWeight: "bold",
                 fontSize: 16
               }}
-            >{`${expenditure.customer}`}</Text>
+            >{`${expenditure.suppl}`}</Text>
           </View>
           <View
             style={{
@@ -153,6 +150,37 @@ class ExpenditureDetails extends Component {
                 fontSize: 16
               }}
             >{`${expenditure.product}`}</Text>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              alignSelf: "stretch",
+              flexDirection: "row",
+              height: 35,
+              margin: 10
+            }}
+          >
+            <Image
+              style={{
+                alignSelf: "center",
+                width: 50,
+                height: 50,
+                marginRight: 5
+              }}
+              source={require("../images/worker.jpg")}
+            />
+            <Text style={{ flex: 1, alignSelf: "stretch", color: "#228B22" }}>
+              Item Type:
+            </Text>
+            <Text
+              style={{
+                flex: 1,
+                alignSelf: "stretch",
+                color: "#006432",
+                fontWeight: "bold",
+                fontSize: 16
+              }}
+            >{`${expenditure.itemtype}`}</Text>
           </View>
           <View
             style={{
@@ -493,7 +521,7 @@ class ExpenditureDetails extends Component {
               source={require("../images/worker.jpg")}
             />
             <Text style={{ flex: 1, alignSelf: "stretch", color: "#228B22" }}>
-              receiptnum:
+              Receipt Number:
             </Text>
             <Text
               style={{
@@ -505,7 +533,7 @@ class ExpenditureDetails extends Component {
               }}
             >{`${expenditure.receiptnum}`}</Text>
           </View>
-          <View
+          {/* <View
             style={{
               flex: 1,
               alignSelf: "stretch",
@@ -535,7 +563,7 @@ class ExpenditureDetails extends Component {
                 fontSize: 16
               }}
             >{`${expenditure.receiptnum}`}</Text>
-          </View>
+          </View> */}
           <View
             style={{
               flex: 1,
@@ -605,7 +633,7 @@ class ExpenditureDetails extends Component {
         <TouchableOpacity
           onPress={() => {
             this.props.deleteExpenditure.bind(this, expenditure.id);
-            navigation.navigate("expenditureLand");
+            navigation.navigate("expenditure summaries");
           }}
           style={{
             flex: 1,
@@ -626,7 +654,7 @@ class ExpenditureDetails extends Component {
     return (
       <ScrollView>
         <View>
-          <Text style={styles.heading}> expenditure Details </Text>
+          <Text style={styles.heading}> Expenditure Details </Text>
           {item}
         </View>
       </ScrollView>

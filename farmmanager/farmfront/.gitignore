@@ -1,5 +1,8 @@
 node_modules/**/*
 .expo/*
+dist/
+.vscode/*
+__pycache__
 npm-debug.*
 *.jks
 *.p8

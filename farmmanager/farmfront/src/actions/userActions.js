@@ -1,62 +1,74 @@
 import axios from "axios";
-import { GET_USERS, ADD_USER, DELETE_USER, UPDATE_USER } from "./types";
+import {
+  GET_USER,
+  DELETE_USER,
+  DETAIL_USER,
+  ADD_USER,
+  UPDATE_USER
+} from "./types";
 
-//GET USERS
-
-// export const fetchUsers = () => dispatch => {
-//   fetch("http://127.0.0.1:8000/api/user/")
-//     .then(res => res.json())
-//     .then(users =>
-//       dispatch({
-//         type: GET_USERS,
-//         payload: users
-//         // users:users//you could also call the payload as users
-//       })
-//     );
-// };
-
-export const fetchUsers = () => dispatch => {
+//FETCH USERS
+export const getUsers = () => dispatch => {
   axios
     .get("http://localhost:8000/api/user/")
     .then(res => {
-      console.log(res.data);
       dispatch({
-        type: GET_USERS,
+        type: GET_USER,
         payload: res.data
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log("Not able to fetch Users", err));
+};
+
+//DELETE USER
+export const deleteUser = id => dispatch => {
+  axios
+    .delete(`http://localhost:8000/api/user/${id}/`)
+    .then(res => {
+      dispatch({
+        type: DELETE_USER,
+        payload: id
+      });
+    })
+    .catch(err => console.log("Axios not able to delete user", err));
+};
+
+// GET DETAILS OF USER
+export const detailUser = id => dispatch => {
+  axios
+    .get(`http://localhost:8000/api/user/${id}/`)
+    .then(res => {
+      dispatch({
+        type: DETAIL_USER,
+        payload: res.data
+      });
+    })
+    .catch(err => console.log("Axios not able to fetch single User", err));
 };
 
 //ADD_USER
 
-export const addUser = userData => dispatch => {
-  fetch("http://127.0.0.1:8000/api/user/", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(userData)
-    //   body: JSON.stringify({
-    //     name: this.Name,
-    //     email: this.Email,
-    //     phone: this.Phone,
-    //     password: this.Password
-    //   })
-  })
-    .then(res => res.json())
-    .then(
-      user =>
-        dispatch({
-          type: ADD_USER,
-          payload: user
-        })
-      // alert("Thank You for Signing Up!");
-      // Alert.alert(responseJson);
-      // this.props.navigation.navigate("Login");
-    );
-  //   .catch(error => {
-  //     console.error(error);
-  //   });
-};
+// export const createUSER = (USERData) => dispatch => {
+//   console.log('creating USER')
+//     fetch("http://127.0.0.1:8000/api/user/", {
+//       method: "POST",
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify(USERData)
+//     })
+//       .then(response => response.json())
+//       .then(USER =>
+//       dispatch({
+//         type: ADD_USER,
+//           payload: USER
+//       })
+//       // alert(USER)
+//       )
+//       .catch(error => {
+//         console.error("Failed to add USER", error);
+//       });
+//   };
+
+// //UPDATE USER

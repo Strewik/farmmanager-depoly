@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Text,
   Button,
-  KeyboardAvoidingView,
+  SafeAreaView,
   Linking,
   Image
 } from "react-native";
@@ -21,22 +21,18 @@ const RecoveryTwo = t.struct({
 const formStyles = {
   ...Form.stylesheet,
   formGroup: {
-    normal: {
-      marginBottom: 10
-    }
+    normal: {}
   },
   controlLabel: {
     normal: {
-      color: "#650225",
-      fontSize: 20,
-      marginBottom: 5
+      color: "#006432",
+      fontSize: 20
     },
-
     error: {
       color: "red",
-      fontSize: 12,
+      fontSize: 18,
       marginBottom: 5,
-      fontWeight: "bold"
+      fontWeight: "600"
     }
   }
 };
@@ -65,7 +61,7 @@ export default class PasswordRecovery extends Component {
   };
   render() {
     return (
-      <KeyboardAvoidingView
+      <SafeAreaView
         style={{
           flex: 1,
           backgroundColor: "#fff",
@@ -85,28 +81,32 @@ export default class PasswordRecovery extends Component {
               type={RecoveryTwo}
               options={options}
             />
-            <Button
-              style={styles.button}
-              title="SUBMIT"
-              color="#0A802B"
-              onPress={this.handleSubmit}
-            ></Button>
+            <View style={styles.button}>
+              <Button
+                title="SUBMIT"
+                color="#0A802B"
+                onPress={this.handleSubmit}
+              />
+            </View>
           </View>
         </ScrollView>
-      </KeyboardAvoidingView>
+      </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
+    justifyContent: "center",
     backgroundColor: "#fff",
-    fontWeight: "bold"
+    marginTop: 10,
+    padding: 10
   },
   image: {
     alignItems: "center",
-    marginTop: 25
+  },
+  button: {
+    marginTop: 15,
+    marginBottom: 50
   }
 });

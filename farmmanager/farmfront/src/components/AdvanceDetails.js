@@ -243,11 +243,8 @@ class AdvanceDetails extends Component {
 
         <TouchableOpacity
           onPress={() => {
-             const ids = this.props.route.params.itemId;
-            console.log("id ayooo----------------------------------", ids);
-            console.log(ids)
-            this.props.deleteAdvance.ids;
-            navigation.navigate("Advance Summaries");
+            this.props.deleteAdvance.bind(this, advance.id);
+            // navigation.navigate("AdvanceLand");
           }}
           style={{
             flex: 1,
@@ -302,4 +299,3 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 });
-
