@@ -51,8 +51,7 @@ const Tool = t.struct({
   Condition: Condition,
   LifeSpan: t.maybe(t.String),
   Quantity: t.Number,
-  Costpertool: t.maybe(t.Number),
-  Totalcost: t.Number
+  Costpertool: t.maybe(t.Number)
 });
 
 const formStyles = {
@@ -120,9 +119,6 @@ const options = {
     },
     Costpertool: {
       label: "Cost per Tool"
-    },
-    Totalcost: {
-      label: " Total Cost"
     }
   },
   stylesheet: formStyles
@@ -153,7 +149,6 @@ export default class ToolForm extends Component {
         lifespan: this.LifeSpan,
         qty: this.Quantity,
         toolcost: this.Costpertool,
-        totalcost: this.Totalcost
       })
     })
       .then(response => response.json())
@@ -188,7 +183,6 @@ export default class ToolForm extends Component {
         (this.LifeSpan = value.LifeSpan),
         (this.Quantity = value.Quantity),
         (this.Costpertool = value.Costpertool),
-        (this.Totalcost = value.Totalcost),
         this.InsertDataToServer();
       this.clearForm();
       alert("Tool captured!");
@@ -240,6 +234,8 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
-    marginBottom: 50
+    marginBottom: 50,
+    marginRight: 80,
+    marginLeft: 80
   }
 });

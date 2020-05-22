@@ -69,7 +69,9 @@ export default function LandReportFinace({ navigation }) {
             style={{
               flex: 1,
               backgroundColor: "#349e00",
-              borderRadius: 15,
+              borderRadius: 10,
+              // borderColor: "gray",
+              // borderWidth:5,
               margin: 10,
               fontSize: 24,
               justifyContent: "center",
@@ -113,9 +115,7 @@ export default function LandReportFinace({ navigation }) {
         </View>
       </View>
       <View style={{ flex: 1 }}>
-        <View
-          style={{ flex: 1, flexDirection: "row" }}
-        >
+        <View style={{ flex: 1, flexDirection: "row" }}>
           <TouchableOpacity
             onPress={() => navigation.navigate("Advance Summaries")}
             style={{
@@ -166,9 +166,7 @@ export default function LandReportFinace({ navigation }) {
       </View>
 
       <View style={{ flex: 1 }}>
-        <View
-          style={{ flex: 1, flexDirection: "row" }}
-        >
+        <View style={{ flex: 1, flexDirection: "row" }}>
           <TouchableOpacity
             onPress={() => navigation.navigate("Supplier Summaries")}
             style={{

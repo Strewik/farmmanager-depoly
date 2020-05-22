@@ -5,8 +5,8 @@ import {
   StyleSheet,
   Text,
   Button,
-  Linking,
-  SafeAreaView
+  SafeAreaView,
+  TouchableOpacity
 } from "react-native";
 import moment from "moment";
 
@@ -17,51 +17,43 @@ const Phone = t.refinement(t.Number, Phone => {
   const reg = /^[0]?[0-9]\d{8}$/;
   return reg.test(Phone);
 });
-const Supplier = t.refinement(t.String, Supplier => {
+const Customer = t.refinement(t.String, Customer => {
   const regex = /^[a-zA-Z].*[\s\.]*$/g;
-  return regex.test(Supplier);
+  return regex.test(Customer);
 });
 
-const Itemtype = t.enums({
-  1: "Office Supplies",
-  2: "Crop Husbandry",
-  3: "Animal Husbandry",
-  4: "Construction Works",
-  5: "Water works",
-  6: "Electrical works",
-  7: "Carpentry works"
-});
-
-const Unit = t.enums({
-  1: "Liter",
-  2: "Kilogram",
-  3: "Tonne",
-  4: "piece",
-  5: "Bag",
-  6: "Trip"
-});
 const PaymentMode = t.enums({
   Cash: "Cash",
   Credit: "Credit"
 });
 
-const Expenditure = t.struct({
-  Date: t.Date,
-  Supplier: Supplier,
-  Phone: Phone,
-  Product: t.String,
-  Itemtype: Itemtype,
-  Unit: Unit,
-  UnitPrice: t.Number,
-  Quantity: t.Number,
-  SubTotal: t.Number,
-  Tax: t.maybe(t.Number),
-  Description: t.maybe(t.String),
-  Total: t.Number,
-  InvoiceNumber: t.maybe(t.Number),
-  AmountPaid: t.Number,
-  PaymentMode: PaymentMode,
+const Product = t.enums({
+  1: "Robusta Green Bean",
+  2: "Robusta Kase",
+  3: "Robusta Kiboko",
+  4: "Robusta Red Cherry"
+});
+
+const VAT = t.enums({
+  1: "VAT Inclusive",
+  2: "VAT Excluded",
+  3: "Not Applicable"
+});
+const Income = t.struct({
+  AmountRec: t.Number,
   ReceiptNumber: t.maybe(t.Number),
+  Customer: Customer,
+  Phone: Phone,
+  Date: t.Date,
+  Product: Product,
+  Quantity: t.Number,
+  Unit: t.String,
+  UnitPrice: t.Number,
+  SubTotal: t.Number,
+  VAT: t.maybe(VAT),
+  Total: t.Number,
+  PaymentMode: PaymentMode,
+  Invnumber: t.maybe(t.Number),
   BalanceDue: t.maybe(t.Number),
   BalanceDueDate: t.maybe(t.Date)
 });
@@ -76,6 +68,7 @@ const formStyles = {
       color: "#006432",
       fontSize: 20
     },
+
     error: {
       color: "red",
       fontSize: 18,
@@ -87,8 +80,28 @@ const formStyles = {
 
 const options = {
   fields: {
+    AmountRec: {
+      autoFocus: true,
+      label: "Amount Received",
+      error: "Please fill this field",
+      returnKeyType: "next"
+    },
+    ReceiptNumber: {
+      label: "Receipt Number",
+      returnKeyType: "next"
+    },
+    Customer: {
+      label: "Customer Name",
+      error: "Fill this field",
+      returnKeyType: "next"
+    },
+    Phone: {
+      label: "Phone Number",
+      error: "Fill this field",
+      returnKeyType: "next"
+    },
     Date: {
-      label: "Date",
+      label: "Date of Sale",
       mode: "date",
       error: "Please enter a correct date",
       config: {
@@ -96,55 +109,54 @@ const options = {
         format: date => moment(date).format("DD-MM-YYYY")
       }
     },
-    Supplier: {
-      label: "Supplier",
-      error: "Please enter a correct Name"
-    },
-    Phone: {
-      label: "Phone",
-      error: "Please enter a correct phone number"
-    },
     Product: {
-      label: "Product",
-      error: "Please fill this field"
-    },
-    Itemtype: {
-      label: "Item Type",
-      error: "Please this field is required.",
-      config: {
-        defaultValueText: "Select"
-      }
-    },
-    Unit: {
-      label: "Unit",
-      error: "Please this field is required.",
-      config: {
-        defaultValueText: "Select"
-      }
-    },
-    UnitPrice: {
-      label: "Unit Price"
+      label: "Product Name",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
     Quantity: {
-      label: "Quantity"
+      label: "Quantity",
+      error: "Fill this field",
+      returnKeyType: "next"
+    },
+    Unit: {
+      label: "Units",
+      error: "Fill this field",
+      returnKeyType: "next"
+    },
+    UnitPrice: {
+      label: "Unit Price",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
     SubTotal: {
-      label: "Sub Total"
+      label: "Sub Total",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
-    InvoiceNumber: {
-      label: "Invoice Number"
+    VAT: {
+      label: "VAT",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
-    AmountPaid: {
-      label: "Amount Paid"
+    Total: {
+      label: "Total",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
     PaymentMode: {
-      label: "Payment Mode"
+      label: "Payment Mode",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
-    ReceiptNumber: {
-      label: "Receipt Number"
+    Invnumber: {
+      label: "Invoice Number",
+      error: "Fill this field",
+      returnKeyType: "next"
     },
     BalanceDue: {
-      label: "Balance Due"
+      label: "Balance Due",
+      returnKeyType: "next"
     },
     BalanceDueDate: {
       label: "Due Date",
@@ -159,38 +171,36 @@ const options = {
   stylesheet: formStyles
 };
 
-export default class ExpenditureForm extends Component {
-  constructor() {
-    super();
+export default class IncomeForm extends Component {
+  constructor(props) {
+    super(props);
     this.state = {};
   }
 
   InsertDataToServer = async () => {
-    fetch("http://127.0.0.1:8000/api/expenditure/", {
+    fetch("http://127.0.0.1:8000/api/income/", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        date: this.Date,
-        suppl: this.Supplier,
-        phone: this.Phone,
-        product: this.Product,
-        itemtype: this.Itemtype,
-        unit: this.Unit,
-        unitprice: this.UnitPrice,
-        quantity: this.Quantity,
-        subtotal: this.SubTotal,
-        tax: this.Tax,
-        description: this.Description,
-        total: this.Total,
-        invnumber: this.InvoiceNumber,
-        amountpaid: this.AmountPaid,
-        paymode: this.PaymentMode,
-        receiptnum: this.ReceiptNumber,
-        baldue: this.BalanceDue,
-        balduedate: this.BalanceDueDate
+        amountrecvd: this.amountrecvd,
+        receiptnum: this.receiptnum,
+        customer: this.customer,
+        phone: this.phone,
+        date: this.date,
+        product: this.product,
+        quantity: this.quantity,
+        unit: this.unit,
+        unitprice: this.unitprice,
+        subtotal: this.subtotal,
+        vat: this.vat,
+        total: this.total,
+        paymode: this.paymode,
+        invnumber: this.invnumber,
+        baldue: this.baldue,
+        balduedate: this.balduedate
       })
     })
       .then(response => response.json())
@@ -215,27 +225,25 @@ export default class ExpenditureForm extends Component {
     const value = this._form.getValue();
     console.log(value);
     if (value != null) {
-      (this.Date = value.Date),
-        (this.Supplier = value.Supplier),
+      (this.AmountRec = value.AmountRec),
+        (this.ReceiptNumber = value.ReceiptNumber),
+        (this.Customer = value.Customer),
         (this.Phone = value.Phone),
+        (this.Date = value.Date),
         (this.Product = value.Product),
-        (this.Itemtype = value.Itemtype),
+        (this.Quantity = value.Quantity),
         (this.Unit = value.Unit),
         (this.UnitPrice = value.UnitPrice),
-        (this.Quantity = value.Quantity),
         (this.SubTotal = value.SubTotal),
-        (this.Tax = value.Tax),
-        (this.Description = value.Description),
+        (this.VAT = value.VAT),
         (this.Total = value.Total),
-        (this.InvoiceNumber = value.InvoiceNumber),
-        (this.AmountPaid = value.AmountPaid),
         (this.PaymentMode = value.PaymentMode),
-        (this.ReceiptNumber = value.ReceiptNumber),
+        (this.Invnumber = value.Invnumber),
         (this.BalanceDue = value.BalanceDue),
         (this.BalanceDueDate = value.BalanceDueDate),
         this.InsertDataToServer();
       this.clearForm();
-      alert("Expenditure captured!");
+      alert("Income captured!");
     } else console.log("No data entered");
   };
 
@@ -244,10 +252,10 @@ export default class ExpenditureForm extends Component {
       <SafeAreaView style={styles.container} behavior="padding" enabled>
         <ScrollView>
           <View>
-            <Text style={styles.title}>Expenditure</Text>
+            <Text style={styles.title}>Sales Form</Text>
             <Form
               ref={c => (this._form = c)}
-              type={Expenditure}
+              type={Income}
               value={this.state.value}
               onChange={this.onChange.bind(this)}
               options={options}
@@ -269,8 +277,11 @@ export default class ExpenditureForm extends Component {
 const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
-    marginTop: 15,
-    padding: 20
+    // marginTop: 15,
+    padding: 20,
+    borderWidth: 5,
+    borderColor: "#006432",
+    borderRadius: 10
   },
   title: {
     fontSize: 25,
@@ -283,7 +294,11 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     marginBottom: 50,
+    elevation: 10,
     marginRight: 80,
     marginLeft: 80
+    // borderWidth: 3,
+    // borderColor: "#006432",
+    // borderRadius: 10
   }
 });

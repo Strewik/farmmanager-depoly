@@ -11,19 +11,24 @@ import {
 
 var t = require("tcomb-form-native");
 const Form = t.form.Form;
-
+const Email = t.refinement(t.String, Email => {
+  const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
+  return reg.test(Email);
+});
 const Phone = t.refinement(t.Number, Phone => {
   const reg = /^[0]?[0-9]\d{9}$/;
   return reg.test(Phone);
 });
+const Name = t.refinement(t.String, Name => {
+  const regex = /^[a-zA-Z].*[\s\.]*$/g;
+  return regex.test(Name);
+});
 
-const Farm = t.struct({
-  Name: t.String,
-  Location: t.String,
-  Address: t.String,
-  ContactPerson: t.String,
+const User = t.struct({
+  Name: Name,
+  Email: Email,
   Phone: Phone,
-  Tin: t.Number
+  Password: t.String
 });
 
 const formStyles = {
@@ -49,46 +54,38 @@ const options = {
   fields: {
     Name: {
       autoFocus: true,
-      label: "Farm Name",
+      label: "Name",
       returnKeyType: "next",
-      error: "Please fill this field"
+      error: "Please enter a correct Name"
     },
-    Location: {
-      label: "Farm Location",
+    Email: {
+      label: "Email",
       returnKeyType: "next",
-      error: "Please fill this field"
-    },
-    Address: {
-      label: "Farm Address",
-      returnKeyType: "next",
-      error: "Please fill this field"
-    },
-    ContactPerson: {
-      label: "Contact Person",
-      returnKeyType: "next",
-      error: "Please fill this field"
+      error: "Please enter a correct email address"
     },
     Phone: {
-      label: "Phone Number",
+      label: "Phone",
       returnKeyType: "next",
       error: "Please enter a correct phone number"
     },
-    Tin: {
-      label: "TIN",
-      error: "Please enter correct TIN"
+    Password: {
+      label: "Password",
+      error: "Please create a password",
+      Password: true,
+      secureTextEntry: true
     }
   },
   stylesheet: formStyles
 };
 
-export default class FarmForm extends Component {
+export default class SignUp extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.Name, this.Email, this.Phone, this.Password;
   }
 
   InsertDataToServer = async () => {
-    fetch("http://127.0.0.1:8000/api/farm/", {
+    fetch("http://127.0.0.1:8000/api/user/", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -96,11 +93,9 @@ export default class FarmForm extends Component {
       },
       body: JSON.stringify({
         name: this.Name,
-        location: this.Location,
-        address: this.Address,
-        contactperson: this.ContactPerson,
+        email: this.Email,
         phone: this.Phone,
-        tin: this.Tin
+        password: this.Password
       })
     })
       .then(response => response.json())
@@ -128,15 +123,13 @@ export default class FarmForm extends Component {
     console.log(value);
     if (value != null) {
       (this.Name = value.Name),
-        (this.Location = value.Location),
-        (this.Address = value.Address),
-        (this.ContactPerson = value.ContactPerson),
+        (this.Email = value.Email),
         (this.Phone = value.Phone),
-        (this.Tin = value.Tin),
+        (this.Password = value.Password),
         this.InsertDataToServer();
       // clear all fields after submit
       this.clearForm();
-      alert("Farm captured!");
+      alert("User captured!");
     } else console.log("No data entered");
   };
 
@@ -146,20 +139,27 @@ export default class FarmForm extends Component {
       <SafeAreaView style={styles.container} behavior="padding" enabled>
         <ScrollView>
           <View>
-            <Text style={styles.title}>Farm</Text>
+            <Text style={styles.title}>Sign Up</Text>
             <Form
               ref={c => (this._form = c)}
-              type={Farm}
+              type={User}
               options={options}
               onChange={this.onChange.bind(this)}
             />
             <View style={styles.button}>
               <Button
                 color="#0A802B"
-                title="REGISTER"
-                onPress={this.handleSubmit.bind(this)}
+                title="Sign Up"
+                onPress={this.handleSubmit}
               />
             </View>
+            <Text style={styles.question}>Have an account?</Text>
+            <Text
+              style={styles.link}
+              onPress={() => navigation.navigate("Login")}
+            >
+              Log In
+            </Text>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -189,5 +189,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginRight: 80,
     marginLeft: 80
+  },
+  question: {
+    color: "gray",
+    textAlign: "center",
+    fontSize: 18
+  },
+  link: {
+    color: "#006432",
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold"
   }
 });

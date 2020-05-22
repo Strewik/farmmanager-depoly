@@ -1,103 +1,99 @@
-import React, { Component } from "react";
-import {
-  ScrollView,
-  View,
-  StyleSheet,
-  Text,
-  Button,
-  SafeAreaView,
-  TouchableOpacity,
-  Linking
-} from "react-native";
+import React, { Fragment } from "react";
+import { StyleSheet, SafeAreaView, View } from "react-native";
+import { Button } from "react-native-elements";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import FormInput from "../otherComponents/FormInput";
+import FormButton from "../otherComponents/FormButton";
+import ErrorMessage from "../otherComponents/ErrorMessage";
 
-var t = require("tcomb-form-native");
-const Form = t.form.Form;
-const Email = t.refinement(t.String, Email => {
-  const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
-  return reg.test(Email);
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .label("Email")
+    .email("Enter a valid email")
+    .required("Please enter a registered email"),
+  password: Yup.string()
+    .label("Password")
+    .required()
+    .min(4, "Password must have more than 4 characters ")
 });
 
-const LoginForm = t.struct({
-  Email: Email,
-  Password: t.String
-});
+export default class Login extends React.Component {
+  goToSignup = () => this.props.navigation.navigate("SignUp");
 
-const formStyles = {
-  ...Form.stylesheet,
-  formGroup: {
-    normal: {}
-  },
-  controlLabel: {
-    normal: {
-      color: "#006432",
-      fontSize: 20
-    },
-    error: {
-      color: "red",
-      fontSize: 18,
-      marginBottom: 7,
-      fontWeight: "600"
+  handleSubmit = values => {
+    if (values.email.length > 0 && values.password.length > 0) {
+      setTimeout(() => {
+        this.props.navigation.navigate("App");
+      }, 3000);
     }
-  }
-};
-
-const options = {
-  fields: {
-    Email: {
-      autoFocus: true,
-      error: "Please enter a valid email"
-    },
-    Password: {
-      error: "Please enter password",
-      Password: true,
-      secureTextEntry: true
-    }
-  },
-  stylesheet: formStyles
-};
-
-export default class Login extends Component {
-  handleSubmit = () => {
-    const value = this._form.getValue();
-    console.log("value: ", value);
   };
 
   render() {
-    let { navigation } = this.props;
     return (
-      <SafeAreaView style={styles.container} behavior="padding" enabled>
-        <ScrollView>
-          <View>
-            <Text style={styles.title}>Log In</Text>
-            <Form
-              ref={c => (this._form = c)}
-              type={LoginForm}
-              options={options}
-            />
-            {/* <TouchableOpacity> */}
-            <View style={styles.button}>
-              <Button
-                title="Login"
-                color="#0A802B"
-                onPress={this.handleSubmit.bind(this)}
+      <SafeAreaView style={styles.container}>
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          onSubmit={values => {
+            this.handleSubmit(values);
+          }}
+          validationSchema={validationSchema}
+        >
+          {({
+            handleChange,
+            values,
+            handleSubmit,
+            errors,
+            isValid,
+            touched,
+            handleBlur,
+            isSubmitting
+          }) => (
+            <Fragment>
+              <FormInput
+                name="email"
+                value={values.email}
+                onChangeText={handleChange("email")}
+                placeholder="Enter email"
+                autoCapitalize="none"
+                iconName="ios-mail"
+                iconColor="#2C384A"
+                onBlur={handleBlur("email")}
+                autoFocus
               />
-            </View>
-            {/* </TouchableOpacity> */}
-            <Text
-              style={styles.forgot}
-              onPress={() => navigation.navigate("Password 0ne")}
-            >
-              Forgot Password?
-            </Text>
-            <Text style={styles.question}>Don't have an account?</Text>
-            <Text
-              style={styles.link}
-              onPress={() => navigation.navigate("SignUp")}
-            >
-              Sign Up
-            </Text>
-          </View>
-        </ScrollView>
+              <ErrorMessage errorValue={touched.email && errors.email} />
+              <FormInput
+                name="password"
+                value={values.password}
+                onChangeText={handleChange("password")}
+                placeholder="Enter password"
+                secureTextEntry
+                iconName="ios-lock"
+                iconColor="#2C384A"
+                onBlur={handleBlur("password")}
+              />
+              <ErrorMessage errorValue={touched.password && errors.password} />
+              <View style={styles.buttonContainer}>
+                <FormButton
+                  buttonType="outline"
+                  onPress={handleSubmit}
+                  title="LOGIN"
+                  buttonColor="#039BE5"
+                  disabled={!isValid || isSubmitting}
+                  loading={isSubmitting}
+                />
+              </View>
+            </Fragment>
+          )}
+        </Formik>
+        <Button
+          title="Don't have an account? Sign Up"
+          onPress={this.goToSignup}
+          titleStyle={{
+            color: "#F57C00"
+          }}
+          type="clear"
+        />
       </SafeAreaView>
     );
   }
@@ -105,42 +101,10 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    marginTop: 15,
-    padding: 20
+    flex: 1,
+    backgroundColor: "#fff"
   },
-  title: {
-    fontSize: 25,
-    fontWeight: "bold",
-    marginTop: 5,
-    color: "#006432",
-    textAlign: "center",
-    marginBottom: 25
-  },
-  button: {
-    marginTop: 20,
-    marginBottom: 20,
-    // alignItems: "center",
-    elevation: 10
-  },
-  question: {
-    color: "gray",
-    textAlign: "center",
-    marginTop: 8,
-    fontSize: 18
-  },
-  link: {
-    color: "#006432",
-    textAlign: "center",
-    marginTop: 8,
-    fontSize: 20,
-    fontWeight: "bold"
-  },
-  forgot: {
-    fontWeight: "bold",
-    fontSize: 18,
-    textAlign: "center",
-    marginTop: 8,
-    color: "#006432"
+  buttonContainer: {
+    margin: 25
   }
 });

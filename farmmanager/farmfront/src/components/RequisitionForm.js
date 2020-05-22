@@ -208,7 +208,7 @@ export default class RequisitionForm extends Component {
               <View style={styles.button}>
                 <Button
                   color="#0A802B"
-                  title="SUBMIT REQUEST"
+                  title="SUBMIT"
                   onPress={this.handleSubmit}
                 />
               </View>
@@ -236,6 +236,8 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
-    marginBottom: 50
+    marginBottom: 50,
+    marginRight: 80,
+    marginLeft: 80
   }
 });

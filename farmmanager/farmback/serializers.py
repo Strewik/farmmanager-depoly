@@ -93,10 +93,10 @@ class RequisitionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# Seedling Serialiser
-class SeedlingSerializer(serializers.ModelSerializer):
+# SeedlingsBatch Serialiser
+class SeedlingsBatchSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Seedling
+        model = SeedlingsBatch
         fields = '__all__'
 
 

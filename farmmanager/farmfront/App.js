@@ -80,12 +80,12 @@ export default class App extends Component {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="Home Screen" component={HomeScreen} />
+            {/* <Stack.Screen name="Home Screen" component={HomeScreen} />
             <Stack.Screen name="Farm Form" component={FarmForm} />
             <Stack.Screen name="Farm Summaries" component={FarmLand} />
             <Stack.Screen name="Farm Details" component={FarmDetails} />
             <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="SignUp" component={SignUp} /> */}
             <Stack.Screen name="Landing Page" component={HomePage} />
             <Stack.Screen name="Finance" component={LandReportFinace} />
             <Stack.Screen name="Sales Form" component={IncomeForm} />

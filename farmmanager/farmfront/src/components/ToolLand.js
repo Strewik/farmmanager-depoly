@@ -77,7 +77,7 @@ export default class ToolLand extends Component {
           <Button
             title="ADD"
             style={{ position: "absolute", bottom: 0, left: 0 }}
-            onPress={() => navigation.navigate("SignUp")}
+            onPress={() => navigation.navigate("Tool Form")}
           />
         </View>
       </ScrollView>
