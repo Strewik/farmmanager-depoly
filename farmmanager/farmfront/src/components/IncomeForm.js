@@ -12,7 +12,10 @@ import {
   Alert,
   StyleSheet,
   ScrollView,
-  SafeAreaView
+  SafeAreaView,
+  Picker,
+  Select,
+  Dropdown
 } from "react-native";
 
 // const validationSchema = yup.object().shape({
@@ -110,6 +113,26 @@ import {
 //     // .required()
 //     .min(2, "Must have at least 2 characters")
 // });
+
+const initialValues = {
+  amountrecvd: "",
+  receiptnum: "",
+  customer: "",
+  phone: "",
+  saledate: "",
+  product: "",
+  quantity: "",
+  unit: "",
+  unitprice: "",
+  subtotal: "",
+  vat: "",
+  total: "",
+  paymode: "",
+  invnumber: "",
+  baldue: "",
+  balduedate: ""
+};
+
 export default class IncomeForm extends Component {
   constructor(props) {
     super(props);
@@ -121,13 +144,8 @@ export default class IncomeForm extends Component {
       total: ""
     };
   }
+
   render() {
-    const inputStyle = {
-      borderWidth: 1,
-      borderColor: "#4e4e4e",
-      padding: 12,
-      marginBottom: 5
-    };
 
     var unitprice = this.state.unitprice;
     var quantity = this.state.quantity;
@@ -138,24 +156,7 @@ export default class IncomeForm extends Component {
     return (
       <ScrollView>
         <Formik
-          initialValues={{
-            amountrecvd: "",
-            receiptnum: "",
-            customer: "",
-            phone: "",
-            saledate: "",
-            product: "",
-            quantity: "",
-            unit: "",
-            unitprice: "",
-            subtotal: "",
-            vat: "",
-            total: "",
-            paymode: "",
-            invnumber: "",
-            baldue: "",
-            balduedate: ""
-          }}
+          initialValues={initialValues}
           onSubmit={values => Alert.alert(JSON.stringify(values))}
           // validationSchema={validationSchema}
         >
@@ -164,6 +165,7 @@ export default class IncomeForm extends Component {
             handleChange,
             errors,
             setFieldTouched,
+            setFieldValue,
             touched,
             isValid,
             handleSubmit
@@ -189,8 +191,8 @@ export default class IncomeForm extends Component {
                      </Text>
                    )} */}
               <ErrorMessage
-                     errorValue={touched.amountrecvd && errors.amountrecvd}
-                   />
+                errorValue={touched.amountrecvd && errors.amountrecvd}
+              />
               <Text style={styles.label}>Receipt Number</Text>
               <TextInput
                 style={styles.inputStyle}
@@ -265,13 +267,36 @@ export default class IncomeForm extends Component {
                 Product Name
                 <Text style={styles.text}>*</Text>
               </Text>
-              <TextInput
+              <View style={styles.mypicker}>
+                <Picker
+                  // passing value directly from formik
+                  selectedValue={values.product}
+                  // changing value in formik
+                  onValueChange={itemValue =>
+                    setFieldValue("product", itemValue)
+                  }
+                  // onValueChange={(itemValue, itemIndex) => {
+                  //   setFieldValue('product', itemValue),
+                  //  this.setState({selectedProduct: itemValue})}
+                >
+                  <Picker.Item
+                    label="Select your product"
+                    value={initialValues.product}
+                    key={0}
+                  />
+                  <Picker.Item label="Robusta Green Been" value={1} key={1} />
+                  <Picker.Item label="Robusta Kase" value={2} key={2} />
+                  <Picker.Item label="Robusta Kiboko" value={3} key={3} />
+                  <Picker.Item label="Robusta Red Cherry" value={4} key={4} />
+                </Picker>
+              </View>
+              {/* <TextInput
                 style={styles.inputStyle}
                 value={values.product}
                 onChangeText={handleChange("product")}
                 onBlur={() => setFieldTouched("product")}
                 placeholder="Product name"
-              />
+              /> */}
               {/* {touched.product && errors.product && (
                      <Text style={{ fontSize: 10, color: "red" }}>
                        {errors.product}
@@ -333,10 +358,26 @@ export default class IncomeForm extends Component {
               <Text style={styles.inputStyle1}>
                 {subtotal ? <Text>{subtotal}</Text> : null}
               </Text>
-
               <ErrorMessage errorValue={touched.subtotal && errors.subtotal} />
               <Text style={styles.label}>VAT</Text>
-              <TextInput
+              <View style={styles.mypicker}>
+                <Picker
+                  // passing value directly from formik
+                  selectedValue={values.vat}
+                  // changing value in formik
+                  onValueChange={itemValue => setFieldValue("vat", itemValue)}
+                >
+                  <Picker.Item
+                    label="Select vat"
+                    value={initialValues.vat}
+                    key={0}
+                  />
+                  <Picker.Item label="VAT Inclusive" value={1} key={1} />
+                  <Picker.Item label="VAT Excluded" value={2} key={2} />
+                  <Picker.Item label="Not Applicable" value={3} key={3} />
+                </Picker>
+              </View>
+              {/* <TextInput
                 style={styles.inputStyle}
                 value={values.vat}
                 placeholder="Vat"
@@ -347,7 +388,7 @@ export default class IncomeForm extends Component {
                     vat: parseInt(text)
                   })
                 }
-              />
+              /> */}
               <ErrorMessage errorValue={touched.vat && errors.vat} />
               <Text style={styles.label}>
                 Total<Text style={styles.text}>*</Text>
@@ -355,25 +396,54 @@ export default class IncomeForm extends Component {
               <Text style={styles.inputStyle1}>
                 {total ? <Text>{total}</Text> : null}
               </Text>
-              {/* <ErrorMessage errorValue={touched.total && errors.total} /> */}
+              <ErrorMessage errorValue={touched.total && errors.total} />
               <Text style={styles.label}>
                 Payment mode <Text style={styles.text}>*</Text>
               </Text>
-              <TextInput
+              {/* <TextInput
                 style={styles.inputStyle}
                 value={values.paymode}
                 onChangeText={handleChange("paymode")}
                 onBlur={() => setFieldTouched("paymode")}
                 placeholder="Payment mode"
-              />
+              /> */}
+              <View style={styles.mypicker}>
+                <Picker
+                  // passing value directly from formik
+                  selectedValue={values.paymode}
+                  // changing value in formik
+                  onValueChange={itemValue =>
+                    setFieldValue("paymode", itemValue)
+                  }
+                >
+                  <Picker.Item
+                    label="Select your paymode"
+                    value={initialValues.paymode}
+                    key={0}
+                  />
+                  <Picker.Item label="Cash" value={1} key={1} />
+                  <Picker.Item label="Bank" value={2} key={2} />
+                  <Picker.Item label="Mob.Money" value={3} key={3} />
+                </Picker>
+              </View>
+              {/* <Select
+                style={styles.inputStyle}
+                data={paymodeData}
+                label={"paymode"}
+                autoCapitalize="none"
+                value={values.paymode || ""}
+                // onChange={setFieldValue}
+                // onTouch={setFieldTouched}
+                error={touched.paymode && errors.paymode}
+                name="paymode"
+                // withIcon={<MCIcon name="paymode-male" />}
+              /> */}
               {touched.paymode && errors.paymode && (
                 <Text style={{ fontSize: 10, color: "red" }}>
                   {errors.paymode}
                 </Text>
               )}
-              <ErrorMessage
-                     errorValue={touched.paymode && errors.paymode}
-                   />
+              <ErrorMessage errorValue={touched.paymode && errors.paymode} />
               <Text style={styles.label}>Invoice number</Text>
               <TextInput
                 style={styles.inputStyle}
@@ -389,8 +459,8 @@ export default class IncomeForm extends Component {
               )}
 
               <ErrorMessage
-                     errorValue={touched.invnumber && errors.invnumber}
-                   /> 
+                errorValue={touched.invnumber && errors.invnumber}
+              />
 
               <Text style={styles.label}>Balance due</Text>
               <TextInput
@@ -423,8 +493,8 @@ export default class IncomeForm extends Component {
               )} */}
 
               <ErrorMessage
-                     errorValue={touched.balduedate && errors.balduedate}
-                   />
+                errorValue={touched.balduedate && errors.balduedate}
+              />
               <View style={styles.button}>
                 <Button
                   color="#0A802B"
@@ -471,7 +541,7 @@ const styles = StyleSheet.create({
   inputStyle: {
     borderWidth: 1,
     borderColor: "#006432",
-    padding: 5,
+    padding: 8,
     // marginBottom: 10,
     borderRadius: 5,
     fontSize: 18
@@ -479,8 +549,8 @@ const styles = StyleSheet.create({
   inputStyle1: {
     borderWidth: 1,
     borderColor: "#006432",
-    padding: 5,
-    marginBottom: 15,
+    padding: 8,
+    // marginBottom: 15,
     borderRadius: 5,
     fontSize: 18
   },
@@ -490,5 +560,19 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "red"
+  },
+  mypicker: {
+    borderRadius: 5,
+    borderWidth: 1,
+    // borderColor: "#bdc3c7",
+    overflow: "hidden",
+    // borderWidth: 1,
+    borderColor: "#006432",
+    padding: 0,
+    marginBottom: 10
+    // borderRadius: 5,
+    // fontSize: 18
   }
 });
+
+//picker style={{}}
