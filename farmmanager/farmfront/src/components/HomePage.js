@@ -1,12 +1,13 @@
 import "react-native-gesture-handler";
 import React from "react";
 import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Button,
-  Image
+    View,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    Button,
+    Image,
+    ImageBackground,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -19,95 +20,106 @@ const Stack = createStackNavigator();
 
 export default function HomePage({ navigation }) {
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, flexDirection: "row" }}>
-        <Image
-          style={{
-            alignSelf: "center",
-            flex: 1,
-            flexDirection: "row",
-            justifyContent: "center",
-            paddingBottom: 10
-          }}
-          source={require("../images/homepage.jpg")}
-        />
-      </View>
       <View style={{ flex: 1 }}>
-        <View style={{ flex: 1, flexDirection: "row" }}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Finance")}
-            style={{
-              flex: 1,
-              backgroundColor: "#349e00",
-              borderRadius: 20,
-              margin: 10,
-              fontSize: 24,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Image
-              style={{
-                alignSelf: "center",
-                width: 80,
-                height: 80,
-                marginRight: 5
+          <ImageBackground
+              style=
+              {{
+                  // alignSelf: "centre",
+                  flex: 1,
+                  resizeMode: "stretch",
+                  // flexDirection: "row",
+                  justifyContent: "center",
+                  // paddingTop: 10,
+                  // height: 800,
+                  // width: 300,
               }}
-              source={require("../images/cashmoney.jpg")}
-            />
-            <Text>FINANCES</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Stores")}
-            style={{
-              flex: 1,
-              backgroundColor: "#7cb407",
-              borderRadius: 20,
-              margin: 10,
-              fontSize: 24,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Image
-              style={{
-                alignSelf: "center",
-                width: 80,
-                height: 80,
-                marginRight: 5
-              }}
-              source={require("../images/stores.png")}
-            />
-            <Text>STORES</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={{ flex: 1 }}>
-        <View style={{ flex: 1, flexDirection: "row" }}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Workers")}
-            style={{
-              flex: 1,
-              backgroundColor: "#7cb407",
-              borderRadius: 20,
-              margin: 10,
-              fontSize: 24,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Image
-              style={{
-                alignSelf: "center",
-                width: 80,
-                height: 80,
-                marginRight: 5
-              }}
-              source={require("../images/worker.jpg")}
-            />
-            <Text>WORKERS</Text>
-          </TouchableOpacity>
-          {/* <TouchableOpacity
+              source={require("../images/gre2.jpg")}>
+              <View style={{ flex: 1, flexDirection: "row" }}></View>
+              <View style={{ flex: 1 }}>
+                  <View style={{ flex: 1, flexDirection: "row" }}>
+                      <TouchableOpacity
+                          onPress={() => navigation.navigate("Finance")}
+                          style={{
+                              flex: 1,
+                              backgroundColor: "#fff",
+                              borderRadius: 20,
+                              margin: 10,
+                              fontSize: 24,
+                              justifyContent: "center",
+                              alignItems: "center",
+                              shadowOpacity: 1,
+                              shadowRadius: 20,
+                              elevation: 10,
+                          }}
+                      >
+                          <Image
+                              style={{
+                                  alignSelf: "center",
+                                  width: 80,
+                                  height: 80,
+                                  marginRight: 5,
+                              }}
+                              source={require("../images/cashmoney.jpg")}
+                          />
+                          <Text>FINANCES</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                          onPress={() => navigation.navigate("Stores")}
+                          style={{
+                              flex: 1,
+                              backgroundColor: "#fff",
+                              borderRadius: 20,
+                              margin: 10,
+                              fontSize: 24,
+                              justifyContent: "center",
+                              alignItems: "center",
+                              shadowOpacity: 1,
+                              shadowRadius: 20,
+                              elevation: 10,
+                          }}
+                      >
+                          <Image
+                              style={{
+                                  alignSelf: "center",
+                                  width: 80,
+                                  height: 80,
+                                  marginRight: 5,
+                              }}
+                              source={require("../images/stores.png")}
+                          />
+                          <Text>STORES</Text>
+                      </TouchableOpacity>
+                  </View>
+              </View>
+              <View style={{ flex: 1 }}>
+                  <View style={{ flex: 1, flexDirection: "row" }}>
+                      <TouchableOpacity
+                          onPress={() => navigation.navigate("Workers")}
+                          style={{
+                              flex: 1,
+                              backgroundColor: "#fff",
+                              borderRadius: 20,
+                              margin: 10,
+                              fontSize: 24,
+                              justifyContent: "center",
+                              alignItems: "center",
+                              shadowOpacity: 1,
+                              shadowRadius: 20,
+                              elevation: 10,
+                          }}
+                      >
+                          <Image
+                              style={{
+                                  alignSelf: "center",
+                                  width: 80,
+                                  height: 80,
+                                  marginRight: 5,
+                              }}
+                              source={require("../images/worker.jpg")}
+                          />
+                          <Text>WORKERS</Text>
+                      </TouchableOpacity>
+                      {/* <TouchableOpacity
             onPress={() => navigation.navigate("Finance")}
             style={{
               flex: 1,
@@ -130,9 +142,9 @@ export default function HomePage({ navigation }) {
             />
             <Text>HARVEST</Text>
           </TouchableOpacity> */}
-        </View>
-      </View>
-      {/* <View style={{ flex: 1 }}>
+                  </View>
+              </View>
+              {/* <View style={{ flex: 1 }}>
         <View style={{ flex: 1, flexDirection: "row" }}>
           <TouchableOpacity
             // onPress={() => navigation.navigate("")}
@@ -150,8 +162,9 @@ export default function HomePage({ navigation }) {
           </TouchableOpacity>
                 <View >
         <View> */}
-    </View>
-   );
+          </ImageBackground>
+      </View>
+  );
 }
 const styles = StyleSheet.create({
   container: {

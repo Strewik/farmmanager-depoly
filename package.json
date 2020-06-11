@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@react-navigation/native": "^5.1.4",
-    "react-datepicker": "^2.14.1"
-  }
-}

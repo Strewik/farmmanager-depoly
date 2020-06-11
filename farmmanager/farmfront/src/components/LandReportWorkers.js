@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     Image,
     StyleSheet,
+    ImageBackground,
 } from "react-native";
 // import { NavigationContainer } from "@react-navigation/native";
 // import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -18,81 +19,83 @@ import {
 
 export default function LandReportWorkers({ navigation }) {
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, flexDirection: "row" }}>
-        <Image
-          style={{
-            alignSelf: "center",
-            flex: 1,
-            flexDirection: "row",
-            justifyContent: "center",
-            paddingBottom: 10
-          }}
-          source={require("../images/homepage.jpg")}
-        />
-      </View>
       <View style={{ flex: 1 }}>
-        <View style={{ flex: 1, flexDirection: "row" }}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Employee Summaries")}
-            style={{
-              flex: 1,
-              backgroundColor: "#349e00",
-              borderRadius: 20,
-              margin: 10,
-              fontSize: 24,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Image
+          <ImageBackground
               style={{
-                alignSelf: "center",
-                width: 80,
-                height: 80,
-                marginRight: 5
+                  // alignSelf: "centre",
+                  flex: 1,
+                  resizeMode: "stretch",
+                  // flexDirection: "row",
+                  justifyContent: "center",
+                  // paddingTop: 10,
+                  // height: 800,
+                  // width: 300,
               }}
-              source={require("../images/worker.jpg")}
-            />
-            <Text>EMPLOYEES</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Casual Summaries")}
-            style={{
-              flex: 1,
-              backgroundColor: "#7cb407",
-              borderRadius: 20,
-              margin: 10,
-              fontSize: 24,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
+              source={require("../images/gre10.jpg")}
           >
-            <Image
-              style={{
-                alignSelf: "center",
-                width: 80,
-                height: 80,
-                marginRight: 5
-              }}
-              source={require("../images/pesticide.png")}
-            />
-            <Text>CASUALS</Text>
-          </TouchableOpacity>
-        </View>
+              <View style={{ flex: 1 }}>
+                  <View style={{ flex: 1, flexDirection: "row" }}>
+                      <TouchableOpacity
+                          onPress={() =>
+                              navigation.navigate("Employee Summaries")
+                          }
+                          style={{
+                              flex: 1,
+                              backgroundColor: "#fff",
+                              borderRadius: 20,
+                              margin: 10,
+                              fontSize: 24,
+                              justifyContent: "center",
+                              alignItems: "center",
+                              shadowOpacity: 1,
+                              shadowRadius: 15,
+                              elevation: 10,
+                              height: 150,
+                          }}
+                      >
+                          <Image
+                              style={{
+                                  alignSelf: "center",
+                                  width: 80,
+                                  height: 80,
+                                  marginRight: 5,
+                              }}
+                              source={require("../images/worker.jpg")}
+                          />
+                          <Text>EMPLOYEES</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                          onPress={() =>
+                              navigation.navigate("Casual Summaries")
+                          }
+                          style={{
+                              flex: 1,
+                              backgroundColor: "#fff",
+                              borderRadius: 20,
+                              margin: 10,
+                              fontSize: 24,
+                              justifyContent: "center",
+                              alignItems: "center",
+                              shadowOpacity: 1,
+                              shadowRadius: 15,
+                              elevation: 10,
+                              height: 150,
+                          }}
+                      >
+                          <Image
+                              style={{
+                                  alignSelf: "center",
+                                  width: 80,
+                                  height: 80,
+                                  marginRight: 5,
+                              }}
+                              source={require("../images/pesticide.png")}
+                          />
+                          <Text>CASUALS</Text>
+                      </TouchableOpacity>
+                  </View>
+              </View>
+          </ImageBackground>
       </View>
-      <View style={{ flex: 1, flexDirection: "row" }}>
-        <Image
-          style={{
-            alignSelf: "center",
-            flex: 1,
-            flexDirection: "row",
-            justifyContent: "center",
-            paddingBottom: 10
-          }}
-          source={require("../images/homepage.jpg")}
-        />
-      </View>
-    </View>
   );
 }

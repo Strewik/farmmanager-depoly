@@ -47,31 +47,3 @@ export const detailAdvance = id => dispatch => {
 };
 
 
-//ADD_ADVANCE
-
-// export const createAdvance = (advanceData) => dispatch => {
-//   console.log('creating advance')
-//     fetch("http://127.0.0.1:8000/api/advance/", {
-//       method: "POST",
-//       headers: {
-//         Accept: "application/json",
-//         "Content-Type": "application/json"
-//       },
-//       body: JSON.stringify(advanceData)
-//     })
-//       .then(response => response.json())
-//       .then(advance => 
-//       dispatch({
-//         type: ADD_ADVANCE,
-//           payload: advance
-//       })
-//       // alert(advance)
-//       )
-//       .catch(error => {
-//         console.error("Failed to add advance", error);
-//       });
-//   };
-
-
-// //UPDATE ADVANCE
-
