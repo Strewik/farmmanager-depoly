@@ -157,7 +157,8 @@ export default class FarmForm extends Component {
               <Button
                 color="#0A802B"
                 title="REGISTER"
-                onPress={this.handleSubmit.bind(this)}
+                // onPress={this.handleSubmit.bind(this)}
+                onPress={() => navigation.navigate("Login")}
               />
             </View>
           </View>

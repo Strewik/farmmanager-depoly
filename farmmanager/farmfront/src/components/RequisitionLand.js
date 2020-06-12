@@ -57,7 +57,7 @@ class RequisitionLand extends Component {
             style={styles.TouchableOpacityStyle}
             onPress={() => navigation.navigate("Requisition Form")}
           >
-            <Text style={styles.TouchableOpacityAdd}>+</Text>
+            <Text style={styles.TouchableOpacityAdd}>+ Add</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     color: "#006432",
-    textAlign: "center"
+    textAlign: "left"
   },
   container: {
     flex: 1,
@@ -99,20 +99,69 @@ const styles = StyleSheet.create({
     borderColor: "rgba(0,0,0,0.2)",
     alignItems: "center",
     justifyContent: "center",
-    width: 60,
+    width: 70,
     position: "absolute",
-    bottom: 10,
+    padding: 10,
+    bottom: 5,
     right: 10,
-    height: 60,
+    height: 30,
+    top: 10,
     backgroundColor: "green",
-    borderRadius: 100
+    borderRadius: 30
   },
   TouchableOpacityAdd: {
     color: "#fff",
     width: 40,
     alignItems: "center",
     justifyContent: "center",
-    fontSize: 30,
-    marginLeft: 20
+    fontSize: 15,
+    // marginLeft: 20
+    fontWeight: "bold"
   }
 });
+// const styles = StyleSheet.create({
+//   heading: {
+//     margin: 10,
+//     fontWeight: "bold",
+//     fontSize: 20,
+//     color: "#006432",
+//     textAlign: "center"
+//   },
+//   container: {
+//     flex: 1,
+//     borderRadius: 10,
+//     margin: 5,
+//     backgroundColor: "transparent",
+//     justifyContent: "center",
+//     padding: 8,
+//     shadowColor: "green",
+//     shadowOffset: {
+//       width: 0,
+//       height: 20
+//     },
+//     shadowOpacity: 1,
+//     shadowRadius: 2,
+//     elevation: 3
+//   },
+//   TouchableOpacityStyle: {
+//     borderWidth: 1,
+//     borderColor: "rgba(0,0,0,0.2)",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     width: 60,
+//     position: "absolute",
+//     bottom: 10,
+//     right: 10,
+//     height: 60,
+//     backgroundColor: "green",
+//     borderRadius: 100
+//   },
+//   TouchableOpacityAdd: {
+//     color: "#fff",
+//     width: 40,
+//     alignItems: "center",
+//     justifyContent: "center",
+//     fontSize: 30,
+//     marginLeft: 20
+//   }
+// });

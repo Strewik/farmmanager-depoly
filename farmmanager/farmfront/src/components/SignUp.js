@@ -1,134 +1,168 @@
-import React, { Fragment } from "react";
-import { StyleSheet, SafeAreaView, View } from "react-native";
-import { Button } from "react-native-elements";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import FormInput from "../otherComponents/FormInput";
-import FormButton from "../otherComponents/FormButton";
-import ErrorMessage from "../otherComponents/ErrorMessage";
+import React, { Component } from "react";
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  Linking,
+  SafeAreaView
+} from "react-native";
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string()
-    .label("Name")
-    .required()
-    .min(2, "Must have at least 2 characters"),
-  email: Yup.string()
-    .label("Email")
-    .email("Enter a valid email")
-    .required("Please enter a registered email"),
-  password: Yup.string()
-    .label("Password")
-    .required()
-    .min(4, "Password must have more than 4 characters "),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password")], "Confirm Password must matched Password")
-    .required("Confirm Password is required")
+var t = require("tcomb-form-native");
+const Form = t.form.Form;
+const Email = t.refinement(t.String, Email => {
+  const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
+  return reg.test(Email);
+});
+const Phone = t.refinement(t.Number, Phone => {
+  const reg = /^[0]?[0-9]\d{9}$/;
+  return reg.test(Phone);
+});
+const Name = t.refinement(t.String, Name => {
+  const regex = /^[a-zA-Z].*[\s\.]*$/g;
+  return regex.test(Name);
 });
 
-export default class Signup extends React.Component {
-  goToLogin = () => this.props.navigation.navigate("Login");
+const User = t.struct({
+  Name: Name,
+  Email: Email,
+  Phone: Phone,
+  Password: t.String
+});
 
-  handleSubmit = values => {
-    if (values.email.length > 0 && values.password.length > 0) {
-      setTimeout(() => {
-        this.props.navigation.navigate("App");
-      }, 3000);
+const formStyles = {
+  ...Form.stylesheet,
+  formGroup: {
+    normal: {}
+  },
+  controlLabel: {
+    normal: {
+      color: "#006432",
+      fontSize: 20
+    },
+    error: {
+      color: "red",
+      fontSize: 18,
+      marginBottom: 7,
+      fontWeight: "600"
     }
+  }
+};
+
+const options = {
+  fields: {
+    Name: {
+      autoFocus: true,
+      label: "Name",
+      returnKeyType: "next",
+      error: "Please enter a correct Name"
+    },
+    Email: {
+      label: "Email",
+      returnKeyType: "next",
+      error: "Please enter a correct email address"
+    },
+    Phone: {
+      label: "Phone",
+      returnKeyType: "next",
+      error: "Please enter a correct phone number"
+    },
+    Password: {
+      label: "Password",
+      error: "Please create a password",
+      Password: true,
+      secureTextEntry: true
+    }
+  },
+  stylesheet: formStyles
+};
+
+export default class SignUp extends Component {
+  constructor(props) {
+    super(props);
+    this.Name, this.Email, this.Phone, this.Password;
+  }
+
+  InsertDataToServer = async () => {
+    fetch("http://127.0.0.1:8000/api/user/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: this.Name,
+        email: this.Email,
+        phone: this.Phone,
+        password: this.Password
+      })
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        // alert("Thank You for Signing Up!");
+        Alert.alert(responseJson);
+        this.props.navigation.navigate("Login");
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  onChange = value => {
+    this.setState({ value });
+  };
+
+  clearForm = () => {
+    // clear content from all textbox
+    this.setState({ value: null });
+  };
+
+  handleSubmit = () => {
+    const value = this._form.getValue();
+    console.log(value);
+    if (value != null) {
+      (this.Name = value.Name),
+        (this.Email = value.Email),
+        (this.Phone = value.Phone),
+        (this.Password = value.Password),
+        this.InsertDataToServer();
+      // clear all fields after submit
+      this.clearForm();
+      alert("User captured!");
+    } else console.log("No data entered");
   };
 
   render() {
+    let { navigation } = this.props;
     return (
-      <SafeAreaView style={styles.container}>
-        <Formik
-          initialValues={{
-            name: "",
-            email: "",
-            password: "",
-            confirmPassword: ""
-          }}
-          onSubmit={values => {
-            this.handleSubmit(values);
-          }}
-          validationSchema={validationSchema}
-        >
-          {({
-            handleChange,
-            values,
-            handleSubmit,
-            errors,
-            isValid,
-            touched,
-            handleBlur,
-            isSubmitting
-          }) => (
-            <Fragment>
-              <FormInput
-                name="name"
-                value={values.name}
-                onChangeText={handleChange("name")}
-                placeholder="Enter your full name"
-                iconName="md-person"
-                iconColor="#2C384A"
-                onBlur={handleBlur("name")}
-                autoFocus
+      <SafeAreaView style={styles.container} behavior="padding" enabled>
+        <ScrollView>
+          <View>
+            <Text style={styles.title}>Sign Up</Text>
+            <Form
+              ref={c => (this._form = c)}
+              type={User}
+              options={options}
+              onChange={this.onChange.bind(this)}
+            />
+            <View style={styles.button}>
+              <Button
+                color="#0A802B"
+                title="Sign Up"
+                // onPress={this.handleSubmit}
+                onPress={() => navigation.navigate("Landing Page")}
               />
-              <ErrorMessage errorValue={touched.name && errors.name} />
-              <FormInput
-                name="email"
-                value={values.email}
-                onChangeText={handleChange("email")}
-                placeholder="Enter email"
-                autoCapitalize="none"
-                iconName="ios-mail"
-                iconColor="#2C384A"
-                onBlur={handleBlur("email")}
-              />
-              <ErrorMessage errorValue={touched.email && errors.email} />
-              <FormInput
-                name="password"
-                value={values.password}
-                onChangeText={handleChange("password")}
-                placeholder="Enter password"
-                secureTextEntry
-                iconName="ios-lock"
-                iconColor="#2C384A"
-                onBlur={handleBlur("password")}
-              />
-              <ErrorMessage errorValue={touched.password && errors.password} />
-              <FormInput
-                name="password"
-                value={values.confirmPassword}
-                onChangeText={handleChange("confirmPassword")}
-                placeholder="Confirm password"
-                secureTextEntry
-                iconName="ios-lock"
-                iconColor="#2C384A"
-                onBlur={handleBlur("confirmPassword")}
-              />
-              <ErrorMessage
-                errorValue={touched.confirmPassword && errors.confirmPassword}
-              />
-              <View style={styles.buttonContainer}>
-                <FormButton
-                  buttonType="outline"
-                  onPress={handleSubmit}
-                  title="SIGNUP"
-                  buttonColor="#F57C00"
-                  disabled={!isValid || isSubmitting}
-                  loading={isSubmitting}
-                />
-              </View>
-            </Fragment>
-          )}
-        </Formik>
-        <Button
-          title="Have an account? Login"
-          onPress={this.goToLogin}
-          titleStyle={{
-            color: "#039BE5"
-          }}
-          type="clear"
-        />
+            </View>
+            <Text style={styles.question}>Have an account?</Text>
+            <Text
+              style={styles.link}
+              onPress={() => navigation.navigate("Login")}
+            >
+              Log In
+            </Text>
+          </View>
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -136,10 +170,36 @@ export default class Signup extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff"
+    justifyContent: "center",
+    // marginTop: 10,
+    padding: 10,
+    borderWidth: 5,
+    borderColor: "#006432",
+    borderRadius: 10
   },
-  buttonContainer: {
-    margin: 25
+  title: {
+    fontSize: 25,
+    fontWeight: "bold",
+    marginTop: 5,
+    color: "#006432",
+    textAlign: "center",
+    marginBottom: 10
+  },
+  button: {
+    marginTop: 10,
+    marginBottom: 10,
+    marginRight: 80,
+    marginLeft: 80
+  },
+  question: {
+    color: "gray",
+    textAlign: "center",
+    fontSize: 18
+  },
+  link: {
+    color: "#006432",
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold"
   }
 });

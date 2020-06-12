@@ -1,99 +1,129 @@
-import React, { Fragment } from "react";
-import { StyleSheet, SafeAreaView, View } from "react-native";
-import { Button } from "react-native-elements";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import FormInput from "../otherComponents/FormInput";
-import FormButton from "../otherComponents/FormButton";
-import ErrorMessage from "../otherComponents/ErrorMessage";
+import React, { Component } from "react";
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  SafeAreaView,
+  TouchableOpacity,
+  Image
+} from "react-native";
 
-const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .label("Email")
-    .email("Enter a valid email")
-    .required("Please enter a registered email"),
-  password: Yup.string()
-    .label("Password")
-    .required()
-    .min(4, "Password must have more than 4 characters ")
+var t = require("tcomb-form-native");
+const Form = t.form.Form;
+
+const Email = t.refinement(t.String, Email => {
+  const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
+  return reg.test(Email);
 });
 
-export default class Login extends React.Component {
-  goToSignup = () => this.props.navigation.navigate("SignUp");
+const LoginForm = t.struct({
+  Email: Email,
+  Password: t.String
+});
 
-  handleSubmit = values => {
-    if (values.email.length > 0 && values.password.length > 0) {
-      setTimeout(() => {
-        this.props.navigation.navigate("App");
-      }, 3000);
+const formStyles = {
+  ...Form.stylesheet,
+  formGroup: {
+    normal: {}
+  },
+  controlLabel: {
+    normal: {
+      color: "#006432",
+      fontSize: 20
+    },
+    error: {
+      color: "red",
+      fontSize: 18,
+      marginBottom: 7,
+      fontWeight: "600"
     }
+  }
+};
+
+const options = {
+  fields: {
+    Email: {
+      autoFocus: true,
+      error: "Please enter a valid email"
+    },
+    Password: {
+      error: "Please enter password",
+      Password: true,
+      secureTextEntry: true
+    }
+  },
+  stylesheet: formStyles
+};
+
+export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  clearForm = () => {
+    // clear content from all textbox
+    this.setState({ value: null });
   };
 
+  handleSubmit = () => {
+    const value = this._form.getValue();
+    console.log("value: ", value);
+    if (value.Email === user.email && value.Password === user.password) {
+      alert("Welcome", value.Name);
+      this.clearForm();
+      // console.log("No data entered");
+    } else alert("Email and Password do not match");
+  };
   render() {
+    let { navigation } = this.props;
     return (
-      <SafeAreaView style={styles.container}>
-        <Formik
-          initialValues={{ email: "", password: "" }}
-          onSubmit={values => {
-            this.handleSubmit(values);
-          }}
-          validationSchema={validationSchema}
-        >
-          {({
-            handleChange,
-            values,
-            handleSubmit,
-            errors,
-            isValid,
-            touched,
-            handleBlur,
-            isSubmitting
-          }) => (
-            <Fragment>
-              <FormInput
-                name="email"
-                value={values.email}
-                onChangeText={handleChange("email")}
-                placeholder="Enter email"
-                autoCapitalize="none"
-                iconName="ios-mail"
-                iconColor="#2C384A"
-                onBlur={handleBlur("email")}
-                autoFocus
+      <SafeAreaView style={styles.container} behavior="padding" enabled>
+        <ScrollView>
+          <View>
+            <View>
+              <Image
+                style={{
+                  alignSelf: "center",
+                  width: 60,
+                  height: 60,
+                  justifyContent: "center",
+                  marginRight: 5
+                }}
+                source={require("../images/worker.jpg")}
               />
-              <ErrorMessage errorValue={touched.email && errors.email} />
-              <FormInput
-                name="password"
-                value={values.password}
-                onChangeText={handleChange("password")}
-                placeholder="Enter password"
-                secureTextEntry
-                iconName="ios-lock"
-                iconColor="#2C384A"
-                onBlur={handleBlur("password")}
+            </View>
+            <Text style={styles.title}>Log In</Text>
+            <Form
+              ref={c => (this._form = c)}
+              type={LoginForm}
+              options={options}
+            />
+            <View style={styles.button}>
+              <Button
+                title="LOG IN"
+                color="#0A802B"
+                // onPress={this.handleSubmit.bind(this)}
+                onPress={() => navigation.navigate("Landing Page")}
               />
-              <ErrorMessage errorValue={touched.password && errors.password} />
-              <View style={styles.buttonContainer}>
-                <FormButton
-                  buttonType="outline"
-                  onPress={handleSubmit}
-                  title="LOGIN"
-                  buttonColor="#039BE5"
-                  disabled={!isValid || isSubmitting}
-                  loading={isSubmitting}
-                />
-              </View>
-            </Fragment>
-          )}
-        </Formik>
-        <Button
-          title="Don't have an account? Sign Up"
-          onPress={this.goToSignup}
-          titleStyle={{
-            color: "#F57C00"
-          }}
-          type="clear"
-        />
+            </View>
+            <Text
+              style={styles.forgot}
+              onPress={() => navigation.navigate("Password 0ne")}
+            >
+              Forgot Password?
+            </Text>
+            <Text style={styles.question}>Don't have an account?</Text>
+            <Text
+              style={styles.link}
+              onPress={() => navigation.navigate("SignUp")}
+            >
+              Sign Up
+            </Text>
+          </View>
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -101,10 +131,47 @@ export default class Login extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff"
+    justifyContent: "center",
+    // marginTop: 10,
+    padding: 10,
+    borderWidth: 5,
+    borderColor: "#006432",
+    borderRadius: 10
   },
-  buttonContainer: {
-    margin: 25
+  title: {
+    fontSize: 25,
+    fontWeight: "bold",
+    // marginTop: 5,
+    color: "#006432",
+    textAlign: "center",
+    marginBottom: 10
+  },
+  button: {
+    marginTop: 10,
+    marginBottom: 10,
+    // alignItems: "center",
+    elevation: 10,
+    marginRight: 80,
+    marginLeft: 80
+  },
+  question: {
+    color: "gray",
+    textAlign: "center",
+    marginTop: 8,
+    fontSize: 18
+  },
+  link: {
+    color: "#006432",
+    textAlign: "center",
+    marginTop: 8,
+    fontSize: 20,
+    fontWeight: "bold"
+  },
+  forgot: {
+    fontWeight: "bold",
+    fontSize: 18,
+    textAlign: "center",
+    // marginTop: 8,
+    color: "#006432"
   }
 });
