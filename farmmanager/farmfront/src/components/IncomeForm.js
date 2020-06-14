@@ -182,7 +182,6 @@ export default class IncomeForm extends Component {
     super(props);
     this.state = {};
   }
-
   InsertDataToServer = async () => {
     fetch("http://127.0.0.1:8000/api/income/", {
       method: "POST",
@@ -314,3 +313,5 @@ const styles = StyleSheet.create({
     // borderRadius: 10
   }
 });
+
+//picker style={{}}
