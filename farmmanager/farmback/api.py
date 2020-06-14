@@ -122,11 +122,11 @@ class RequisitionViewset(viewsets.ModelViewSet):
 
 # Seedling Viewset
 class SeedlingViewset(viewsets.ModelViewSet):
-    queryset = Seedling.objects.all().order_by('-date')
+    queryset = SeedlingsBatch.objects.all().order_by('-date')
     permissions_classes = [
         permissions.AllowAny
     ]
-    serializer_class = SeedlingSerializer
+    serializer_class = SeedlingsBatchSerializer
 
 
 # Supplier Viewset

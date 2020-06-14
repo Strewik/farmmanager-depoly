@@ -94,9 +94,9 @@ class RequisitionSerializer(serializers.ModelSerializer):
 
 
 # Seedling Serialiser
-class SeedlingSerializer(serializers.ModelSerializer):
+class SeedlingsBatchSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Seedling
+        model = SeedlingsBatch
         fields = '__all__'
 
 
