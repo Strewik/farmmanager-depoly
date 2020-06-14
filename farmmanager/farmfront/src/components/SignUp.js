@@ -149,7 +149,8 @@ export default class SignUp extends Component {
               <Button
                 color="#0A802B"
                 title="Sign Up"
-                onPress={this.handleSubmit}
+                // onPress={this.handleSubmit}
+                onPress={() => navigation.navigate("Landing Page")}
               />
             </View>
             <Text style={styles.question}>Have an account?</Text>
@@ -170,7 +171,10 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     // marginTop: 10,
-    padding: 10
+    padding: 10,
+    // borderWidth: 5,
+    // borderColor: "#006432",
+    // borderRadius: 10
   },
   title: {
     fontSize: 25,
@@ -182,7 +186,9 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    marginRight: 80,
+    marginLeft: 80
   },
   question: {
     color: "gray",

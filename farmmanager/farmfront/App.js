@@ -75,247 +75,111 @@ const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
 
 export default class App extends Component {
-    render() {
-        return (
-            <Provider store={store}>
-                <NavigationContainer>
-                    <Stack.Navigator>
-                        <Stack.Screen
-                            name="Landing Page"
-                            component={HomePage}
-                        />
-                        <Stack.Screen 
-                            name="Farm Form" 
-                            component={FarmForm} />
-                        <Stack.Screen
-                            name="Farm Summaries"
-                            component={FarmLand}
-                        />
-                        <Stack.Screen
-                            name="Farm Details"
-                            component={FarmDetails}
-                        />
-                        <Stack.Screen 
-                            name="Login" 
-                            component={Login} />
-                        <Stack.Screen 
-                            name="SignUp" 
-                            component={SignUp} />
-                        {/* <Stack.Screen name="Landing Page" component={HomePage} /> */}
-                        <Stack.Screen
-                            name="Finance"
-                            component={LandReportFinace}
-                        />
-                        <Stack.Screen
-                            name="Sales Form"
-                            component={IncomeForm}
-                        />
-                        <Stack.Screen
-                            name="Sales Summaries"
-                            component={IncomeLand}
-                        />
-                        <Stack.Screen
-                            name="Sales Details"
-                            component={IncomeDetails}
-                        />
-                        <Stack.Screen
-                            name="Expenditure Form"
-                            component={ExpenditureForm}
-                        />
-                        <Stack.Screen
-                            name="Expenditure Summaries"
-                            component={ExpenditureLand}
-                        />
-                        <Stack.Screen
-                            name="Expenditure Details"
-                            component={ExpenditureDetails}
-                        />
-                        <Stack.Screen
-                            name="Payroll Form"
-                            component={PayrollForm}
-                        />
-                        <Stack.Screen
-                            name="Payroll Summaries"
-                            component={PayrollLand}
-                        />
-                        <Stack.Screen
-                            name="Payroll Details"
-                            component={PayrollDetails}
-                        />
-                        <Stack.Screen 
-                            name="Advance Form" 
-                            component={Advance} />
-                        <Stack.Screen
-                            name="Advance Summaries"
-                            component={AdvanceLand}
-                        />
-                        <Stack.Screen
-                            name="Advance Details"
-                            component={AdvanceDetails}
-                        />
-                        <Stack.Screen
-                            name="Requisition Form"
-                            component={RequisitionForm}
-                        />
-                        <Stack.Screen
-                            name="Requisition Summaries"
-                            component={RequisitionLand}
-                        />
-                        <Stack.Screen
-                            name="Requisition Details"
-                            component={RequisitionDetails}
-                        />
-                        <Stack.Screen
-                            name="Customer Form"
-                            component={CustomerForm}
-                        />
-                        <Stack.Screen
-                            name="Customer Summaries"
-                            component={CustomerLand}
-                        />
-                        <Stack.Screen
-                            name="Customer Details"
-                            component={CustomerDetails}
-                        />
-                        <Stack.Screen
-                            name="Supplier Form"
-                            component={SupplierForm}
-                        />
-                        <Stack.Screen
-                            name="Supplier Summaries"
-                            component={SupplierLand}
-                        />
-                        <Stack.Screen
-                            name="Supplier Details"
-                            component={SupplierDetails}
-                        />
-                        <Stack.Screen
-                            name="Stores"
-                            component={LandReportInventory}
-                        />
-                        <Stack.Screen
-                            name="Consumable Form"
-                            component={ConsumableForm}
-                        />
-                        <Stack.Screen
-                            name="Consumable Summaries"
-                            component={ConsumableLand}
-                        />
-                        <Stack.Screen
-                            name="Consumable Details"
-                            component={ConsumableDetails}
-                        />
-                        <Stack.Screen
-                            name="Consumablebincard Form"
-                            component={ConsumableBinCardForm}
-                        />
-                        <Stack.Screen
-                            name="Consumablebincard Summaries"
-                            component={ConsumableBinCardLand}
-                        />
-                        <Stack.Screen
-                            name="Consumablebincard Details"
-                            component={ConsumableBinCardDetails}
-                        />
-                        <Stack.Screen
-                            name="Harvest Form"
-                            component={HarvestForm}
-                        />
-                        <Stack.Screen
-                            name="Harvest Summaries"
-                            component={HarvestLand}
-                        />
-                        <Stack.Screen
-                            name="Harvest Details"
-                            component={HarvestDetails}
-                        />
-                        <Stack.Screen
-                            name="SeedlingsBatch Form"
-                            component={SeedlingsBatchForm}
-                        />
-                        <Stack.Screen
-                            name="Seedlings Summaries"
-                            component={SeedlingsLand}
-                        />
-                        <Stack.Screen
-                            name="Seedlings Details"
-                            component={SeedlingsDetails}
-                        />
-                        <Stack.Screen 
-                            name="Tool Form" 
-                            component={ToolForm} />
-                        <Stack.Screen
-                            name="Tool Summaries"
-                            component={ToolLand}
-                        />
-                        <Stack.Screen
-                            name="Tool Details"
-                            component={ToolDetails}
-                        />
-                        <Stack.Screen
-                            name="Toolbincard Form"
-                            component={ToolBinCardForm}
-                        />
-                        <Stack.Screen
-                            name="Workers"
-                            component={LandReportWorkers}
-                        />
-                        <Stack.Screen
-                            name="Casual Form"
-                            component={CasualForm}
-                        />
-                        <Stack.Screen
-                            name="Casual Summaries"
-                            component={CasualLand}
-                        />
-                        <Stack.Screen
-                            name="Casual Details"
-                            component={CasualDetails}
-                        />
-                        <Stack.Screen
-                            name="Employee Form"
-                            component={EmployeeForm}
-                        />
-                        <Stack.Screen
-                            name="Employee Summaries"
-                            component={EmployeeLand}
-                        />
-                        <Stack.Screen
-                            name="Employee Details"
-                            component={EmployeeDetails}
-                        />
-                        {/* <Stack.Screen name="Login" component={Login} />
+  render() {
+    return (
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Home Screen" component={HomeScreen} />
+            <Stack.Screen name="Farm Form" component={FarmForm} />
+            <Stack.Screen name="Farm Summaries" component={FarmLand} />
+            <Stack.Screen name="Farm Details" component={FarmDetails} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="Landing Page" component={HomePage} />
+            <Stack.Screen name="Finance" component={LandReportFinace} />
+            <Stack.Screen name="Sales Form" component={IncomeForm} />
+            <Stack.Screen name="Sales Summaries" component={IncomeLand} />
+            <Stack.Screen name="Sales Details" component={IncomeDetails} />
+            <Stack.Screen name="Expenditure Form" component={ExpenditureForm} />
+            <Stack.Screen
+              name="Expenditure Summaries"
+              component={ExpenditureLand}
+            />
+            <Stack.Screen
+              name="Expenditure Details"
+              component={ExpenditureDetails}
+            />
+            <Stack.Screen name="Payroll Form" component={PayrollForm} />
+            <Stack.Screen name="Payroll Summaries" component={PayrollLand} />
+            <Stack.Screen name="Payroll Details" component={PayrollDetails} />
+            <Stack.Screen name="Advance Form" component={Advance} />
+            <Stack.Screen name="Advance Summaries" component={AdvanceLand} />
+            <Stack.Screen name="Advance Details" component={AdvanceDetails} />
+            <Stack.Screen name="Requisition Form" component={RequisitionForm} />
+            <Stack.Screen
+              name="Requisition Summaries"
+              component={RequisitionLand}
+            />
+            <Stack.Screen
+              name="Requisition Details"
+              component={RequisitionDetails}
+            />
+            <Stack.Screen name="Customer Form" component={CustomerForm} />
+            <Stack.Screen name="Customer Summaries" component={CustomerLand} />
+            <Stack.Screen name="Customer Details" component={CustomerDetails} />
+            <Stack.Screen name="Supplier Form" component={SupplierForm} />
+            <Stack.Screen name="Supplier Summaries" component={SupplierLand} />
+            <Stack.Screen name="Supplier Details" component={SupplierDetails} />
+            <Stack.Screen name="Stores" component={LandReportInventory} />
+            <Stack.Screen name="Consumable Form" component={ConsumableForm} />
+            <Stack.Screen
+              name="Consumable Summaries"
+              component={ConsumableLand}
+            />
+            <Stack.Screen
+              name="Consumable Details"
+              component={ConsumableDetails}
+            />
+            <Stack.Screen
+              name="Consumablebincard Form"
+              component={ConsumableBinCardForm}
+            />
+            <Stack.Screen
+              name="Consumablebincard Summaries"
+              component={ConsumableBinCardLand}
+            />
+            <Stack.Screen
+              name="Consumablebincard Details"
+              component={ConsumableBinCardDetails}
+            />
+            <Stack.Screen name="Harvest Form" component={HarvestForm} />
+            <Stack.Screen name="Harvest Summaries" component={HarvestLand} />
+            <Stack.Screen name="Harvest Details" component={HarvestDetails} />
+            <Stack.Screen
+              name="SeedlingsBatch Form"
+              component={SeedlingsBatchForm}
+            />
+            <Stack.Screen
+              name="Seedlings Summaries"
+              component={SeedlingsLand}
+            />
+            <Stack.Screen
+              name="Seedlings Details"
+              component={SeedlingsDetails}
+            />
+            <Stack.Screen name="Tool Form" component={ToolForm} />
+            <Stack.Screen name="Tool Summaries" component={ToolLand} />
+            <Stack.Screen name="Tool Details" component={ToolDetails} />
+            <Stack.Screen name="Toolbincard Form" component={ToolBinCardForm} />
+            <Stack.Screen name="Workers" component={LandReportWorkers} />
+            <Stack.Screen name="Casual Form" component={CasualForm} />
+            <Stack.Screen name="Casual Summaries" component={CasualLand} />
+            <Stack.Screen name="Casual Details" component={CasualDetails} />
+            <Stack.Screen name="Employee Form" component={EmployeeForm} />
+            <Stack.Screen name="Employee Summaries" component={EmployeeLand} />
+            <Stack.Screen name="Employee Details" component={EmployeeDetails} />
+            {/* <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="SignUp" component={SignUp} /> */}
-                        <Stack.Screen
-                            name="Password 0ne"
-                            component={PasswordRecoveryOne}
-                        />
-                        <Stack.Screen
-                            name="Password Two"
-                            component={PasswordRecoveryTwo}
-                        />
-                    </Stack.Navigator>
-                </NavigationContainer>
-            </Provider>
-        );
-    }
+            <Stack.Screen name="Password 0ne" component={PasswordRecoveryOne} />
+            <Stack.Screen name="Password Two" component={PasswordRecoveryTwo} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+    );
+  }
 }
 AppRegistry.registerComponent("App", () => App);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import * as yup from "yup";
 // import { Formik } from "formik";
@@ -395,8 +259,6 @@ AppRegistry.registerComponent("App", () => App);
 //                                         {errors.customer}
 //                                     </Text>
 //                                 )}
-
-                                
 
 //                                 <TextInput
 //                                     style={styles.inputstyle}
@@ -630,22 +492,6 @@ AppRegistry.registerComponent("App", () => App);
 //     fontSize:18
 //     }
 // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React from "react";
 // import {
@@ -910,16 +756,6 @@ AppRegistry.registerComponent("App", () => App);
 //         </SafeAreaView>
 //     </View>
 // );
-
-
-
-
-
-
-
-
-
-
 
 // import React, { Component } from "react";
 // import {
@@ -1273,4 +1109,3 @@ AppRegistry.registerComponent("App", () => App);
 //         // borderRadius: 10
 //     },
 // });
-

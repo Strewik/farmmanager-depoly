@@ -12211,7 +12211,7 @@ react-native-image-picker-form@^0.2.5:
     react-native-js-bottom-sheet "^1.0.0"
     react-native-vector-icons "^4.5.0"
 
-react-native-iphone-x-helper@^1.2.1:
+react-native-iphone-x-helper@^1.0.3, react-native-iphone-x-helper@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
@@ -12226,12 +12226,27 @@ react-native-js-bottom-sheet@^1.0.0:
     prop-types "^15.5.10"
     react-native-modalbox "^1.4.2"
 
+react-native-keyboard-aware-scroll-view@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/react-native-keyboard-aware-scroll-view/-/react-native-keyboard-aware-scroll-view-0.9.1.tgz#9e54b565a5f19b30bed12221d48921781f7630af"
+  integrity sha512-tBZ8rmjELN0F6t5UBp5CW3NYmZXgVnJSzVCssv/OqG2t6kiB+OUTqxNvUP24K+HARX4H+XaW0aEJSFQkQCv6KA==
+  dependencies:
+    prop-types "^15.6.2"
+    react-native-iphone-x-helper "^1.0.3"
+
 react-native-material-textfield@^0.16.1:
   version "0.16.1"
   resolved "https://registry.yarnpkg.com/react-native-material-textfield/-/react-native-material-textfield-0.16.1.tgz#649e71344bb8a7225d5cea7c7b51cd38bcb2bbfc"
   integrity sha512-pcV/ic3i6vYEODS7pvAMUYJ+evkzIB8cjXtSzkab9rBtYNGRpAlM0Yp8QNnjZ7foZqkj9Ynav0nguWcuJST10A==
   dependencies:
     prop-types "^15.5.9"
+
+react-native-modal-datetime-picker@^8.7.0:
+  version "8.7.1"
+  resolved "https://registry.yarnpkg.com/react-native-modal-datetime-picker/-/react-native-modal-datetime-picker-8.7.1.tgz#9769492f3e61d48bad06817f8986cb8be4a46acc"
+  integrity sha512-wcP8WRe9uDqWF9KdScItkDSfJ3w/xi4fGAe8Q9xvU15+7sWWCHDJzXMlRv2Jeeu7MIlHS6XBisTprvqBcqjwtA==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-native-modalbox@^1.4.2:
   version "1.7.1"
@@ -12264,6 +12279,28 @@ react-native-reanimated@^1.7.1:
   integrity sha512-vGTt94lE5fsZmfMwERWFIsCr5LHsyllOESeNvlKryLgAg7h4cnJ5XSmVSy4L3qogdgFYCL6HEgY+s7tQmKXiiQ==
   dependencies:
     fbjs "^1.0.0"
+
+react-native-responsive-screen@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-responsive-screen/-/react-native-responsive-screen-1.4.1.tgz#0270bc8f03a208b578299c1594495db69aff506b"
+  integrity sha512-WuMkVyCPeepzKQaT3N+mbUAvQLL0jGsBnGf6yDtA7vyA/sp1imXYVPYjCNMRaKV+PSM5GzEMXxl4Bj+tUpD2Tw==
+
+react-native-router-flux@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-router-flux/-/react-native-router-flux-4.2.0.tgz#71c59f6a6250e9ed10d61ade506b9b809f879db0"
+  integrity sha512-ab6HZNKNfYhbk/UEiwSGOY6/lhikybOIGjL8CV9bQSLn2sNT1hkAJ1tRReQQVxHlgNI7N4oWfuH1ewk9rePsRA==
+  dependencies:
+    "@babel/runtime" "^7.6.0"
+    add "^2.0.6"
+    lodash "^4.17.15"
+    opencollective "^1.0.3"
+    path-to-regexp "^2.4.0"
+    prop-types "^15.6.2"
+    react-navigation "^4.x"
+    react-navigation-drawer "^2.2.1"
+    react-navigation-stack "^1.7.3"
+    react-navigation-tabs "^2.5.2"
+    remove "^0.1.5"
 
 react-native-safe-area-context@^0.6.4:
   version "0.6.4"

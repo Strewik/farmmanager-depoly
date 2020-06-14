@@ -156,8 +156,9 @@ export default class FarmForm extends Component {
             <View style={styles.button}>
               <Button
                 color="#0A802B"
-                title="Sign Up"
-                onPress={this.handleSubmit.bind(this)}
+                title="REGISTER"
+                // onPress={this.handleSubmit.bind(this)}
+                onPress={() => navigation.navigate("Login")}
               />
             </View>
           </View>
@@ -171,7 +172,10 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     // marginTop: 10,
-    padding: 10
+    padding: 10,
+    borderWidth: 5,
+    borderColor: "#006432",
+    borderRadius: 10
   },
   title: {
     fontSize: 25,
@@ -183,6 +187,8 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    marginRight: 80,
+    marginLeft: 80
   }
 });
