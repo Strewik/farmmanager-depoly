@@ -11,6 +11,12 @@ import {
   TextInput,
   TouchableOpacity
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange as lor,
+  removeOrientationListener as rol
+} from "react-native-responsive-screen";
 
 var t = require("tcomb-form-native");
 const Form = t.form.Form;
@@ -71,8 +77,10 @@ export default class HomeScreen extends Component {
               <Image
                 style={{
                   alignSelf: "center",
-                  width: 100,
-                  height: 100,
+                  // width: 100,
+                  // height: 100,
+                  height: hp("25%"),
+                  width: wp("50%"),
                   justifyContent: "center",
                   marginRight: 5
                 }}
@@ -109,17 +117,18 @@ export default class HomeScreen extends Component {
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
+    height: hp("100%"),
+    width: wp("100%"),
     justifyContent: "center",
-    marginTop: 10,
+    // marginTop: 15,
     padding: 20,
     backgroundColor: "#fff",
     textAlign: "center",
-    borderWidth: 5,
-    borderColor: "#006432",
-    borderRadius: 10
+    // borderWidth: 5,
+    // borderColor: "#006432",
+    // borderRadius: 10
   },
   title: {
     fontSize: 25,

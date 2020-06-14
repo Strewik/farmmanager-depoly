@@ -14,7 +14,6 @@ import {
   listenOrientationChange as lor,
   removeOrientationListener as rol
 } from "react-native-responsive-screen";
-
 import moment from "moment";
 
 var t = require("tcomb-form-native");
@@ -73,14 +72,12 @@ const formStyles = {
   controlLabel: {
     normal: {
       color: "#006432",
-      // fontSize: 20
-      fontSize: hp("3.5%")
+      fontSize: 20
     },
 
     error: {
       color: "red",
-      // fontSize: 18,
-      fontSize: hp("3%"),
+      fontSize: 18,
       marginBottom: 7,
       fontWeight: "600"
     }
@@ -186,14 +183,6 @@ export default class IncomeForm extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    lor(this);
-  }
-
-  componentWillUnmount() {
-    rol();
-  }
-
   InsertDataToServer = async () => {
     fetch("http://127.0.0.1:8000/api/income/", {
       method: "POST",
@@ -291,66 +280,37 @@ export default class IncomeForm extends Component {
   }
 }
 
- const styles = StyleSheet.create({
-   container: {
-     height: hp("100%"),
-     width: wp("100%"),
-     justifyContent: "center",
-     // marginTop: 15,
-     padding: 20,
-     borderWidth: 5,
-     borderColor: "#006432",
-     borderRadius: 10
-   },
-   title: {
-     // fontSize: 25,
-     fontSize: hp("5%"),
-     fontWeight: "bold",
-     // marginTop: 5,
-     marginTop: wp("5"),
-     color: "#006432",
-     textAlign: "center",
-     marginBottom: 25
-   },
-   button: {
-     marginTop: 20,
-     marginBottom: wp("30"),
-     elevation: 10,
-     // marginRight: 80,
-     marginRight: wp("20"),
-     // marginLeft: 80
-     marginLeft: wp("20")
-     // borderWidth: 3,
-     // borderColor: "#006432",
-     // borderRadius: 10
-   }
- });
-
-// const styles = StyleSheet.create({
-//   container: {
-//     justifyContent: "center",
-//     // marginTop: 15,
-//     padding: 20,
-//     borderWidth: 5,
-//     borderColor: "#006432",
-//     borderRadius: 10
-//   },
-//   title: {
-//     fontSize: 25,
-//     fontWeight: "bold",
-//     marginTop: 5,
-//     color: "#006432",
-//     textAlign: "center",
-//     marginBottom: 25
-//   },
-//   button: {
-//     marginTop: 20,
-//     marginBottom: 50,
-//     elevation: 10,
-//     marginRight: 80,
-//     marginLeft: 80
-//     // borderWidth: 3,
-//     // borderColor: "#006432",
-//     // borderRadius: 10
-//   }
-// });
+const styles = StyleSheet.create({
+  container: {
+    height: hp("100%"),
+    width: wp("100%"),
+    justifyContent: "center",
+    // marginTop: 15,
+    padding: 20,
+    borderWidth: 5,
+    borderColor: "#006432",
+    borderRadius: 10
+  },
+  title: {
+    // fontSize: 25,
+    fontSize: hp("5%"),
+    fontWeight: "bold",
+    // marginTop: 5,
+    marginTop: wp("5"),
+    color: "#006432",
+    textAlign: "center",
+    marginBottom: 25
+  },
+  button: {
+    marginTop: 20,
+    marginBottom: wp("30"),
+    elevation: 10,
+    // marginRight: 80,
+    marginRight: wp("20"),
+    // marginLeft: 80
+    marginLeft: wp("20")
+    // borderWidth: 3,
+    // borderColor: "#006432",
+    // borderRadius: 10
+  }
+});

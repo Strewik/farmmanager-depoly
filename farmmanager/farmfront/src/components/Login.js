@@ -7,8 +7,15 @@ import {
   Button,
   SafeAreaView,
   TouchableOpacity,
-  Image
+  Image,
+  ImageBackground
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange as lor,
+  removeOrientationListener as rol
+} from "react-native-responsive-screen";
 
 var t = require("tcomb-form-native");
 const Form = t.form.Form;
@@ -82,46 +89,60 @@ export default class Login extends Component {
     return (
       <SafeAreaView style={styles.container} behavior="padding" enabled>
         <ScrollView>
-          <View>
-            <View>
-              <Image
-                style={{
-                  alignSelf: "center",
-                  width: 60,
-                  height: 60,
-                  justifyContent: "center",
-                  marginRight: 5
-                }}
-                source={require("../images/worker.jpg")}
+          <View style={{ flex: 1 }}>
+            {/* <ImageBackground
+              style={{
+                // alignSelf: "centre",
+                flex: 1,
+                resizeMode: "stretch",
+                // flexDirection: "row",
+                justifyContent: "center"
+                // paddingTop: 10,
+                // height: 800,
+                // width: 300,
+              }}
+              source={require("../images/gre2.jpg")}
+            > */}
+              <View>
+                <Image
+                  style={{
+                    alignSelf: "center",
+                    width: 60,
+                    height: 60,
+                    justifyContent: "center",
+                    marginRight: 5
+                  }}
+                  source={require("../images/worker.jpg")}
+                />
+              </View>
+              <Text style={styles.title}>Log In</Text>
+              <Form
+                ref={c => (this._form = c)}
+                type={LoginForm}
+                options={options}
               />
-            </View>
-            <Text style={styles.title}>Log In</Text>
-            <Form
-              ref={c => (this._form = c)}
-              type={LoginForm}
-              options={options}
-            />
-            <View style={styles.button}>
-              <Button
-                title="LOG IN"
-                color="#0A802B"
-                // onPress={this.handleSubmit.bind(this)}
-                onPress={() => navigation.navigate("Landing Page")}
-              />
-            </View>
-            <Text
-              style={styles.forgot}
-              onPress={() => navigation.navigate("Password 0ne")}
-            >
-              Forgot Password?
-            </Text>
-            <Text style={styles.question}>Don't have an account?</Text>
-            <Text
-              style={styles.link}
-              onPress={() => navigation.navigate("SignUp")}
-            >
-              Sign Up
-            </Text>
+              <View style={styles.button}>
+                <Button
+                  title="LOG IN"
+                  color="#0A802B"
+                  // onPress={this.handleSubmit.bind(this)}
+                  onPress={() => navigation.navigate("Landing Page")}
+                />
+              </View>
+              <Text
+                style={styles.forgot}
+                onPress={() => navigation.navigate("Password 0ne")}
+              >
+                Forgot Password?
+              </Text>
+              <Text style={styles.question}>Don't have an account?</Text>
+              <Text
+                style={styles.link}
+                onPress={() => navigation.navigate("SignUp")}
+              >
+                Sign Up
+              </Text>
+            {/* </ImageBackground> */}
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -132,11 +153,12 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
-    // marginTop: 10,
     padding: 10,
-    borderWidth: 5,
-    borderColor: "#006432",
-    borderRadius: 10
+    // borderWidth: 5,
+    // borderColor: "#006432",
+    // borderRadius: 10
+    height: hp("100%"),
+    width: wp("100%")
   },
   title: {
     fontSize: 25,

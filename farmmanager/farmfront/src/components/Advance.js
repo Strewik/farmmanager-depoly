@@ -15,7 +15,6 @@ import {
   removeOrientationListener as rol
 } from "react-native-responsive-screen";
 import moment from "moment";
-
 var t = require("tcomb-form-native");
 const Form = t.form.Form;
 
@@ -80,9 +79,12 @@ const options = {
       error: "Please enter a correct date",
       config: {
         defaultValueText: "Select",
-        // format: date => moment(date).format("DD-MM-YYYY")
-        format: date => String(date)
+        format: date => moment(date).format("YYYY-DD-MM")
       }
+      // config: {
+      //   defaultValueText: "Select",
+      //   format: strDate => utils.convertDateToString(strDate, "YYYY-MM-DD")
+      // }
     },
     name: {
       autoFocus: true,
@@ -228,58 +230,37 @@ export default class Advance extends Component {
   }
 }
 
- const styles = StyleSheet.create({
-   container: {
-     height: hp("100%"),
-     width: wp("100%"),
-     justifyContent: "center",
-     // marginTop: 15,
-     padding: 20,
-     borderWidth: 5,
-     borderColor: "#006432",
-     borderRadius: 10
-   },
-   title: {
-     // fontSize: 25,
-     fontSize: hp("5%"),
-     fontWeight: "bold",
-     // marginTop: 5,
-     marginTop: wp("5"),
-     color: "#006432",
-     textAlign: "center",
-     marginBottom: 25
-   },
-   button: {
-     marginTop: 20,
-     marginBottom: wp("30"),
-     elevation: 10,
-     // marginRight: 80,
-     marginRight: wp("20"),
-     // marginLeft: 80
-     marginLeft: wp("20")
-     // borderWidth: 3,
-     // borderColor: "#006432",
-     // borderRadius: 10
-   }
- });
-// const styles = StyleSheet.create({
-//   container: {
-//     justifyContent: "center",
-//     marginTop: 15,
-//     padding: 20
-//   },
-//   title: {
-//     fontSize: 25,
-//     fontWeight: "bold",
-//     marginTop: 5,
-//     color: "#006432",
-//     textAlign: "center",
-//     marginBottom: 25
-//   },
-//   button: {
-//     marginTop: 20,
-//     marginBottom: 50,
-//     marginRight: 80,
-//     marginLeft: 80
-//   }
-// });
+const styles = StyleSheet.create({
+  container: {
+    height: hp("100%"),
+    width: wp("100%"),
+    justifyContent: "center",
+    // marginTop: 15,
+    padding: 20,
+    borderWidth: 5,
+    borderColor: "#006432",
+    borderRadius: 10
+  },
+  title: {
+    // fontSize: 25,
+    fontSize: hp("5%"),
+    fontWeight: "bold",
+    // marginTop: 5,
+    marginTop: wp("5"),
+    color: "#006432",
+    textAlign: "center",
+    marginBottom: 25
+  },
+  button: {
+    marginTop: 20,
+    marginBottom: wp("30"),
+    elevation: 10,
+    // marginRight: 80,
+    marginRight: wp("20"),
+    // marginLeft: 80
+    marginLeft: wp("20")
+    // borderWidth: 3,
+    // borderColor: "#006432",
+    // borderRadius: 10
+  }
+});

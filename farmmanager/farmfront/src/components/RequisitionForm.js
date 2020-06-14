@@ -196,7 +196,6 @@ export default class RequisitionForm extends Component {
       alert("Requisition captured!");
     } else console.log("No data entered");
   };
-
   render() {
     return (
       <SafeAreaView style={styles.container} behavior="padding" enabled>
@@ -226,40 +225,40 @@ export default class RequisitionForm extends Component {
   }
 }
 
- const styles = StyleSheet.create({
-   container: {
-     height: hp("100%"),
-     width: wp("100%"),
-     justifyContent: "center",
-     // marginTop: 15,
-     padding: 20,
-     borderWidth: 5,
-     borderColor: "#006432",
-     borderRadius: 10
-   },
-   title: {
-     // fontSize: 25,
-     fontSize: hp("5%"),
-     fontWeight: "bold",
-     // marginTop: 5,
-     marginTop: wp("5"),
-     color: "#006432",
-     textAlign: "center",
-     marginBottom: 25
-   },
-   button: {
-     marginTop: 20,
-     marginBottom: wp("30"),
-     elevation: 10,
-     // marginRight: 80,
-     marginRight: wp("20"),
-     // marginLeft: 80
-     marginLeft: wp("20")
-     // borderWidth: 3,
-     // borderColor: "#006432",
-     // borderRadius: 10
-   }
- });
+const styles = StyleSheet.create({
+  container: {
+    height: hp("100%"),
+    width: wp("100%"),
+    justifyContent: "center",
+    // marginTop: 15,
+    padding: 20,
+    borderWidth: 5,
+    borderColor: "#006432",
+    borderRadius: 10
+  },
+  title: {
+    // fontSize: 25,
+    fontSize: hp("5%"),
+    fontWeight: "bold",
+    // marginTop: 5,
+    marginTop: wp("5"),
+    color: "#006432",
+    textAlign: "center",
+    marginBottom: 25
+  },
+  button: {
+    marginTop: 20,
+    marginBottom: wp("30"),
+    elevation: 10,
+    // marginRight: 80,
+    marginRight: wp("20"),
+    // marginLeft: 80
+    marginLeft: wp("20")
+    // borderWidth: 3,
+    // borderColor: "#006432",
+    // borderRadius: 10
+  }
+});
 // const styles = StyleSheet.create({
 //   container: {
 //     justifyContent: "center",

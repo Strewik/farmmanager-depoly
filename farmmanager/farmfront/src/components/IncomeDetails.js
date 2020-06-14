@@ -20,7 +20,6 @@ class IncomeDetails extends Component {
 
     this.props.detailIncome(id);
   }
-
   render() {
     const { navigation } = this.props;
     const { income } = this.props;

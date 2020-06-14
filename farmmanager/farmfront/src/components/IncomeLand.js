@@ -89,9 +89,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 20
     },
-    shadowOpacity: 1,
-    shadowRadius: 2,
-    elevation: 3
+    
   },
   TouchableOpacityStyle: {
     borderWidth: 1,

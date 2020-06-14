@@ -32,6 +32,7 @@ class RequisitionLand extends Component {
             }}
           >
             <Text style={{ color: "#228B22" }}>Date : {requisition.date}</Text>
+
             <Text style={{ color: "#228B22" }}>
               Activity : {requisition.activity}
             </Text>

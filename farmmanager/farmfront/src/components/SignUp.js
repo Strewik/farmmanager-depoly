@@ -11,24 +11,24 @@ import {
 
 var t = require("tcomb-form-native");
 const Form = t.form.Form;
-const Email = t.refinement(t.String, Email => {
-  const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
-  return reg.test(Email);
+const Email = t.refinement(t.String, (Email) => {
+    const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
+    return reg.test(Email);
 });
-const Phone = t.refinement(t.Number, Phone => {
-  const reg = /^[0]?[0-9]\d{9}$/;
-  return reg.test(Phone);
+const Phone = t.refinement(t.Number, (Phone) => {
+    const reg = /^[0]?[0-9]\d{9}$/;
+    return reg.test(Phone);
 });
-const Name = t.refinement(t.String, Name => {
-  const regex = /^[a-zA-Z].*[\s\.]*$/g;
-  return regex.test(Name);
+const Name = t.refinement(t.String, (Name) => {
+    const regex = /^[a-zA-Z].*[\s\.]*$/g;
+    return regex.test(Name);
 });
 
 const User = t.struct({
-  Name: Name,
-  Email: Email,
-  Phone: Phone,
-  Password: t.String
+    Name: Name,
+    Email: Email,
+    Phone: Phone,
+    Password: t.String
 });
 
 const formStyles = {
@@ -46,43 +46,42 @@ const formStyles = {
       fontSize: 18,
       marginBottom: 7,
       fontWeight: "600"
-    }
-  }
-};
+    },
+}};
 
 const options = {
-  fields: {
-    Name: {
-      autoFocus: true,
-      label: "Name",
-      returnKeyType: "next",
-      error: "Please enter a correct Name"
+    fields: {
+        Name: {
+            autoFocus: true,
+            label: "Name",
+            returnKeyType: "next",
+            error: "Please enter a correct Name"
+        },
+        Email: {
+            label: "Email",
+            returnKeyType: "next",
+            error: "Please enter a correct email address"
+        },
+        Phone: {
+            label: "Phone",
+            returnKeyType: "next",
+            error: "Please enter a correct phone number"
+        },
+        Password: {
+            label: "Password",
+            error: "Please create a password",
+            Password: true,
+            secureTextEntry: true
+        }
     },
-    Email: {
-      label: "Email",
-      returnKeyType: "next",
-      error: "Please enter a correct email address"
-    },
-    Phone: {
-      label: "Phone",
-      returnKeyType: "next",
-      error: "Please enter a correct phone number"
-    },
-    Password: {
-      label: "Password",
-      error: "Please create a password",
-      Password: true,
-      secureTextEntry: true
-    }
-  },
-  stylesheet: formStyles
+    stylesheet: formStyles
 };
 
 export default class SignUp extends Component {
-  constructor(props) {
-    super(props);
-    this.Name, this.Email, this.Phone, this.Password;
-  }
+    constructor(props) {
+        super(props);
+        this.Name, this.Email, this.Phone, this.Password;
+    }
 
   InsertDataToServer = async () => {
     fetch("http://127.0.0.1:8000/api/user/", {
@@ -173,9 +172,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     // marginTop: 10,
     padding: 10,
-    borderWidth: 5,
-    borderColor: "#006432",
-    borderRadius: 10
+    // borderWidth: 5,
+    // borderColor: "#006432",
+    // borderRadius: 10
   },
   title: {
     fontSize: 25,
