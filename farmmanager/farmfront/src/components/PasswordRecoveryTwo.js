@@ -74,7 +74,16 @@ export default class PasswordRecovery extends Component {
         <ScrollView>
           <View style={styles.container}>
             <View style={styles.image}>
-              <Image source={require("../images/user.png")} />
+              <Image
+                style={{
+                  alignSelf: "center",
+                  width: 150,
+                  height: 150,
+                  justifyContent: "center",
+                  marginRight: 5
+                }}
+                source={require("../images/user.png")}
+              />
             </View>
             <Form
               ref={c => (this._form = c)}
@@ -103,10 +112,12 @@ const styles = StyleSheet.create({
     padding: 10
   },
   image: {
-    alignItems: "center",
+    alignItems: "center"
   },
   button: {
     marginTop: 15,
-    marginBottom: 50
+    marginBottom: 50,
+    marginRight: 80,
+    marginLeft: 80
   }
 });

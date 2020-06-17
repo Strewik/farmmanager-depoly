@@ -8,6 +8,12 @@ import {
   SafeAreaView,
   TouchableOpacity
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange as lor,
+  removeOrientationListener as rol
+} from "react-native-responsive-screen";
 import moment from "moment";
 
 var t = require("tcomb-form-native");
@@ -176,7 +182,6 @@ export default class IncomeForm extends Component {
     super(props);
     this.state = {};
   }
-
   InsertDataToServer = async () => {
     fetch("http://127.0.0.1:8000/api/income/", {
       method: "POST",
@@ -185,22 +190,22 @@ export default class IncomeForm extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        amountrecvd: this.AmountRec,
-        receiptnum: this.ReceiptNumber,
-        customer: this.Customer,
-        phone: this.Phone,
-        date: this.Date,
-        product: this.Product,
-        quantity: this.Quantity,
-        unit: this.Unit,
-        unitprice: this.UnitPrice,
-        subtotal: this.SubTotal,
-        vat: this.VAT,
-        total: this.Total,
-        paymode: this.PaymentMode,
-        invnumber: this.Invnumber,
-        baldue: this.BalanceDue,
-        balduedate: this.BalanceDueDate
+        amountrecvd: this.amountrecvd,
+        receiptnum: this.receiptnum,
+        customer: this.customer,
+        phone: this.phone,
+        date: this.date,
+        product: this.product,
+        quantity: this.quantity,
+        unit: this.unit,
+        unitprice: this.unitprice,
+        subtotal: this.subtotal,
+        vat: this.vat,
+        total: this.total,
+        paymode: this.paymode,
+        invnumber: this.invnumber,
+        baldue: this.baldue,
+        balduedate: this.balduedate
       })
     })
       .then(response => response.json())
@@ -247,56 +252,6 @@ export default class IncomeForm extends Component {
     } else console.log("No data entered");
   };
 
-  clearForm = () => {
-    // clear content from all textbox
-    this.setState({ value: null });
-  };
-
-  handleSubmit = () => {
-    const value = this._form.getValue();
-    console.log(value);
-    if (value != null) {
-      (this.Date = value.Date),
-        (this.Customer = value.Customer),
-        (this.Phone = value.Phone),
-        (this.Product = value.Product),
-        (this.Unit = value.Unit),
-        (this.UnitPrice = value.UnitPrice),
-        (this.Quantity = value.Quantity),
-        (this.SubTotal = value.SubTotal),
-        (this.Tax = value.Tax),
-        (this.Description = value.Description),
-        (this.Total = value.Total),
-        (this.InvoiceNumber = value.InvoiceNumber),
-        (this.AmountPaid = value.AmountPaid),
-        (this.PaymentMode = value.PaymentMode),
-        (this.ReceiptNumber = value.ReceiptNumber),
-        (this.BalanceDue = value.BalanceDue),
-        (this.BalanceDueDate = value.BalanceDueDate),
-        this.InsertDataToServer();
-      this.clearForm();
-      alert("Income captured!");
-    } else console.log("No data entered");
-  };
-
-  // handlenum1Change = evt => {
-  //   const num1 = this._form.getValue().Quantity;
-  //   num1 = Number(evt.target.value);
-  //   this.setState(prevState => ({
-  //     num1,
-  //     result: num1 + prevState.num2
-  //   }));
-  // };
-
-  // handlenum2Change = evt => {
-  //   const num2 = this._form.getValue().UnitPrice;
-  //   num2 = Number(evt.target.value);
-  //   this.setState(prevState => ({
-  //     num2,
-  //     result: prevState.num1 + num2
-  //   }));
-  // };
-
   render() {
     return (
       <SafeAreaView style={styles.container} behavior="padding" enabled>
@@ -326,77 +281,37 @@ export default class IncomeForm extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    height: hp("100%"),
+    width: wp("100%"),
     justifyContent: "center",
-    marginTop: 15,
-    padding: 20
+    // marginTop: 15,
+    padding: 20,
+    borderWidth: 5,
+    borderColor: "#006432",
+    borderRadius: 10
   },
   title: {
-    fontSize: 25,
+    // fontSize: 25,
+    fontSize: hp("5%"),
     fontWeight: "bold",
-    marginTop: 5,
+    // marginTop: 5,
+    marginTop: wp("5"),
     color: "#006432",
     textAlign: "center",
     marginBottom: 25
   },
   button: {
     marginTop: 20,
-    marginBottom: 50
+    marginBottom: wp("30"),
+    elevation: 10,
+    // marginRight: 80,
+    marginRight: wp("20"),
+    // marginLeft: 80
+    marginLeft: wp("20")
+    // borderWidth: 3,
+    // borderColor: "#006432",
+    // borderRadius: 10
   }
 });
 
-
-
-// import * as yup from "yup";
-// import { Formik } from 'formik'
-
-// import React, { Component, Fragment } from 'react';
-// import { TextInput, Text, Button, Alert, StyleSheet SafeAreaView } from "react-native";
-
-
-// export default class Income extends Component {
-//   render() {
-//     return (
-//       <SafeAreaView style={styles.container} behavior="padding" enabled>
-//         <ScrollView>
-//           <View>
-//             <Text style={styles.title}>Sales Form</Text>
-//             <Form
-//               ref={c => (this._form = c)}
-//               type={Income}
-//               value={this.state.value}
-//               onChange={this.onChange.bind(this)}
-//               options={options}
-//             />
-//             <View style={styles.button}>
-//               <Button
-//                 color="#0A802B"
-//                 title="SAVE"
-//                 onPress={this.handleSubmit}
-//               />
-//             </View>
-//           </View>
-//         </ScrollView>
-//       </SafeAreaView>
-//     );
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     justifyContent: "center",
-//     marginTop: 15,
-//     padding: 20
-//   },
-//   title: {
-//     fontSize: 25,
-//     fontWeight: "bold",
-//     marginTop: 5,
-//     color: "#006432",
-//     textAlign: "center",
-//     marginBottom: 25
-//   },
-//   button: {
-//     marginTop: 20,
-//     marginBottom: 50
-//   }
-// });
+//picker style={{}}

@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class User(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=50, unique=True)
@@ -171,7 +172,7 @@ class Payroll(models.Model):
 class Requisition(models.Model):
     date = models.CharField(max_length=50)
     reqno = models.CharField(max_length=100, blank=True)
-    itemtype  = models.CharField(max_length=50)
+    itemtype = models.CharField(max_length=50)
     description = models.CharField(max_length=50, blank=True)
     purpose = models.CharField(max_length=50)
     activity = models.CharField(max_length=100, blank=True)
@@ -221,7 +222,6 @@ class Tool(models.Model):
     lifespan = models.CharField(max_length=100, blank=True)
     qty = models.IntegerField()
     toolcost = models.IntegerField(blank=True)
-    totalcost = models.IntegerField()
 
 
 class ToolBinCard(models.Model):

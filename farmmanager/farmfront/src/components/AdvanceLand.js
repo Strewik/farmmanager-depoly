@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { getAdvances } from "../actions/advanceActions";
 import { connect } from "react-redux";
 import {
@@ -56,14 +56,17 @@ class AdvanceLand extends Component {
     return (
       <ScrollView>
         <View>
-          <Text style={styles.heading}> Advance Summaries </Text>
-          {advanceItems}
-          <TouchableOpacity
-            style={styles.TouchableOpacityStyle}
-            onPress={() => navigation.navigate("Advance Form")}
-          >
-            <Text style={styles.TouchableOpacityAdd}>+</Text>
-          </TouchableOpacity>
+          <View>
+            <Text style={styles.heading}> Advance Summaries </Text>
+            {/* {advanceItems} */}
+            <TouchableOpacity
+              style={styles.TouchableOpacityStyle}
+              onPress={() => navigation.navigate("Advance Form")}
+            >
+              <Text style={styles.TouchableOpacityAdd}>+ Add</Text>
+            </TouchableOpacity>
+          </View>
+          <View>{advanceItems}</View>
         </View>
       </ScrollView>
     );
@@ -75,13 +78,11 @@ class AdvanceLand extends Component {
 //   newAdvance: PropTypes.object
 // }
 const mapStateToProps = state => ({
-  advances: state.advances.items,
+  advances: state.advances.items
   // newAdvance: state.advances.item
 });
 
-export default connect(mapStateToProps, { getAdvances })(
-  AdvanceLand
-);
+export default connect(mapStateToProps, { getAdvances })(AdvanceLand);
 
 const styles = StyleSheet.create({
   heading: {
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     color: "#006432",
-    textAlign: "center"
+    textAlign: "left"
   },
   container: {
     flex: 1,
@@ -112,21 +113,23 @@ const styles = StyleSheet.create({
     borderColor: "rgba(0,0,0,0.2)",
     alignItems: "center",
     justifyContent: "center",
-    width: 60,
+    width: 70,
     position: "absolute",
-    bottom: 10,
+    padding:10,
+    bottom: 5,
     right: 10,
-    height: 60,
+    height: 30,
+    top:10,
     backgroundColor: "green",
-    borderRadius: 100
+    borderRadius: 30
   },
   TouchableOpacityAdd: {
     color: "#fff",
     width: 40,
     alignItems: "center",
     justifyContent: "center",
-    fontSize: 30,
-    marginLeft: 20
+    fontSize: 15,
+    // marginLeft: 20
+    fontWeight:'bold'
   }
 });
-

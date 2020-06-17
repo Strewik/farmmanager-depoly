@@ -58,7 +58,16 @@ export default class PasswordRecovery extends Component {
         <ScrollView>
           <View>
             <View style={styles.image}>
-              <Image source={require("../images/user.png")} />
+              <Image
+                style={{
+                  alignSelf: "center",
+                  width: 150,
+                  height: 150,
+                  justifyContent: "center",
+                  marginRight: 5
+                }}
+                source={require("../images/user.png")}
+              />
             </View>
             <Text style={styles.word}>Enter Account Email</Text>
             <Form

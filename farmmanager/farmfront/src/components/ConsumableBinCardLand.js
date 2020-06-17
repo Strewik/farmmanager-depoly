@@ -64,7 +64,7 @@ class ConsumableBinCardLand extends Component {
             style={styles.TouchableOpacityStyle}
             onPress={() => navigation.navigate("Consumable Form")}
           >
-            <Text style={styles.TouchableOpacityAdd}>+</Text>
+            <Text style={styles.TouchableOpacityAdd}>+ Add</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
