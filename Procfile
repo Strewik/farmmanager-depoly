@@ -1,1 +1,1 @@
-web: gunicorn uetcldash.wsgi --log-file -
+web: gunicorn farmmanager.wsgi --log-file -
