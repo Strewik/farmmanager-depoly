@@ -5,7 +5,7 @@ from .serializers import *
 
 # User Viewset
 class UserViewset(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('-date')
+    queryset = User.objects.all()
     permissions_classes = [
         permissions.AllowAny
     ]
@@ -14,7 +14,7 @@ class UserViewset(viewsets.ModelViewSet):
 
 # Farm Viewset
 class FarmViewset(viewsets.ModelViewSet):
-    queryset = Farm.objects.all().order_by('-date')
+    queryset = Farm.objects.all()
     permissions_classes = [
         permissions.AllowAny
     ]
@@ -32,7 +32,7 @@ class AdvanceFormViewset(viewsets.ModelViewSet):
 
 # Casual Viewset
 class CasualViewset(viewsets.ModelViewSet):
-    queryset = Casual.objects.all().order_by('-date')
+    queryset = Casual.objects.all().order_by
     permissions_classes = [
         permissions.AllowAny
     ]
@@ -59,7 +59,7 @@ class ConsumableBinCardViewset(viewsets.ModelViewSet):
 
 # Customer Viewset
 class CustomerViewset(viewsets.ModelViewSet):
-    queryset = Customer.objects.all().order_by('-date')
+    queryset = Customer.objects.all()
     permissions_classes = [
         permissions.AllowAny
     ]
@@ -68,7 +68,7 @@ class CustomerViewset(viewsets.ModelViewSet):
 
 # Employee
 class EmployeeViewset(viewsets.ModelViewSet):
-    queryset = Employee.objects.all().order_by('-date')
+    queryset = Employee.objects.all()
     permissions_classes = [
         permissions.AllowAny
     ]
@@ -131,7 +131,7 @@ class SeedlingsBatchViewset(viewsets.ModelViewSet):
 
 # Supplier Viewset
 class SupplierViewset(viewsets.ModelViewSet):
-    queryset = Supplier.objects.all().order_by('-date')
+    queryset = Supplier.objects.all()
     permissions_classes = [
         permissions.AllowAny
     ]
@@ -149,7 +149,7 @@ class ToolViewset(viewsets.ModelViewSet):
 
 # ToolBinCard Viewset
 class ToolBinCardViewset(viewsets.ModelViewSet):
-    queryset = ToolBinCard.objects.all().order_by('-date')
+    queryset = ToolBinCard.objects.all()
     permissions_classes = [
         permissions.AllowAny
     ]
