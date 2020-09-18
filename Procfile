@@ -1,0 +1,1 @@
+web: gunicorn uetcldash.wsgi --log-file -
