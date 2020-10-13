@@ -11,7 +11,7 @@ import {
 
 export const getIncome = () => dispatch => {
   axios
-    .get("http://localhost:8000/api/income/")
+    .get("https://farmmanager-api.herokuapp.com/api/income/")
     .then(res => {
       // console.log(res.data);
       dispatch({
@@ -24,7 +24,7 @@ export const getIncome = () => dispatch => {
 // GET ONE INCOME
 export const detailIncome = id => dispatch => {
   axios
-    .get(`http://localhost:8000/api/income/${id}/`)
+    .get(`https://farmmanager-api.herokuapp.com/api/income/${id}/`)
     .then(res => {
       // console.log(res.data);
       // .then((INCOMEs) =>
@@ -39,7 +39,7 @@ export const detailIncome = id => dispatch => {
 //DELETE INCOME
 export const deleteIncome = id => dispatch => {
   axios
-    .delete(`http://localhost:8000/api/income/${id}/`)
+    .delete(`https://farmmanager-api.herokuapp.com/api/income/${id}/`)
     .then(res => {
       // console.log(res.id);
       dispatch({

@@ -123,7 +123,7 @@ export default class CustomerForm extends Component {
   }
 
   InsertDataToServer = async () => {
-    fetch("http://127.0.0.1:8000/api/customer/", {
+    fetch("https://farmmanager-api.herokuapp.com/api/customer/, {
       method: "POST",
       headers: {
         Accept: "application/json",

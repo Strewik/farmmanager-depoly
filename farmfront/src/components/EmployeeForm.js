@@ -181,7 +181,7 @@ export default class EmployeeForm extends Component {
   }
 
   InsertDataToServer = async () => {
-    fetch("http://127.0.0.1:8000/api/employee/", {
+    fetch("https://farmmanager-api.herokuapp.com/api/employee/", {
       method: "POST",
       headers: {
         Accept: "application/json",

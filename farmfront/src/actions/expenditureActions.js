@@ -11,7 +11,7 @@ import {
 
 export const getExpenditures = () => dispatch => {
   axios
-    .get("http://localhost:8000/api/expenditure/")
+    .get("https://farmmanager-api.herokuapp.com/api/expenditure/")
     .then(res => {
       // console.log(res.data);
       dispatch({
@@ -24,7 +24,7 @@ export const getExpenditures = () => dispatch => {
 // GET ONE EXPENDITURE
 export const detailExpenditure = id => dispatch => {
   axios
-    .get(`http://localhost:8000/api/expenditure/${id}/`)
+    .get(`https://farmmanager-api.herokuapp.com/api/expenditure/${id}/`)
     .then(res => {
       // console.log(res.data);
       // .then((EXPENDITUREs) =>
@@ -41,7 +41,7 @@ export const detailExpenditure = id => dispatch => {
 //DELETE EXPENDITURE
 export const deleteExpenditure = id => dispatch => {
   axios
-    .delete(`http://localhost:8000/api/expenditure/${id}/`)
+    .delete(`https://farmmanager-api.herokuapp.com/api/expenditure/${id}/`)
     .then(res => {
       // console.log(res.id);
       dispatch({
