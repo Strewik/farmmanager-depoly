@@ -136,7 +136,7 @@ export default class RequisitionForm extends Component {
     this.state = {};
   }
   InsertDataToServer = async () => {
-    fetch("http://127.0.0.1:8000/api/requisition/", {
+    fetch("https://farmmanager-api.herokuapp.com/api/requisition/", {
       method: "POST",
       headers: {
         Accept: "application/json",

@@ -11,7 +11,7 @@ import {
 
 export const getPayroll = () => dispatch => {
   axios
-    .get("http://localhost:8000/api/payroll/")
+    .get("https://farmmanager-api.herokuapp.com/api/payroll/")
     .then(res => {
       // console.log(res.data);
       dispatch({
@@ -24,7 +24,7 @@ export const getPayroll = () => dispatch => {
 // GET ONE Payroll
 export const detailPayroll = id => dispatch => {
   axios
-    .get(`http://localhost:8000/api/payroll/${id}/`)
+    .get(`https://farmmanager-api.herokuapp.com/api/payroll/${id}/`)
     .then(res => {
       // console.log(res.data);
       // .then((Payroll) =>
@@ -39,7 +39,7 @@ export const detailPayroll = id => dispatch => {
 //DELETE Payroll
 export const deletePayroll = id => dispatch => {
   axios
-    .delete(`http://localhost:8000/api/payroll/${id}/`)
+    .delete(`https://farmmanager-api.herokuapp.com/api/payroll/${id}/`)
     .then(res => {
       // console.log(res.id);
       dispatch({

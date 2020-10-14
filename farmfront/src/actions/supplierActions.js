@@ -10,7 +10,7 @@ import {
 //FETCH CUSTOMERS
 export const getSuppliers = () => dispatch => {
   axios
-    .get("http://localhost:8000/api/supplier/")
+    .get("https://farmmanager-api.herokuapp.com/api/supplier/")
     .then(res => {
       dispatch({
         type: GET_SUPPLIER,
@@ -23,7 +23,7 @@ export const getSuppliers = () => dispatch => {
 //DELETE CUSTOMER
 export const deleteSupplier = id => dispatch => {
   axios
-    .delete(`http://localhost:8000/api/supplier/${id}/`)
+    .delete(`https://farmmanager-api.herokuapp.com/api/supplier/${id}/`)
     .then(res => {
       dispatch({
         type: DELETE_SUPPLIER,
@@ -36,7 +36,7 @@ export const deleteSupplier = id => dispatch => {
 // GET DETAILS OF COSTUMER
 export const detailSupplier = id => dispatch => {
   axios
-    .get(`http://localhost:8000/api/supplier/${id}/`)
+    .get(`https://farmmanager-api.herokuapp.com/api/supplier/${id}/`)
     .then(res => {
       dispatch({
         type: DETAIL_SUPPLIER,

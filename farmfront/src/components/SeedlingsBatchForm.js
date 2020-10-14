@@ -106,7 +106,7 @@ export default class SeedlingsBatchForm extends Component {
   }
 
   InsertDataToServer = async () => {
-    fetch("http://127.0.0.1:8000/api/seedling/", {
+    fetch("https://farmmanager-api.herokuapp.com/api/seedling/", {
       method: "POST",
       headers: {
         Accept: "application/json",

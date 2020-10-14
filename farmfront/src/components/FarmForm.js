@@ -88,7 +88,7 @@ export default class FarmForm extends Component {
   }
 
   InsertDataToServer = async () => {
-    fetch("http://127.0.0.1:8000/api/farm/", {
+    fetch("https://farmmanager-api.herokuapp.com/api/farm/", {
       method: "POST",
       headers: {
         Accept: "application/json",

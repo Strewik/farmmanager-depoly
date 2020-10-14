@@ -10,7 +10,7 @@ import {
 //FETCH CUSTOMERS
 export const getSeedlings = () => dispatch => {
   axios
-    .get("http://localhost:8000/api/seedling/")
+    .get("https://farmmanager-api.herokuapp.com/api/seedling/")
     .then(res => {
       dispatch({
         type: GET_SEEDLING,
@@ -23,7 +23,7 @@ export const getSeedlings = () => dispatch => {
 //DELETE CUSTOMER
 export const deleteSeedling = id => dispatch => {
          axios
-           .delete(`http://localhost:8000/api/seedling/${id}/`)
+           .delete(`https://farmmanager-api.herokuapp.com/api/seedling/${id}/`)
            .then(res => {
              dispatch({
                type: DELETE_SEEDLING,
@@ -36,7 +36,7 @@ export const deleteSeedling = id => dispatch => {
 // GET DETAILS OF COSTUMER
 export const detailSeedling = id => dispatch => {
          axios
-           .get(`http://localhost:8000/api/seedling/${id}/`)
+           .get(`https://farmmanager-api.herokuapp.com/api/seedling/${id}/`)
            .then(res => {
              dispatch({
                type: DETAIL_SEEDLING,

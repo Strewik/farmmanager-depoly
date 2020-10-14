@@ -10,7 +10,7 @@ import {
 //FETCH FARMS
 export const getFarms = () => dispatch => {
   axios
-    .get("http://localhost:8000/api/farm/")
+    .get("https://farmmanager-api.herokuapp.com/api/farm/")
     .then(res => {
       dispatch({
         type: GET_FARM,
@@ -23,7 +23,7 @@ export const getFarms = () => dispatch => {
 //DELETE FARM
 export const deleteFarm = id => dispatch => {
   axios
-    .delete(`http://localhost:8000/api/farm/${id}/`)
+    .delete(`https://farmmanager-api.herokuapp.com/api/farm/${id}/`)
     .then(res => {
       dispatch({
         type: DELETE_FARM,
@@ -36,7 +36,7 @@ export const deleteFarm = id => dispatch => {
 // GET DETAILS OF FARM
 export const detailFarm = id => dispatch => {
   axios
-    .get(`http://localhost:8000/api/farm/${id}/`)
+    .get(`https://farmmanager-api.herokuapp.com/api/farm/${id}/`)
     .then(res => {
       dispatch({
         type: DETAIL_FARM,

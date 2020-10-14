@@ -10,7 +10,7 @@ import {
 //FETCH EMPLOYEES
 export const getEmployees = () => dispatch => {
   axios
-    .get("http://localhost:8000/api/employee/")
+    .get("https://farmmanager-api.herokuapp.com/api/employee/")
     .then(res => {
       dispatch({
         type: GET_EMPLOYEE,
@@ -23,7 +23,7 @@ export const getEmployees = () => dispatch => {
 //DELETE EMPLOYEE
 export const deleteEmployee = id => dispatch => {
          axios
-           .delete(`http://localhost:8000/api/employee/${id}/`)
+           .delete(`https://farmmanager-api.herokuapp.com/api/employee/${id}/`)
            .then(res => {
              dispatch({
                type: DELETE_EMPLOYEE,
@@ -36,7 +36,7 @@ export const deleteEmployee = id => dispatch => {
 // GET DETAILS OF EMPLOYEE
 export const detailEmployee = id => dispatch => {
          axios
-           .get(`http://localhost:8000/api/employee/${id}/`)
+           .get(`https://farmmanager-api.herokuapp.com/api/employee/${id}/`)
            .then(res => {
              dispatch({
                type: DETAIL_EMPLOYEE,

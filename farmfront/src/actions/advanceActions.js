@@ -3,7 +3,7 @@ import { GET_ADVANCE, DELETE_ADVANCE, DETAIL_ADVANCE } from "./types";
 
 //FETCH ADVANCES
 export const getAdvances = () => (dispatch) => {
-    axios.get("http://localhost:8000/api/advance/")
+    axios.get("https://farmmanager-api.herokuapp.com/api/advance/")
     .then((res) => {
         dispatch({
             type: GET_ADVANCE,
@@ -15,7 +15,7 @@ export const getAdvances = () => (dispatch) => {
 
 //DELETE ADVANCE
 export const deleteAdvance = (id) => (dispatch) => {
-    axios.delete(`http://localhost:8000/api/advance/${id}/`)
+    axios.delete(`https://farmmanager-api.herokuapp.com/api/advance/${id}/`)
     .then((res) => {
         dispatch({
             type: DELETE_ADVANCE,
@@ -27,7 +27,7 @@ export const deleteAdvance = (id) => (dispatch) => {
 
 // GET DETAILS OF ADVANCE
 export const detailAdvance = (id) => (dispatch) => {
-    axios.get(`http://localhost:8000/api/advance/${id}`)
+    axios.get(`https://farmmanager-api.herokuapp.com/api/advance/${id}`)
     .then((res) => {
         dispatch({
             type: DETAIL_ADVANCE,

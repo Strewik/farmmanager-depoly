@@ -10,7 +10,7 @@ import {
 //FETCH CONSUMABLES
 export const getConsumables = () => dispatch => {
   axios
-    .get("http://localhost:8000/api/consumable/")
+    .get("https://farmmanager-api.herokuapp.com/api/consumable/")
     .then(res => {
       dispatch({
         type: GET_CONSUMABLE,
@@ -23,7 +23,7 @@ export const getConsumables = () => dispatch => {
 //DELETE CONSUMABLE
 export const deleteConsumable = id => dispatch => {
          axios
-           .delete(`http://localhost:8000/api/consumable/${id}/`)
+           .delete(`https://farmmanager-api.herokuapp.com/api/consumable/${id}/`)
            .then(res => {
              dispatch({
                type: DELETE_CONSUMABLE,
@@ -38,7 +38,7 @@ export const deleteConsumable = id => dispatch => {
 // GET DETAILS OF CONSUMABLE
 export const detailConsumable = id => dispatch => {
          axios
-           .get(`http://localhost:8000/api/consumable/${id}/`)
+           .get(`https://farmmanager-api.herokuapp.com/api/consumable/${id}/`)
            .then(res => {
              dispatch({
                type: DETAIL_CONSUMABLE,

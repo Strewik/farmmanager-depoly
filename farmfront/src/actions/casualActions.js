@@ -10,7 +10,7 @@ import {
 //FETCH CASUALS
 export const getCasuals = () => dispatch => {
   axios
-    .get("http://localhost:8000/api/casual/")
+    .get("https://farmmanager-api.herokuapp.com/api/casual/")
     .then(res => {
       dispatch({
         type: GET_CASUAL,
@@ -23,7 +23,7 @@ export const getCasuals = () => dispatch => {
 //DELETE CASUAL
 export const deleteCasual = id => dispatch => {
   axios
-    .delete(`http://localhost:8000/api/casual/${id}/`)
+    .delete(`https://farmmanager-api.herokuapp.com/api/casual/${id}/`)
     .then(res => {
       dispatch({
         type: DELETE_CASUAL,
@@ -36,7 +36,7 @@ export const deleteCasual = id => dispatch => {
 // GET DETAILS OF CASUAL
 export const detailCasual = id => dispatch => {
   axios
-    .get(`http://localhost:8000/api/casual/${id}/`)
+    .get(`https://farmmanager-api.herokuapp.com/api/casual/${id}/`)
     .then(res => {
       dispatch({
         type: DETAIL_CASUAL,

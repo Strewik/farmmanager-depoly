@@ -11,7 +11,7 @@ import {
 
 export const getRequisition = () => dispatch => {
   axios
-    .get("http://localhost:8000/api/requisition/")
+    .get("https://farmmanager-api.herokuapp.com/api/requisition/")
     .then(res => {
       // console.log(res.data);
       dispatch({
@@ -24,7 +24,7 @@ export const getRequisition = () => dispatch => {
 // GET ONE ADVANCE
 export const detailRequisition = id => dispatch => {
   axios
-    .get(`http://localhost:8000/api/requisition/${id}/`)
+    .get(`https://farmmanager-api.herokuapp.com/api/requisition/${id}/`)
     .then(res => {
       // console.log(res.data);
       // .then((advances) =>
@@ -41,7 +41,7 @@ export const detailRequisition = id => dispatch => {
 //DELETE ADVANCE
 export const deleteRequisition = id => dispatch => {
   axios
-    .delete(`http://localhost:8000/api/requisition/${id}/`)
+    .delete(`https://farmmanager-api.herokuapp.com/api/requisition/${id}/`)
     .then(res => {
       // console.log(res.id);
       dispatch({

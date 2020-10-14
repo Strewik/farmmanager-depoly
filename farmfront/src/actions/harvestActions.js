@@ -10,7 +10,7 @@ import {
 //FETCH HARVESTS
 export const getHarvest = () => dispatch => {
   axios
-    .get("http://localhost:8000/api/harvest/")
+    .get("https://farmmanager-api.herokuapp.com/api/harvest/")
     .then(res => {
       dispatch({
         type: GET_HARVEST,
@@ -23,7 +23,7 @@ export const getHarvest = () => dispatch => {
 //DELETE HARVEST
 export const deleteHarvest = id => dispatch => {
          axios
-           .delete(`http://localhost:8000/api/harvest/${id}/`)
+           .delete(`https://farmmanager-api.herokuapp.com/api/harvest/${id}/`)
            .then(res => {
              dispatch({
                type: DELETE_HARVEST,
@@ -36,7 +36,7 @@ export const deleteHarvest = id => dispatch => {
 // GET DETAILS OF HARVEST
 export const detailHarvest = id => dispatch => {
          axios
-           .get(`http://localhost:8000/api/harvest/${id}/`)
+           .get(`https://farmmanager-api.herokuapp.com/api/harvest/${id}/`)
            .then(res => {
              dispatch({
                type: DETAIL_HARVEST,

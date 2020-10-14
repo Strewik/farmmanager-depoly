@@ -10,7 +10,7 @@ import {
 //FETCH TOOLS
 export const getTools = () => dispatch => {
   axios
-    .get("http://localhost:8000/api/tool/")
+    .get("https://farmmanager-api.herokuapp.com/api/tool/")
     .then(res => {
       dispatch({
         type: GET_TOOL,
@@ -23,7 +23,7 @@ export const getTools = () => dispatch => {
 //DELETE TOOL
 export const deleteTool = id => dispatch => {
   axios
-    .delete(`http://localhost:8000/api/tool/${id}/`)
+    .delete(`https://farmmanager-api.herokuapp.com/api/tool/${id}/`)
     .then(res => {
       dispatch({
         type: DELETE_TOOL,
@@ -36,7 +36,7 @@ export const deleteTool = id => dispatch => {
 // GET DETAILS OF TOOL
 export const detailTool = id => dispatch => {
   axios
-    .get(`http://localhost:8000/api/tool/${id}/`)
+    .get(`https://farmmanager-api.herokuapp.com/api/tool/${id}/`)
     .then(res => {
       dispatch({
         type: DETAIL_TOOL,

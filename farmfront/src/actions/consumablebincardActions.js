@@ -10,7 +10,7 @@ import {
 //FETCH CONSUMABLE BIN CARDS
 export const getConsumablebincards = () => dispatch => {
   axios
-    .get("http://localhost:8000/api/consumablebincard/")
+    .get("https://farmmanager-api.herokuapp.com/api/consumablebincard/")
     .then(res => {
       dispatch({
         type: GET_CONSUMABLEBINCARD,
@@ -23,7 +23,7 @@ export const getConsumablebincards = () => dispatch => {
 //DELETE CONSUMABLE BIN CARD
 export const deleteConsumablebincard = id => dispatch => {
   axios
-    .delete(`http://localhost:8000/api/consumablebincard/${id}/`)
+    .delete(`https://farmmanager-api.herokuapp.com/api/consumablebincard/${id}/`)
     .then(res => {
       dispatch({
         type: DELETE_CONSUMABLEBINCARD,
@@ -38,7 +38,7 @@ export const deleteConsumablebincard = id => dispatch => {
 // GET DETAILS OF CONSUMABLE BIN CARD
 export const detailConsumablebincard = id => dispatch => {
   axios
-    .get(`http://localhost:8000/api/consumablebincard/${id}/`)
+    .get(`https://farmmanager-api.herokuapp.com/api/consumablebincard/${id}/`)
     .then(res => {
       dispatch({
         type: DETAIL_CONSUMABLEBINCARD,

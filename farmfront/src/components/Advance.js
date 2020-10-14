@@ -145,7 +145,7 @@ export default class Advance extends Component {
   }
 
   InsertDataToServer = async () => {
-    fetch("http://127.0.0.1:8000/api/advance/", {
+    fetch("https://farmmanager-api.herokuapp.com/api/advance/", {
       method: "POST",
       headers: {
         Accept: "application/json",

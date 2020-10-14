@@ -126,7 +126,7 @@ export default class HarvestForm extends Component {
   }
 
   InsertDataToServer = async () => {
-    fetch("http://127.0.0.1:8000/api/harvest/", {
+    fetch("https://farmmanager-api.herokuapp.com/api/harvest/", {
       method: "POST",
       headers: {
         Accept: "application/json",

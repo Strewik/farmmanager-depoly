@@ -10,7 +10,7 @@ import {
 //FETCH TOOLS
 export const getToolbincards = () => dispatch => {
   axios
-    .get("http://localhost:8000/api/toolbincard/")
+    .get("https://farmmanager-api.herokuapp.com/api/toolbincard/")
     .then(res => {
       dispatch({
         type: GET_TOOLBINCARD,
@@ -23,7 +23,7 @@ export const getToolbincards = () => dispatch => {
 //DELETE TOOL
 export const deleteToolbincard = id => dispatch => {
   axios
-    .delete(`http://localhost:8000/api/toolbincard/${id}/`)
+    .delete(`https://farmmanager-api.herokuapp.com/api/toolbincard/${id}/`)
     .then(res => {
       dispatch({
         type: DELETE_TOOLBINCARD,
@@ -36,7 +36,7 @@ export const deleteToolbincard = id => dispatch => {
 // GET DETAILS OF TOOL
 export const detailToolbincard = id => dispatch => {
   axios
-    .get(`http://localhost:8000/api/toolbincard/${id}/`)
+    .get(`https://farmmanager-api.herokuapp.com/api/toolbincard/${id}/`)
     .then(res => {
       dispatch({
         type: DETAIL_TOOLBINCARD,

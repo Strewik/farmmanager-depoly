@@ -91,7 +91,7 @@ export default class ConsumableBinCardForm extends Component {
   }
 
   InsertDataToServer = async () => {
-    fetch("http://127.0.0.1:8000/api/consumablebincard/", {
+    fetch("https://farmmanager-api.herokuapp.com/api/consumablebincard/", {
       method: "POST",
       headers: {
         Accept: "application/json",
