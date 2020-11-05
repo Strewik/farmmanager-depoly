@@ -17,6 +17,11 @@ import supplierReducer from "./supplierReducer";
 import toolReducer from "./toolReducer";
 import toolbincardReducer from "./toolbincardReducer";
 
+
+import auth from "./auth";
+import errors from "./errors";
+import messages from "./messages";
+
 export default combineReducers({
   users: userReducer,
   farms: farmReducer,
@@ -34,5 +39,8 @@ export default combineReducers({
   seedlings: seedlingReducer,
   suppliers: supplierReducer,
   tools: toolReducer,
-  toolbincards: toolbincardReducer
+  toolbincards: toolbincardReducer,
+  auth,
+  errors,
+  messages
 });

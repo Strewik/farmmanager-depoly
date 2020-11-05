@@ -21,9 +21,11 @@ const Farm = t.struct({
   Name: t.String,
   Location: t.String,
   Address: t.String,
-  ContactPerson: t.String,
+  ContactPerson: t.maybe(t.String),
   Phone: Phone,
-  Tin: t.Number
+  Tin: t.maybe(t.Number), 
+  Status: t.maybe(t.String),
+  Description:t.maybe(t.String)
 });
 
 const formStyles = {
@@ -66,7 +68,7 @@ const options = {
     ContactPerson: {
       label: "Contact Person",
       returnKeyType: "next",
-      error: "Please fill this field"
+      // error: "Please fill this field"
     },
     Phone: {
       label: "Phone Number",
@@ -75,8 +77,17 @@ const options = {
     },
     Tin: {
       label: "TIN",
-      error: "Please enter correct TIN"
-    }
+      // error: "Please enter correct TIN"
+    },
+    Status: {
+      label: "Status",
+      // error: "Please enter correct TIN"
+
+    },
+  Description:{
+    label: "Description",
+    // error: "Please enter correct TIN"
+  }
   },
   stylesheet: formStyles
 };
