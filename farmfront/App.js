@@ -71,6 +71,7 @@ import EmployeeForm from "./src/components/EmployeeForm";
 import EmployeeLand from "./src/components/EmployeeLand";
 import EmployeeDetails from "./src/components/EmployeeDetails";
 import BottomNav from "./src/components/BottomNav";
+import LoginT from "./src/components/accounts/LoginT"
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -81,6 +82,7 @@ export default class App extends Component {
         <Provider store={store}>
             <NavigationContainer>
                 <Stack.Navigator>
+                    <Stack.Screen name="Logint" component={LoginT} />
                     <Stack.Screen name="Home Screen" component={HomeScreen} />
                     <Stack.Screen name="Farm Form" component={FarmForm} />
                     <Stack.Screen name="Farm Summaries" component={FarmLand} />
