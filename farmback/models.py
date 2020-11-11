@@ -9,12 +9,14 @@ class User(models.Model):
 
 
 class Farm(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     location = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
-    contactperson = models.CharField(max_length=100)
+    contactperson = models.CharField(max_length=100, blank=True)
     phone = models.IntegerField()
-    tin = models.IntegerField()
+    tin = models.IntegerField(blank=True)
+    status = models.CharField(max_length=100, blank=True)
+    description = models.CharField(max_length=500, blank=True)
 
 
 class AdvanceForm(models.Model):

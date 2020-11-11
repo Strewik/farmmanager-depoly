@@ -222,17 +222,17 @@ export default class ConsumableForm extends Component {
     const value = this._form.getValue();
     console.log(value);
     if (value != null) {
-      (this.Date: value.Date),
-        (this.Name: value.Name),
-        (this.ItemType: value.ItemType),
-        (this.Description: value.Description),
-        (this.Purpose: value.Purpose),
-        (this.Material: value.Material),
-        (this.Source: value.Source),
-        (this.Unit: value.Unit),
-        (this.UnitSize: value.UnitSize),
-        (this.UnitCost: value.UnitCost),
-        (this.MainUser: value.MainUser),
+      (this.Date = value.Date),
+        (this.Name = value.Name),
+        (this.ItemType = value.ItemType),
+        (this.Description = value.Description),
+        (this.Purpose = value.Purpose),
+        (this.Material = value.Material),
+        (this.Source = value.Source),
+        (this.Unit = value.Unit),
+        (this.UnitSize = value.UnitSize),
+        (this.UnitCost = value.UnitCost),
+        (this.MainUser = value.MainUser),
         this.InsertDataToServer();
       this.clearForm();
       alert("Consumable captured!");
