@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'farmback',
     'farmfront',
     'rest_framework',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
