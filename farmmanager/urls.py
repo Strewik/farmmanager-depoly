@@ -24,7 +24,7 @@ urlpatterns = [
     # path('auth/', include('authentication.urls')),
     # path('social_auth/', include(('social_auth.urls', 'social_auth'),
     #                              namespace="social_auth")),
-    path('farmback/', include('farmback.urls')),
+    path('', include('farmback.urls')),
     # path('', schema_view.with_ui('swagger',
     #                              cache_timeout=0), name='schema-swagger-ui'),
 
