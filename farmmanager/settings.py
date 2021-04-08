@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'farmback',
     'rest_framework',
-    'drf_yasg'
+    # 'drf_yasg'
 ]
 
 SWAGGER_SETTINGS = {
