@@ -1,12 +1,64 @@
 from django.db import models
 
 
+# class Personel(models.Model):
+#     uuid = models.CharField(max_length=100) #place holder
+#     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+#     phone = models.CharField(max_length=100)
+
+# class TeleFarmer(models.Model):
+#     uuid = models.CharField(max_length=100) #place holder
+#     personel = models.ForeignKey(Personel, null=True, on_delete=models.CASCADE)
+
+# class Manager(models.Model):
+#     uuid = models.CharField(max_length=100) #place holder
+#     personel = models.ForeignKey(Personel, null=True, on_delete=models.CASCADE)
+#     address = models.CharField(max_length=100)
+#     qualification = models.CharField(max_length=250)
+
+# class Farm(models.Model):
+#     uuid = models.CharField(max_length=100) #place holder
+#     name = models.CharField(max_length=100)
+#     location = models.CharField(max_length=100)
+#     tin = models.CharField(max_length=100, blank=True)
+#     phone = models.CharField(max_length=100, blank=True)
+#     description = models.CharField(max_length=500, blank=True)
+#     #how does farm connect with creator
+
+# class Creates(models.Model):
+#     uuid = models.CharField(max_length=100) #place holder
+#     telefarmer_id = models.ForeignKey(TeleFarmer, null=True, on_delete=models.CASCADE)
+#     farm_id = models.ForeignKey(Farm, null=True, on_delete=models.CASCADE)
+
+# class Adds(models.Model):
+#     uuid = models.CharField(max_length=100) #place holder
+#     telefarmer_id = models.ForeignKey(TeleFarmer, null=True, on_delete=models.CASCADE)
+#     farm_id = models.ForeignKey(Farm, null=True, on_delete=models.CASCADE)
+#     manager_id = models.ForeignKey(Manager, null=True, on_delete=models.CASCADE)
+
+# class Project(models.Model):
+#     uuid = models.CharField(max_length=100) #place holder
+#     name = models.CharField(max_length=100)
+#     description = models.CharField(max_length=500, blank=True)
+#     #how does project connect with creator and farm
+
+
+# class Manages(models.Model):
+#     uuid = models.CharField(max_length=100) #place holder
+#     project_id = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
+#     manager_id = models.ForeignKey(Manager, null=True, on_delete=models.CASCADE)
+
+# class Has(models.Model):
+#     uuid = models.CharField(max_length=100) #place holder
+#     farm_id = models.ForeignKey(Farm, null=True, on_delete=models.CASCADE)
+#     project_id = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
+
+
 class User(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=50, unique=True)
     phone = models.IntegerField()
     password = models.CharField(max_length=50)
-
 
 class Farm(models.Model):
     name = models.CharField(max_length=100, unique=True)
