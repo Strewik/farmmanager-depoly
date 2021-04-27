@@ -12,8 +12,15 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-from dotenv import load_dotenv
-load_dotenv(verbose=True)
+# from dotenv import load_dotenv
+# load_dotenv(verbose=True)
+
+import environ
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +30,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -107,7 +114,19 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        
+        # Connection to Remote / cloud Database : PostresQL
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': env("DATABASE_NAME"),
+        # 'USER': env("DATABASE_USER"),
+        # 'PASSWORD': env("DATABASE_PASSWORD"),
+        # 'HOST': env("DATABASE_HOST"),
+        # 'PORT': env("DATABASE_PORT"),
+        
+
     }
+    
+    
 }
 
 import dj_database_url
@@ -116,6 +135,7 @@ DATABASES['default'].update(db_from_env)
 # DATABASES = { 'default': dj_database_url.config() }
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
